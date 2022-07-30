@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
 {
+    protected $exceptRoutes = ['complete_social_signup'];
+
     /**
      * Handle an incoming request.
      *
@@ -22,8 +24,9 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+            $redirectTo = $guard == 'admin' ? 'admin.dashboard' : 'dashboard';
+            if (Auth::guard($guard)->check() && !in_array($request->route()->getName(), $this->exceptRoutes)) {
+                return redirect()->route($redirectTo);
             }
         }
 

@@ -1,0 +1,157 @@
+// Mixins
+@mixin input-focus {
+    &:focus {
+        border: 1px solid #262626;
+        box-shadow: none;
+        outline: 0;
+    }
+}
+
+@mixin border-none() {
+    border: 0;
+}
+
+@mixin border-default() {
+    border: 1px solid $border-color;
+}
+
+@mixin border-top() {
+    border: 1px solid $border-color;
+    border-width: 1px 0 0 0;
+}
+
+@mixin border-bottom() {
+    border: 1px solid $border-color;
+    border-width: 0 0 1px 0;
+}
+
+@mixin border-left() {
+    border: 1px solid $border-color;
+    border-width: 0 0 0 1px;
+}
+
+@mixin border-right() {
+    border: 1px solid $border-color;
+    border-width: 0 1px 0 0;
+}
+
+@mixin border-top-bottom() {
+  border: 1px solid $border-color;
+  border-width: 1px 0;
+}
+
+@mixin border-color($border-color) {
+    border-color: $border-color;
+}
+
+@mixin custom-border($border-value, $border-style, $border-color) {
+  border: $border-value $border-style $border-color;
+}
+
+@mixin shadow-default() {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+@mixin shadow-default-hover() {
+    box-shadow: 0px 0px 10px #e4e4e4;
+}
+
+@mixin shadow-none() {
+    box-shadow: none;
+}
+
+@mixin shadow-high() {
+    box-shadow: 0 17px 50px 0 rgba(0,0,0,.19), 0 12px 15px 0 rgba(0,0,0,.24);
+}
+
+@mixin btn-shadow() {
+    box-shadow: 0px 0px 38px -9px #000;
+}
+
+@mixin btn-shadow-hover() {
+    box-shadow: 0px 0px 13px -5px #000;
+}
+
+@mixin hr() {
+    border-bottom: 1px solid #E4E4E4;
+}
+
+@mixin rounded-img($width,$height) {
+  width: $width;
+  height: $height;
+  object-fit: cover;
+  @include border-radius(50%);
+}
+@mixin round-sm-img($width,$height) {
+  width: $width !important;
+  height: $height !important;
+  object-fit: cover !important;
+  @include border-radius(50%);
+}
+@mixin square-img($width,$height) {
+  width: $width !important;
+  height: $height !important;
+  object-fit: cover !important;
+  border-radius: unset !important;
+}
+@mixin font-head($fs,$fw,$fc){
+    font-size: $fs;
+    font-weight: $fw;
+    color: $fc;
+}
+@mixin slider_nav($width,$height) {
+  width: $width;
+  height: $height;
+  object-fit: cover;
+  @include border-radius(50%);
+  appearance: none;
+  display: inline-flex;
+  outline: 0px;
+  margin: 0px;
+  padding: 0px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 0px 0px 1px transparent, 0px 0px 0px 4px transparent, 0px 2px 4px rgba(0, 0, 0, 0.18);
+  transition: box-shadow 0.2s ease, -ms-transform 0.25s ease, -webkit-transform 0.25s ease, transform 0.25s ease;
+}
+
+@mixin image_cover() {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@mixin prefix-border($border-radius) {
+  border-radius: $border-radius 0 0 $border-radius;
+  border: 1px solid $border-color;
+  border-right: none;
+}
+
+@mixin font-style($fs,$fw,$fc) {
+  font-size: $fs;
+  font-weight: $fw;
+  color: $fc;
+}
+
+@mixin custom-border($border-value, $border-style, $border-color) {
+    border: $border-value $border-style $border-color;
+}
+
+@mixin custom-border-left($border-value, $border-style, $border-color) {
+    border-left: $border-value $border-style $border-color;
+}
+
+@mixin custom-border-right($border-value, $border-style, $border-color) {
+    border-right: $border-value $border-style $border-color;
+}
+
+@mixin custom-border-top($border-value, $border-style, $border-color) {
+    border-top: $border-value $border-style $border-color;
+}
+
+@mixin custom-border-bottom($border-value, $border-style, $border-color) {
+    border-bottom: $border-value $border-style $border-color;
+}

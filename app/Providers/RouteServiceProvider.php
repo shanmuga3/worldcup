@@ -45,6 +45,12 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->namespace($this->namespace)
+                ->prefix($this->getAdminPrefix())
+                ->name('admin.')
+                ->group(base_path('routes/admin.php'));
+
+            Route::middleware('web')
+                ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
     }
@@ -57,7 +63,23 @@ class RouteServiceProvider extends ServiceProvider
     protected function configureRateLimiting()
     {
         RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
+    }
+
+    /**
+     * Get Admin prefix
+     *
+     * @return string
+     */
+    protected function getAdminPrefix()
+    {
+        $admin_prefix = "admin";
+
+        if (env('DB_DATABASE') != '' && \Schema::hasTable('global_settings')) {
+            $admin_prefix = global_settings('admin_url');
+        }
+        
+        return $admin_prefix;
     }
 }

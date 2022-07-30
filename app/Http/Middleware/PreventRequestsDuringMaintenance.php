@@ -14,4 +14,28 @@ class PreventRequestsDuringMaintenance extends Middleware
     protected $except = [
         //
     ];
+
+    /**
+     * Determine if the request has a URI that should be accessible in maintenance mode.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
+     */
+    protected function inExceptArray($request)
+    {
+    	$this->except[] = global_settings('admin_url');
+        $this->except[] = global_settings('admin_url').'/*';
+    	
+        foreach ($this->except as $except) {
+            if ($except !== '/') {
+                $except = trim($except, '/');
+            }
+
+            if ($request->fullUrlIs($except) || $request->is($except)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
