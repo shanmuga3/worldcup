@@ -16,8 +16,9 @@ class CreateTeamsTable extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('src',100)->nullable();
+            $table->string('image',100)->nullable();
             $table->tinyInteger('upload_driver')->default(0);
+            $table->boolean('status')->default(true);
             $table->softDeletes();
             $table->timestamps();
         });

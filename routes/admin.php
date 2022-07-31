@@ -11,7 +11,8 @@ use App\Http\Controllers\Admin\{ HomeController,
     SocialMediaController,
     MetaController,
     StaticPageController,
-    TemplateController,
+    TeamController,
+    MatchController,
 };
 
 /*
@@ -97,13 +98,23 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::match(['PUT','PATCH'],'{id}', [MetaController::class,'update'])->name('metas.update')->middleware('permission:update-metas');
     });
 
-    // Manage Templates Routes
-    Route::group(['prefix' => 'templates'], function () {
-        Route::get('/', [TemplateController::class,'index'])->name('templates')->middleware('permission:view-templates');
-        Route::get('create', [TemplateController::class,'create'])->name('templates.create')->middleware('permission:create-templates');
-        Route::post('/', [TemplateController::class,'store'])->name('templates.store')->middleware('permission:create-templates');
-        Route::get('{id}/edit', [TemplateController::class,'edit'])->name('templates.edit')->middleware('permission:update-templates');
-        Route::match(['PUT','PATCH'],'{id}', [TemplateController::class,'update'])->name('templates.update')->middleware('permission:update-templates');
-        Route::delete('{id}', [TemplateController::class,'destroy'])->name('templates.delete')->middleware('permission:delete-templates');
+    // Manage Teams Routes
+    Route::group(['prefix' => 'teams'], function () {
+        Route::get('/', [TeamController::class,'index'])->name('teams')->middleware('permission:view-teams');
+        Route::get('create', [TeamController::class,'create'])->name('teams.create')->middleware('permission:create-teams');
+        Route::post('/', [TeamController::class,'store'])->name('teams.store')->middleware('permission:create-teams');
+        Route::get('{id}/edit', [TeamController::class,'edit'])->name('teams.edit')->middleware('permission:update-teams');
+        Route::match(['PUT','PATCH'],'{id}', [TeamController::class,'update'])->name('teams.update')->middleware('permission:update-teams');
+        Route::delete('{id}', [TeamController::class,'destroy'])->name('teams.delete')->middleware('permission:delete-teams');
+    });
+
+    // Manage Matches Routes
+    Route::group(['prefix' => 'matches'], function () {
+        Route::get('/', [MatchController::class,'index'])->name('matches')->middleware('permission:view-matches');
+        Route::get('create', [MatchController::class,'create'])->name('matches.create')->middleware('permission:create-matches');
+        Route::post('/', [MatchController::class,'store'])->name('matches.store')->middleware('permission:create-matches');
+        Route::get('{id}/edit', [MatchController::class,'edit'])->name('matches.edit')->middleware('permission:update-matches');
+        Route::match(['PUT','PATCH'],'{id}', [MatchController::class,'update'])->name('matches.update')->middleware('permission:update-matches');
+        Route::delete('{id}', [MatchController::class,'destroy'])->name('matches.delete')->middleware('permission:delete-matches');
     });
 });

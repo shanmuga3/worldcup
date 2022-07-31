@@ -257,7 +257,8 @@ return [
         "home_page" => "Home Page",
         "languages" => "Languages",
         "login_sliders" => "Admin Sliders",
-        "templates" => "Templates",
+        "teams" => "teams",
+        "matches" => "Matches",
         "manage_admin" => "Manage Admin",
         "manage_users" => "Manage Users",
         "metas" => "Meta Informations",
@@ -276,10 +277,15 @@ return [
         "manage_login_sliders" => "Manage Admin Login Sliders",
         "manage_sliders" => "Manage Sliders"
     ],
-    "templates" => [
-        "add_template" => "Add Template",
-        "edit_template" => "Edit Template",
-        "manage_templates" => "Manage Templates"
+    "teams" => [
+        "add_team" => "Add Team",
+        "edit_team" => "Edit Team",
+        "manage_teams" => "Manage Teams"
+    ],
+    "matches" => [
+        "add_match" => "Add Match",
+        "edit_match" => "Edit Match",
+        "manage_matches" => "Manage Matches"
     ],
     "social_media_links" => [
         "app_store" => "App Store",

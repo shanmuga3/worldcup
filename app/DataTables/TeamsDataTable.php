@@ -3,10 +3,10 @@
 namespace App\DataTables;
 
 use Yajra\DataTables\Services\DataTable;
-use App\Models\User;
+use App\Models\Team;
 use Lang;
 
-class UsersDataTable extends DataTable
+class TeamsDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -17,20 +17,27 @@ class UsersDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
+        ->addColumn('status', function($query) {
+            return getStatusText($query->status);
+        })
+        ->addColumn('image', function ($query) {
+            return '<img class="dt-thumb-image" src="'.$query->image_src.'">';
+        })
         ->addColumn('action',function($query) {
-            $edit = auth()->guard('admin')->user()->can('update-users') ? '<a href="'.route('admin.users.edit',['id' => $query->id]).'" class=""> <i class="fa fa-edit"></i> </a>' : '';
-            $delete = auth()->guard('admin')->user()->can('delete-users') ? '<a href="" data-action="'.route('admin.users.delete',['id' => $query->id]).'" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"> <i class="fa fa-times"></i> </a>' : '';
+            $edit = auth()->guard('admin')->user()->can('update-teams') ? '<a href="'.route('admin.teams.edit',['id' => $query->id]).'" class=""> <i class="fa fa-edit"></i> </a>' : '';
+            $delete = auth()->guard('admin')->user()->can('delete-teams') ? '<a href="" data-action="'.route('admin.teams.delete',['id' => $query->id]).'" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"> <i class="fa fa-times"></i> </a>' : '';
             return $edit." &nbsp; ".$delete;
-        });
+        })
+        ->rawColumns(['image','action']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param User $model
+     * @param Team $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model)
+    public function query(Team $model)
     {
         return $model->select();
     }
@@ -46,7 +53,6 @@ class UsersDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->addAction()
-                    ->orderBy(0)
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -59,9 +65,8 @@ class UsersDataTable extends DataTable
     {
         return [
             ['data' => 'id', 'name' => 'id', 'title' => Lang::get('admin_messages.fields.id')],
-            ['data' => 'name', 'name' => 'name', 'title' => Lang::get('admin_messages.fields.name')],
-            ['data' => 'email', 'name' => 'email', 'title' => Lang::get('admin_messages.fields.email')],
-            ['data' => 'phone_number', 'name' => 'phone_number', 'title' => Lang::get('admin_messages.fields.phone_number')],
+            ['data' => 'name', 'name' => 'name', 'title' => Lang::get('admin_messages.fields.name'),'searchable' => false],
+            ['data' => 'image', 'name' => 'image', 'title' => Lang::get('admin_messages.fields.image'),'searchable' => false],
             ['data' => 'status', 'name' => 'status', 'title' => Lang::get('admin_messages.fields.status')],
         ];
     }
@@ -86,6 +91,6 @@ class UsersDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'users_' . date('YmdHis');
+        return 'teams_' . date('YmdHis');
     }
 }

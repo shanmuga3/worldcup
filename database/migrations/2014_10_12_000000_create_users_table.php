@@ -33,6 +33,7 @@ return new class extends Migration
             $table->enum('photo_source',['site', 'facebook', 'google'])->default('site');
             $table->string('src',100)->nullable();
             $table->tinyInteger('upload_driver')->default(0);
+            $table->enum('status',['pending','active', 'inactive','disabled'])->default('pending');
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
