@@ -4,7 +4,7 @@
       <img src="{{ $site_logo }}" alt="{{ $site_name }}" class="brand-image opacity-80 shadow">
       <span class="brand-text fw-light"> {{ $site_name }} </span>
     </a>
-    <a class="pushmenu mx-1" data-lte-toggle="sidebar-mini" href="javascript:;" role="button"><i class="fas fa-angle-double-start"></i></a>
+    <a class="pushmenu mx-1" data-lte-toggle="sidebar-mini" href="javascript:;" role="button"><i class="fas fa-angle-double-left"></i></a>
   </div>
   <!-- Sidebar -->
   <div class="sidebar">
@@ -22,7 +22,7 @@
           <a href="#" class="nav-link {{ in_array($active_menu,['admin_users','roles']) ? 'active' : '' }}">
             <i class="nav-icon fas fa-user-plus"></i>
             <p> Manage Admin </p>
-            <i class="end fas fa-angle-start"></i>
+            <i class="end fas fa-angle-left"></i>
           </a>
           <ul class="nav nav-treeview {{ in_array($active_menu,['admin_users', 'roles','login_sliders']) ? 'menu-open':'' }}">
             @checkPermission('*-admin_users')
