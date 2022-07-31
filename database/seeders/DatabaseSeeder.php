@@ -22,5 +22,9 @@ class DatabaseSeeder extends Seeder
             SocialMediaLinkSeeder::class,
             SliderSeeder::class,
         ]);
+
+        $this->call([
+            TeamSeeder::class,
+        ]);
     }
 }

@@ -18,6 +18,7 @@ class CreateTeamsTable extends Migration
             $table->string('name');
             $table->string('src',100)->nullable();
             $table->tinyInteger('upload_driver')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

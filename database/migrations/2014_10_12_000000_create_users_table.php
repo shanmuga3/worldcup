@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id()->from(10001)->startingValue(10001);
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
             $table->string('password');
             $table->foreignId('team_id')->nullable();
             $table->unsignedBigInteger('score');
@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('src',100)->nullable();
             $table->tinyInteger('upload_driver')->default(0);
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

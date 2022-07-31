@@ -14,6 +14,19 @@ use App\Http\Controllers\AuthController;
 |
 */
 
+Route::group(['prefix' => 'dev'], function () {
+    Route::get('mail', function() {
+        return resolveAndSendNotification("welcomeMail",10001);
+    });
+    Route::get('show__l--log', function() {
+        $contents = \File::get(storage_path('logs/laravel.log'));
+        echo '<pre>'.$contents.'</pre>';
+    });
+    Route::get('clear__l--log', function() {
+        file_put_contents(storage_path('logs/laravel.log'),'');
+    });
+});
+
 Route::get('/', function () {
     return view('home');
 })->name('home');

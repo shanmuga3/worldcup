@@ -26,6 +26,7 @@ class CreateMatchesTable extends Migration
             $table->timestamp('starting_at')->nullable();
             $table->timestamp('ending_at')->nullable();
             $table->boolean('answer')->default(false);
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('first_team_id')->references('id')->on('teams');
