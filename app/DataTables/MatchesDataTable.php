@@ -20,12 +20,9 @@ class MatchesDataTable extends DataTable
         ->addColumn('status', function($query) {
             return getStatusText($query->status);
         })
-        ->addColumn('image', function ($query) {
-            return '<img class="dt-thumb-image" src="'.$query->image_src.'">';
-        })
         ->addColumn('action',function($query) {
-            $edit = auth()->guard('admin')->user()->can('update-teams') ? '<a href="'.route('admin.teams.edit',['id' => $query->id]).'" class=""> <i class="fa fa-edit"></i> </a>' : '';
-            $delete = auth()->guard('admin')->user()->can('delete-teams') ? '<a href="" data-action="'.route('admin.teams.delete',['id' => $query->id]).'" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"> <i class="fa fa-times"></i> </a>' : '';
+            $edit = auth()->guard('admin')->user()->can('update-matches') ? '<a href="'.route('admin.matches.edit',['id' => $query->id]).'" class=""> <i class="fa fa-edit"></i> </a>' : '';
+            $delete = auth()->guard('admin')->user()->can('delete-matches') ? '<a href="" data-action="'.route('admin.matches.delete',['id' => $query->id]).'" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"> <i class="fa fa-times"></i> </a>' : '';
             return $edit." &nbsp; ".$delete;
         })
         ->rawColumns(['image','action']);
@@ -53,6 +50,7 @@ class MatchesDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->addAction()
+                    ->orderBy(0)
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -65,9 +63,11 @@ class MatchesDataTable extends DataTable
     {
         return [
             ['data' => 'id', 'name' => 'id', 'title' => Lang::get('admin_messages.fields.id')],
-            ['data' => 'order_id', 'name' => 'order_id', 'title' => Lang::get('admin_messages.fields.order_id')],
-            ['data' => 'image', 'name' => 'image', 'title' => Lang::get('admin_messages.fields.image'),'searchable' => false],
-            ['data' => 'status', 'name' => 'status', 'title' => Lang::get('admin_messages.fields.status')],
+            ['data' => 'first_team', 'name' => 'first_team', 'title' => Lang::get('admin_messages.matches.first_team')],
+            ['data' => 'second_team', 'name' => 'second_team', 'title' => Lang::get('admin_messages.matches.second_team')],
+            ['data' => 'round', 'name' => 'round', 'title' => Lang::get('admin_messages.matches.round')],
+            ['data' => 'starting_at', 'name' => 'starting_at', 'title' => Lang::get('admin_messages.matches.starting_at')],
+            ['data' => 'ending_at', 'name' => 'ending_at', 'title' => Lang::get('admin_messages.matches.ending_at')],
         ];
     }
 
@@ -91,6 +91,6 @@ class MatchesDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'teams_' . date('YmdHis');
+        return 'matches_' . date('YmdHis');
     }
 }

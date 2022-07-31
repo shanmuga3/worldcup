@@ -202,6 +202,7 @@ return [
     "global_settings" => [
         "admin_url" => "Admin URL",
         "aws" => "AWS",
+        "monthly" => "Monthly",
         "copyright_link" => "Copyright Link",
         "copyright_text" => "Copyright Text",
         "daily" => "Daily",
@@ -285,7 +286,12 @@ return [
     "matches" => [
         "add_match" => "Add Match",
         "edit_match" => "Edit Match",
-        "manage_matches" => "Manage Matches"
+        "manage_matches" => "Manage Matches",
+        "first_team" => "First Team",
+        "second_team" => "Second Team",
+        "round" => "Round",
+        "starting_at" => "Starting At",
+        "ending_at" => "Ending At",
     ],
     "social_media_links" => [
         "app_store" => "App Store",

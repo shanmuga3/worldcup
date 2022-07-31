@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GlobalSettingsRequest;
-use App\Http\Requests\SiteImagesRequest;
 use App\Models\GlobalSetting;
 use Illuminate\Support\Facades\Artisan;
 use Lang;
@@ -31,7 +30,6 @@ class GlobalSettingController extends Controller
     {
         $this->view_data['maintenance_mode'] = (\App::isDownForMaintenance()) ? 'down' : 'up';
         $this->view_data['date_formats'] = resolve("DateFormat")->pluck('display_format','id');
-        $this->view_data['timezones'] = \App\Models\Timezone::get()->pluck('name','value');
         $this->view_data['backup_period_array'] = array(
             'never' => Lang::get('admin_messages.global_settings.never'),
             'daily' => Lang::get('admin_messages.global_settings.daily'),

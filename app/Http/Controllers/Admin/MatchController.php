@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\MatchesDataTable;
+use App\Models\Team;
 use App\Models\TeamMatch;
 use Lang;
 
@@ -38,7 +39,8 @@ class MatchController extends Controller
 	*/
 	public function create()
 	{
-		$this->view_data['sub_title'] = Lang::get('admin_messages.matches.add_slider');
+		$this->view_data['sub_title'] = Lang::get('admin_messages.matches.add_match');
+		$this->view_data['teams'] = Team::activeOnly()->get()->pluck('name','id');
 		$this->view_data['result'] = $result = new TeamMatch;
 		return view('admin.matches.add', $this->view_data);
 	}
@@ -53,20 +55,11 @@ class MatchController extends Controller
 	{
 		$this->validateRequest($request);
 
-		$login_slider = new TeamMatch;
-
-		$upload_result = $this->uploadImage($request->file('image'),$login_slider->getUploadPath());
-		if(!$upload_result['status']) {
-			flashMessage('danger',Lang::get('admin_messages.common.failed'),Lang::get('admin_messages.errors.failed_to_upload_image'));
-			return redirect()->route('admin.matches');
-		}
-
-		$login_slider->order_id = $request->order_id;
-		$login_slider->image = $upload_result['file_name'];
-		$login_slider->upload_driver = $upload_result['upload_driver'];
-		$login_slider->status = $request->status;
-
-		$login_slider->save();
+		$match = new TeamMatch;
+		$match->first_team_id = $request->first_team;
+		$match->second_team_id = $request->second_team;
+		$match->status = $request->status;
+		$match->save();
 
 		flashMessage('success',Lang::get('admin_messages.common.success'),Lang::get('admin_messages.common.successfully_added'));
 		return redirect()->route('admin.matches');
@@ -80,7 +73,8 @@ class MatchController extends Controller
 	*/
 	public function edit($id)
 	{
-		$this->view_data['sub_title'] = Lang::get('admin_messages.matches.edit_slider');
+		$this->view_data['sub_title'] = Lang::get('admin_messages.matches.edit_match');
+		$this->view_data['teams'] = Team::activeOnly()->get()->pluck('name','id');
 		$this->view_data['result'] = $result = TeamMatch::findOrFail($id);
 		return view('admin.matches.edit', $this->view_data);
 	}
@@ -96,24 +90,11 @@ class MatchController extends Controller
 	{
 		$this->validateRequest($request, $id);
 
-		$login_slider = TeamMatch::findOrFail($id);
-		$login_slider->order_id = $request->order_id;
-		$login_slider->status = $request->status;
-		
-		if($request->hasFile('image')) {
-			$login_slider->deleteImageFile();
-
-			$upload_result = $this->uploadImage($request->file('image'),$login_slider->filePath);
-			if(!$upload_result['status']) {
-				flashMessage('danger',Lang::get('admin_messages.common.failed'),Lang::get('admin_messages.errors.failed_to_upload_image'));
-				return redirect()->route('admin.matches');
-			}
-
-			$login_slider->image = $upload_result['file_name'];
-			$login_slider->upload_driver = $upload_result['upload_driver'];
-		}
-
-		$login_slider->save();
+		$match = TeamMatch::findOrFail($id);
+		$match->first_team_id = $request->first_team;
+		$match->second_team_id = $request->second_team;
+		$match->status = $request->status;
+		$match->save();
 		
 		flashMessage('success',Lang::get('admin_messages.common.success'),Lang::get('admin_messages.common.successfully_updated'));
 		return redirect()->route('admin.matches');
@@ -127,32 +108,16 @@ class MatchController extends Controller
 	*/
 	public function destroy($id)
 	{
-		$login_slider = TeamMatch::findOrFail($id);
+		$match = TeamMatch::findOrFail($id);
 		$can_destroy = $this->canDestroy($id);
 		if($can_destroy['status']) {
-			$login_slider->deleteImageFile();
-			$login_slider->delete();
+			$match->deleteImageFile();
+			$match->delete();
 		}
 
 		flashMessage('success',Lang::get('admin_messages.common.success'),Lang::get('admin_messages.common.successfully_deleted'));
 		
 		return redirect()->route('admin.matches');
-	}
-
-	/**
-	 * Upload Given Image to Server
-	 *
-	 * @return Array Upload Result
-	 */
-	protected function uploadImage($image,$target_dir)
-	{
-		$image_handler = resolve('App\Contracts\ImageHandleInterface');
-		$image_data = array();
-		$image_data['name_prefix'] = 'admin_slider_';
-		$image_data['add_time'] = true;
-		$image_data['target_dir'] = $target_dir;
-
-		return $image_handler->upload($image,$image_data);
 	}
 
 	/**

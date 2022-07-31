@@ -4,7 +4,7 @@
       <img src="{{ $site_logo }}" alt="{{ $site_name }}" class="brand-image opacity-80 shadow">
       <span class="brand-text fw-light"> {{ $site_name }} </span>
     </a>
-    <a class="pushmenu mx-1" data-lte-toggle="sidebar-mini" href="javascript:;" role="button"><i class="fas fa-angle-double-left"></i></a>
+    <a class="pushmenu mx-1" data-lte-toggle="sidebar-mini" href="javascript:;" role="button"><i class="fa-solid fa-angle-double-left"></i></a>
   </div>
   <!-- Sidebar -->
   <div class="sidebar">
@@ -13,16 +13,16 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
           <a href="{{ route('admin.dashboard') }}" class="nav-link {{ in_array($active_menu,['dashboard']) ? 'active':'' }}">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <i class="nav-icon fa-solid fa-tachometer-alt"></i>
             <p> Dashboard </p>
           </a>
         </li>
         @checkPermission('*-admin_users|*-roles|*-login_sliders')
         <li class="nav-item has-treeview {{ in_array($active_menu,['admin_users','roles']) ? 'menu-open active' : '' }}">
           <a href="#" class="nav-link {{ in_array($active_menu,['admin_users','roles']) ? 'active' : '' }}">
-            <i class="nav-icon fas fa-user-plus"></i>
+            <i class="nav-icon fa-solid fa-user-plus"></i>
             <p> Manage Admin </p>
-            <i class="end fas fa-angle-left"></i>
+            <i class="end fa-solid fa-angle-left"></i>
           </a>
           <ul class="nav nav-treeview {{ in_array($active_menu,['admin_users', 'roles','login_sliders']) ? 'menu-open':'' }}">
             @checkPermission('*-admin_users')
@@ -47,7 +47,7 @@
         @checkPermission('*-users')
         <li class="nav-item">
           <a href="{{ route('admin.users') }}" class="nav-link {{ in_array($active_menu,['users']) ? 'active':'' }}">
-            <i class="nav-icon fas fa-users"></i>
+            <i class="nav-icon fa-solid fa-users"></i>
             <p> Users </p>
           </a>
         </li>
@@ -55,7 +55,7 @@
         @checkPermission('*-teams')
         <li class="nav-item">
           <a href="{{ route('admin.teams') }}" class="nav-link {{ in_array($active_menu,['teams']) ? 'active':'' }}">
-            <i class="nav-icon fas fa-image"></i>
+            <i class="nav-icon fa-solid fa-people-roof"></i>
             <p> Teams </p>
           </a>
         </li>
@@ -63,7 +63,7 @@
         @checkPermission('*-matches')
         <li class="nav-item">
           <a href="{{ route('admin.matches') }}" class="nav-link {{ in_array($active_menu,['matches']) ? 'active':'' }}">
-            <i class="nav-icon fas fa-image"></i>
+            <i class="nav-icon fa-solid fa-sword"></i>
             <p> Matches </p>
           </a>
         </li>
@@ -71,8 +71,16 @@
         @checkPermission('*-guessess')
         <li class="nav-item">
           <a href="{{ route('admin.guessess') }}" class="nav-link {{ in_array($active_menu,['guessess']) ? 'active':'' }}">
-            <i class="nav-icon fas fa-image"></i>
+            <i class="nav-icon fa-solid fa-image"></i>
             <p> Guessess </p>
+          </a>
+        </li>
+        @endcheckPermission
+        @checkPermission('*-global_settings')
+        <li class="nav-item">
+          <a href="{{ route('admin.global_settings') }}" class="nav-link {{ in_array($active_menu,['global_settings']) ? 'active':'' }}">
+            <i class="nav-icon fa-solid fa-gears"></i>
+            <p> Global Settings </p>
           </a>
         </li>
         @endcheckPermission
