@@ -3,28 +3,24 @@
 		<div class="card-title"> {{ $sub_title }} </div>
 	</div>
 	<div class="card-body">
-		<div class="form-group">
-			<label for="order_id"> @lang('admin_messages.fields.order_id') <em class="text-danger">*</em> </label>
-			{!! Form::text('order_id', $result->order_id, ['class' => 'form-control', 'id' => 'order_id']) !!}
-			<span class="text-danger">{{ $errors->first('order_id') }}</span>
+		<div class="form-group mb-2">
+			<label for="name"> @lang('admin_messages.fields.name') <em class="text-danger">*</em> </label>
+			{!! Form::text('name', $result->name, ['class' => 'form-control', 'id' => 'name']) !!}
+			<span class="text-danger">{{ $errors->first('name') }}</span>
 		</div>
-		<div class="form-group input-file input-file-image">
-			<img class="img-upload-preview" src="{{ $result->image_src ?? asset('images/preview_thumbnail.png') }}">
-			<input type="file" class="form-control form-control-file" id="image" name="image" accept="image/*">
-			<label for="image" class="label-input-file btn btn-default btn-round">
-				<span class="btn-label"><i class="fa fa-file-image"></i></span>
-				@lang('admin_messages.common.choose_file')
-			</label>
+		<div class="form-group mb-2 input-file input-file-image">
+			<img class="img-upload-preview dt-thumb-image" src="{{ $result->image_src ?? asset('images/preview_thumbnail.png') }}">
+			<input type="file" class="form-control my-3 form-control-file" id="image" name="image" accept="image/*">
 			<span class="text-danger d-block">{{ $errors->first('image') }}</span>
 		</div>
-		<div class="form-group">
+		<div class="form-group mb-2">
 			<label for="status"> @lang('admin_messages.fields.status') <em class="text-danger">*</em> </label>
 			{!! Form::select('status', $status_array, $result->status, ['class' => 'form-select', 'id' => 'status', 'placeholder' => Lang::get("admin_messages.common.select")]) !!}
 			<span class="text-danger">{{ $errors->first('status') }}</span>
 		</div>
 	</div>
-	<div class="card-action">
+	<div class="card-footer">
 		<a href="{{ route('admin.teams')}}" class="btn btn-danger"> @lang('admin_messages.common.back') </a>
-		<button type="submit" class="btn btn-primary float-right"> @lang('admin_messages.common.submit') </button>
+		<button type="submit" class="btn btn-primary float-end"> @lang('admin_messages.common.submit') </button>
 	</div>
 </div>

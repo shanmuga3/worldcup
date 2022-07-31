@@ -24,8 +24,6 @@ class SocialMediaLinkSeeder extends Seeder
 			['name' => 'pinterest', 'value' => 'https://www.pinterest.com/'],
 			['name' => 'youtube', 'value' => 'https://www.youtube.com/'],
 			['name' => 'skype', 'value' => ''],
-			['name' => 'play_store', 'value' => ''],
-			['name' => 'app_store', 'value' => ''],
 		]);
     }
 }

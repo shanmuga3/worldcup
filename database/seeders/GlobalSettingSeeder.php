@@ -21,6 +21,8 @@ class GlobalSettingSeeder extends Seeder
             ['name' => 'site_url', 'value' => ''],
             ['name' => 'version', 'value' => '1.0'],
             ['name' => 'starting_year', 'value' => date('Y')],
+            ['name' => 'play_store', 'value' => ''],
+            ['name' => 'app_store', 'value' => ''],
             ['name' => 'admin_url', 'value' => 'admin'],
             ['name' => 'timezone', 'value' => 'Asia/Kolkata'],
             ['name' => 'upload_driver', 'value' => '0'],

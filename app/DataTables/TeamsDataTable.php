@@ -53,6 +53,7 @@ class TeamsDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->addAction()
+                    ->orderBy(0)
                     ->parameters($this->getBuilderParameters());
     }
 

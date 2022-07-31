@@ -38,7 +38,7 @@ class TeamController extends Controller
 	*/
 	public function create()
 	{
-		$this->view_data['sub_title'] = Lang::get('admin_messages.teams.add_slider');
+		$this->view_data['sub_title'] = Lang::get('admin_messages.teams.add_team');
 		$this->view_data['result'] = $result = new Team;
 		return view('admin.teams.add', $this->view_data);
 	}
@@ -53,20 +53,20 @@ class TeamController extends Controller
 	{
 		$this->validateRequest($request);
 
-		$login_slider = new Team;
+		$team = new Team;
 
-		$upload_result = $this->uploadImage($request->file('image'),$login_slider->getUploadPath());
+		$upload_result = $this->uploadImage($request->file('image'),$team->getUploadPath());
 		if(!$upload_result['status']) {
 			flashMessage('danger',Lang::get('admin_messages.common.failed'),Lang::get('admin_messages.errors.failed_to_upload_image'));
 			return redirect()->route('admin.teams');
 		}
 
-		$login_slider->order_id = $request->order_id;
-		$login_slider->image = $upload_result['file_name'];
-		$login_slider->upload_driver = $upload_result['upload_driver'];
-		$login_slider->status = $request->status;
+		$team->name = $request->name;
+		$team->image = $upload_result['file_name'];
+		$team->upload_driver = $upload_result['upload_driver'];
+		$team->status = $request->status;
 
-		$login_slider->save();
+		$team->save();
 
 		flashMessage('success',Lang::get('admin_messages.common.success'),Lang::get('admin_messages.common.successfully_added'));
 		return redirect()->route('admin.teams');
@@ -80,7 +80,7 @@ class TeamController extends Controller
 	*/
 	public function edit($id)
 	{
-		$this->view_data['sub_title'] = Lang::get('admin_messages.teams.edit_slider');
+		$this->view_data['sub_title'] = Lang::get('admin_messages.teams.edit_team');
 		$this->view_data['result'] = $result = Team::findOrFail($id);
 		return view('admin.teams.edit', $this->view_data);
 	}
@@ -96,24 +96,24 @@ class TeamController extends Controller
 	{
 		$this->validateRequest($request, $id);
 
-		$login_slider = Team::findOrFail($id);
-		$login_slider->order_id = $request->order_id;
-		$login_slider->status = $request->status;
+		$team = Team::findOrFail($id);
+		$team->name = $request->name;
+		$team->status = $request->status;
 		
 		if($request->hasFile('image')) {
-			$login_slider->deleteImageFile();
+			$team->deleteImageFile();
 
-			$upload_result = $this->uploadImage($request->file('image'),$login_slider->filePath);
+			$upload_result = $this->uploadImage($request->file('image'),$team->filePath);
 			if(!$upload_result['status']) {
 				flashMessage('danger',Lang::get('admin_messages.common.failed'),Lang::get('admin_messages.errors.failed_to_upload_image'));
 				return redirect()->route('admin.teams');
 			}
 
-			$login_slider->image = $upload_result['file_name'];
-			$login_slider->upload_driver = $upload_result['upload_driver'];
+			$team->image = $upload_result['file_name'];
+			$team->upload_driver = $upload_result['upload_driver'];
 		}
 
-		$login_slider->save();
+		$team->save();
 		
 		flashMessage('success',Lang::get('admin_messages.common.success'),Lang::get('admin_messages.common.successfully_updated'));
 		return redirect()->route('admin.teams');
@@ -127,11 +127,11 @@ class TeamController extends Controller
 	*/
 	public function destroy($id)
 	{
-		$login_slider = Team::findOrFail($id);
+		$team = Team::findOrFail($id);
 		$can_destroy = $this->canDestroy($id);
 		if($can_destroy['status']) {
-			$login_slider->deleteImageFile();
-			$login_slider->delete();
+			$team->deleteImageFile();
+			$team->delete();
 		}
 
 		flashMessage('success',Lang::get('admin_messages.common.success'),Lang::get('admin_messages.common.successfully_deleted'));
@@ -148,7 +148,7 @@ class TeamController extends Controller
 	{
 		$image_handler = resolve('App\Contracts\ImageHandleInterface');
 		$image_data = array();
-		$image_data['name_prefix'] = 'admin_slider_';
+		$image_data['name_prefix'] = 'team_';
 		$image_data['add_time'] = true;
 		$image_data['target_dir'] = $target_dir;
 
@@ -177,14 +177,14 @@ class TeamController extends Controller
 	{
 		$image_rule = ($id == '') ? 'required|':'';
 		$rules = array(
-			'order_id'		=> 'required|integer|min:1',
-			'image'			=> $image_rule.'mimes:'.view()->shared('valid_mimes'),
-			'status'		=> 'required',
+			'name' => 'required|max:50',
+			'image' => $image_rule.'mimes:'.view()->shared('valid_mimes'),
+			'status' => 'required',
 		);
 		$attributes = array(
-			'order_id'		=> Lang::get('admin_messages.fields.order_id'),
-			'image'			=> Lang::get('admin_messages.fields.image'),
-			'status'		=> Lang::get('admin_messages.fields.status'),
+			'name' => Lang::get('admin_messages.fields.name'),
+			'image' => Lang::get('admin_messages.fields.image'),
+			'status' => Lang::get('admin_messages.fields.status'),
 		);
 
 		$this->validate($request_data,$rules,[],$attributes);

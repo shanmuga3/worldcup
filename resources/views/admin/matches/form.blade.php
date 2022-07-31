@@ -23,8 +23,8 @@
 			<span class="text-danger">{{ $errors->first('status') }}</span>
 		</div>
 	</div>
-	<div class="card-action">
+	<div class="card-footer">
 		<a href="{{ route('admin.matches')}}" class="btn btn-danger"> @lang('admin_messages.common.back') </a>
-		<button type="submit" class="btn btn-primary float-right"> @lang('admin_messages.common.submit') </button>
+		<button type="submit" class="btn btn-primary float-end"> @lang('admin_messages.common.submit') </button>
 	</div>
 </div>
