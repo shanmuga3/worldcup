@@ -10,4 +10,12 @@ return [
 		"yes" => "Yes",
 		"no" => "No",
 	],
+	"home" => "Home",
+	"about" => "About",
+	"teams" => "Teams",
+	"previous_guess" => "Previous Guess",
+	"contact" => "Contact",
+	"welcome_to" => "Welcome to",
+	"login" => "Login",
+	"register" => "Register",
 ];
