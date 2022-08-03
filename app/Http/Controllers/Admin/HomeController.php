@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\LoginSlider;
+use App\Models\Team;
+use App\Models\TeamMatch;
 use Carbon\Carbon;
 use Lang;
 use Auth;
@@ -131,12 +133,26 @@ class HomeController extends Controller
         if(date("Y") == $year) {
             $today = now()->format('Y-m-d');
             $today_users = User::whereDate('created_at',$today)->count();
+            $today_matches = TeamMatch::whereDate('created_at',$today)->count();
+            $today_teams = Team::whereDate('created_at',$today)->count();
         }
 
         $statistics_data = [
             "users" => [
                 "count" => User::count(),
                 "new" => $today_users ?? 0,
+                "colors" => ['#f1f1f1', '#FF9E27'],
+                "value" => 100,
+            ],
+            "teams" => [
+                "count" => Team::count(),
+                "new" => $today_teams ?? 0,
+                "colors" => ['#f1f1f1', '#FF9E27'],
+                "value" => 100,
+            ],
+            "matches" => [
+                "count" => TeamMatch::count(),
+                "new" => $today_matches ?? 0,
                 "colors" => ['#f1f1f1', '#FF9E27'],
                 "value" => 100,
             ],

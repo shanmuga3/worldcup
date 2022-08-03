@@ -23,13 +23,27 @@
 					<!-- small box -->
 					<div class="small-box bg-indigo">
 						<div class="inner">
-							<h3>150</h3>
+							<h3> {{ $dashboard_data['statistics_data']['users']['count'] }} </h3>
 							<p> Users</p>
 						</div>
 						<div class="icon">
 							<i class="fas fa-users"></i>
 						</div>
-						<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-end"></i></a>
+						<a href="{{ route('admin.users') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-end"></i></a>
+					</div>
+				</div>
+				<!-- ./col -->
+				<div class="col-lg-3 col-6">
+					<!-- small box -->
+					<div class="small-box bg-secondary">
+						<div class="inner">
+							<h3>{{ $dashboard_data['statistics_data']['teams']['count'] }}</h3>
+							<p> Teams</p>
+						</div>
+						<div class="icon">
+							<i class="fas fa-chart-line"></i>
+						</div>
+						<a href="{{ route('admin.teams') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-end"></i></a>
 					</div>
 				</div>
 				<!-- ./col -->
@@ -37,13 +51,13 @@
 					<!-- small box -->
 					<div class="small-box bg-success">
 						<div class="inner">
-							<h3>100<sup style="font-size: 20px">%</sup></h3>
+							<h3>{{ $dashboard_data['statistics_data']['matches']['count'] }}</h3>
 							<p> Matches</p>
 						</div>
 						<div class="icon">
 							<i class="fas fa-chart-line"></i>
 						</div>
-						<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-end"></i></a>
+						<a href="{{ route('admin.matches') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-end"></i></a>
 					</div>
 				</div>
 			</div>

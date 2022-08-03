@@ -63,7 +63,7 @@
         @checkPermission('*-matches')
         <li class="nav-item">
           <a href="{{ route('admin.matches') }}" class="nav-link {{ in_array($active_menu,['matches']) ? 'active':'' }}">
-            <i class="nav-icon fa-solid fa-sword"></i>
+            <i class="nav-icon fa-solid fa-basketball"></i>
             <p> Matches </p>
           </a>
         </li>
