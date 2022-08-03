@@ -1,74 +1,45 @@
 @extends('app')
 @section('main')
-<div class="container mt-4 mt-md-5 pt-md-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    {{ __('Login') }}
-                </div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('authenticate') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
+<main class="main-container" ng-controller="authController">
+    <section class="pt-5 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 m-auto">
+                    <div class="login-wrap widget-taber-content p-30 background-white border-radius-10">
+                        <div class="card">
+                            <div class="card-body bg-white">
+                                <div class="text-center mb-2">
+                                    <h2 class="mb-2 text-black fw-bold"> @lang('messages.login') </h2>
                                 </div>
+                                {!! Form::open(['url' => route('authenticate'), 'class' => 'form--auth form--login']) !!}
+                                <div class="form__content">
+                                    <div class="mb-2 form-floating">
+                                        {!! Form::text('email',null,['placeholder' => trans('messages.email'),'class' =>'form-control'])!!}
+                                        <label> @lang('messages.email') </label>
+                                    </div>
+                                    <span class="text-danger"> {{ $errors->first('email') }} </span>
+                                    <div class="password-with-toggler input-group floating-input-group flex-nowrap">
+                                        <div class="mb-2 form-floating flex-grow-1">
+                                            <input type="password" name="password" class="password form-control" placeholder="@lang('messages.password')">
+                                            <label> @lang('messages.password') </label>
+                                        </div>
+                                        <span class="input-group-text"><i class="bi bi-eye-slash cursor-pointer toggle-password active" area-hidden="true"></i></span>
+                                    </div>
+                                    <span class="text-danger"> {{ $errors->first('password') }} </span>
+                                    <div class="mb-2 form-floating mt-4">
+                                        <button type="submit" class="btn btn-rounded btn-primary w-100 py-2 d-flex align-items-center justify-content-center">
+                                        @lang('messages.login')
+                                        </button>
+                                    </div>
+                                    {!! Form::close() !!}
+                                </div>
+                                <p class="mt-3"> @lang('messages.dont_have_account')? <a href="{{ route('register') }}" class="d-inline-block"> @lang('messages.register') </a></p>
                             </div>
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+</main>
 @endsection

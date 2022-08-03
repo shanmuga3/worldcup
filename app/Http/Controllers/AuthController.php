@@ -17,8 +17,8 @@ class AuthController extends Controller
             'password'  => 'required',
         );
         $attributes = array(
-            'email'     => Lang::get('messages.login.email'),
-            'password'  => Lang::get('messages.login.password'),
+            'email'     => Lang::get('messages.email'),
+            'password'  => Lang::get('messages.password'),
         );
         $validator = Validator::make($request->all(), $rules, [], $attributes);
 
@@ -42,9 +42,9 @@ class AuthController extends Controller
             'password'  => 'required|confirmed',
         );
         $attributes = array(
-            'name'     => Lang::get('messages.login.name'),
-            'email'     => Lang::get('messages.login.email'),
-            'password'  => Lang::get('messages.login.password'),
+            'name'     => Lang::get('messages.name'),
+            'email'     => Lang::get('messages.email'),
+            'password'  => Lang::get('messages.password'),
         );
         $validator = Validator::make($request->all(), $rules, [], $attributes);
 

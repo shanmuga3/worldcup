@@ -60,6 +60,9 @@
                                 @endif
                                 <li><a href="#"> @lang('messages.about') </a></li>
                                 <li><a href="#"> @lang('messages.contact') </a></li>
+                                @auth
+                                <li><a href="{{ route('logout') }}"> @lang('messages.logout') </a></li>
+                                @endauth
                             </ul>
                         </nav>
                         <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>

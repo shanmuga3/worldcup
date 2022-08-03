@@ -278,6 +278,26 @@ select::-webkit-scrollbar {
     color: $primary;
 }
 
+.text-note {
+    font-size: 12px;
+    color: #367cfc;
+}
+
+.form-floating,
+.form-group {
+    margin-bottom: 1rem !important;
+}
+
+.mt--5 {
+    margin-top: -3rem;
+}
+
+.floating-input-group {
+    .input-group-text {
+        height: $form-floating-height;
+    }
+}
+
 .btn {
     text-transform: none;
     text-align: center;

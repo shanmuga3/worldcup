@@ -16,6 +16,10 @@ return [
 	"previous_guess" => "Previous Guess",
 	"contact" => "Contact",
 	"welcome_to" => "Welcome to",
+	"logout" => "Logout",
 	"login" => "Login",
 	"register" => "Register",
+	"email" => "Email",
+	"password" => "Password",
+	"dont_have_account" => "Don't have an account",
 ];
