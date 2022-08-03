@@ -22,4 +22,7 @@ return [
 	"email" => "Email",
 	"password" => "Password",
 	"dont_have_account" => "Don't have an account",
+	"name" => "Name",
+	"phone_number" => "Phone Number",
+	"city" => "City",
 ];
