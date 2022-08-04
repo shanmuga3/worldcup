@@ -28,6 +28,7 @@ class GlobalSettingSeeder extends Seeder
             ['name' => 'upload_driver', 'value' => '0'],
             ['name' => 'support_number', 'value' => '9876543210'],
             ['name' => 'support_email', 'value' => 'support@gmail.com'],
+            ['name' => 'default_language', 'value' => 'ar'],
             ['name' => 'date_format', 'value' => '1'],
             ['name' => 'logo', 'value' => 'logo.png'],
             ['name' => 'logo_driver', 'value' => '0'],

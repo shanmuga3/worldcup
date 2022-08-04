@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+<html lang="en" dir="rtl">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +27,7 @@
         {!! global_settings('head_code') !!}
     </head>
     <body>
-        <div id="app">
+        <div id="app" ng-app="App" ng-controller="myApp" ng-cloak>
             <!-- ======= Header ======= -->
             <section id="topbar" class="topbar d-flex align-items-center">
                 <div class="container d-flex justify-content-center justify-content-md-between">
@@ -136,29 +136,16 @@
                 const APP_URL = {!! json_encode(url('/')) !!};
                 const SITE_NAME = '{!! $site_name !!}';
                 const USER_ID = '{!! Auth::check() ? Auth::id() : 0 !!}';
+                const flatpickrFormat = "Y-m-d";
                 const routeList = {!!
                 json_encode([
                     'login' => route('login'),
                 ]);
             !!}
             </script>
-            <script src="vendors/jquery/jquery-3.6.0.min.js"></script>
-            <script src="vendors/popper/popper.min.js"></script>
-            <script src="vendors/bootstrap/bootstrap.min.js"></script>
-            <script src="vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
-            <script src="vendors/masonry/masonry.pkgd.min.js"></script>
-            <script src="vendors/fabric-js/fabric.js"></script>
-            <script src="vendors/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
-            <script src="vendors/bootstrap-select/bootstrap-select.min.js"></script>
-            <script src="vendors/fontfaceobserver/fontfaceobserver.standalone.js"></script>
-            <script src="js/initialization.js"></script>
-            <script src="js/helpers.js"></script>
-            @if(in_array(Route::currentRouteName(),['home','dashboard']))
-            <script src="js/load-images.js"></script>
-            @endif
-            <script src="js/choice-image.js"></script>
-            <script src="js/handlers.js"></script>
-            <script src="js/common.js"></script>
-            <script src="js/main.js"></script>
+            
+            <!-- Include JS files -->
+            {!! Html::script('js/app.js?v='.$version) !!}
+            {!! Html::script('js/common.js?v='.$version) !!}
         </body>
     </html>

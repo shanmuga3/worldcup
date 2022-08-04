@@ -37,14 +37,25 @@ class AuthController extends Controller
     public function createUser(Request $request)
     {
         $rules = array(
-            'name'     => 'required',
-            'email'     => 'required|email',
-            'password'  => 'required|confirmed',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8',
+            'dob' => 'required',
+            'gender' => 'required',
+            'phone_number' => 'required',
+            'address' => 'required',
+            'city' => 'required',
         );
         $attributes = array(
-            'name'     => Lang::get('messages.name'),
-            'email'     => Lang::get('messages.email'),
-            'password'  => Lang::get('messages.password'),
+            'first_name' => Lang::get('messages.first_name'),
+            'last_name' => Lang::get('messages.last_name'),
+            'email' => Lang::get('messages.email'),
+            'password' => Lang::get('messages.password'),
+            'dob' => Lang::get('messages.dob'),
+            'phone_number' => Lang::get('messages.phone_number'),
+            'address' => Lang::get('messages.address'),
+            'city' => Lang::get('messages.city'),
         );
         $validator = Validator::make($request->all(), $rules, [], $attributes);
 
@@ -53,9 +64,14 @@ class AuthController extends Controller
         }
 
         $user = new User;
-        $user->name = $request->name;
+        $user->name = $request->first_name.' '.$request->last_name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->dob = $request->dob;
+        $user->gender = $request->gender;
+        $user->phone_number = $request->phone_number;
+        $user->address = $request->address;
+        $user->city = $request->city;
         $user->save();
 
         $credentials = $request->only(['email','password']);
@@ -63,6 +79,7 @@ class AuthController extends Controller
         if(Auth::attempt($credentials)) {
             return redirect()->route('home');
         }
+        
         return back();
     }
 }

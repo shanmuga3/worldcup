@@ -9,20 +9,16 @@ window._ = require('lodash');
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
+window.$ = window.jQuery = require('jquery');
 
-// import Echo from 'laravel-echo';
+window.bootstrap = require('bootstrap');
+const flatpickr = require("flatpickr");
 
-// window.Pusher = require('pusher-js');
+import "bootstrap-notify/bootstrap-notify.min.js";
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: true
-// });
+import "select2/dist/js/select2.js";
+
+import "angular/angular.js";
+import "angular-sanitize/angular-sanitize.js";

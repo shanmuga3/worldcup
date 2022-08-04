@@ -26,7 +26,7 @@ class UserDefaults
             session(['is_mobile' => true]);
         }
 
-        $user_language = 'en';
+        $user_language = global_settings('default_language');
 
         if(!defined('LOCALE')) {
             define('LOCALE',$user_language);

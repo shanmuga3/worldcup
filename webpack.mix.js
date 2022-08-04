@@ -25,6 +25,9 @@ mix.webpackConfig(webpack => {
 mix.setResourceRoot('../');
 
 mix.js('resources/js/app.js', 'public/js')
+.scripts([
+    'resources/js/common.js',
+], 'public/js/common.js')
 .sass('resources/sass/app.scss', 'public/css')
 .sass('resources/sass/admin_app.scss', 'public/admin_assets/css')
 .vue();

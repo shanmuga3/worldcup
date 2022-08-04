@@ -13,39 +13,68 @@
                                 </div>
                                 {!! Form::open(['url' => route('create_user'), 'class' => 'form--auth form--register']) !!}
                                 <div class="form__content">
-                                    <div class="mb-2 form-floating">
-                                        {!! Form::text('name',null,['placeholder' => trans('messages.name'),'class' =>'form-control'])!!}
-                                        <label> @lang('messages.name') </label>
+                                    <div class="form-floating mt-2">
+                                        {!! Form::text('first_name',null,['placeholder' => trans('messages.first_name'),'class' =>'form-control'])!!}
+                                        <label> @lang('messages.first_name') </label>
                                     </div>
-                                    <div class="mb-2 form-floating">
+                                    <span class="text-danger"> {{ $errors->first('first_name') }} </span>
+                                    <div class="form-floating mt-2">
+                                        {!! Form::text('last_name',null,['placeholder' => trans('messages.last_name'),'class' =>'form-control'])!!}
+                                        <label> @lang('messages.last_name') </label>
+                                    </div>
+                                    <span class="text-danger"> {{ $errors->first('last_name') }} </span>
+                                    <div class="form-floating mt-2">
                                         {!! Form::text('email',null,['placeholder' => trans('messages.email'),'class' =>'form-control'])!!}
                                         <label> @lang('messages.email') </label>
                                     </div>
-                                    <div class="mb-2 form-floating">
-                                        {!! Form::text('phone_number',null,['placeholder' => trans('messages.phone_number'),'class' =>'form-control'])!!}
-                                        <label> @lang('messages.phone_number') </label>
-                                    </div>
-                                    <div class="mb-2 form-floating">
-                                        {!! Form::text('city',null,['placeholder' => trans('messages.city'),'class' =>'form-control'])!!}
-                                        <label> @lang('messages.city') </label>
-                                    </div>
                                     <span class="text-danger"> {{ $errors->first('email') }} </span>
-                                    <div class="password-with-toggler input-group floating-input-group flex-nowrap">
-                                        <div class="mb-2 form-floating flex-grow-1">
+                                    <div class="mt-2 password-with-toggler input-group floating-input-group flex-nowrap">
+                                        <div class="form-floating flex-grow-1">
                                             <input type="password" name="password" class="password form-control" placeholder="@lang('messages.password')">
                                             <label> @lang('messages.password') </label>
                                         </div>
                                         <span class="input-group-text"><i class="bi bi-eye-slash cursor-pointer toggle-password active" area-hidden="true"></i></span>
                                     </div>
                                     <span class="text-danger"> {{ $errors->first('password') }} </span>
-                                    <div class="mb-2 form-floating mt-4">
+                                    <div class="form-floating mt-2">
+                                        <select name="gender" class="form-select">
+                                            <option value=""> @lang('messages.select') </option>
+                                            <option value="Male"> @lang('messages.male') </option>
+                                            <option value="Female"> @lang('messages.female') </option>
+                                            <option value="Other"> @lang('messages.other') </option>
+                                        </select>
+                                        <label> @lang('messages.gender') </label>
+                                    </div>
+                                    <span class="text-danger"> {{ $errors->first('gender') }} </span>
+                                    <div class="form-floating mt-2">
+                                        {!! Form::text('dob',null,['placeholder' => trans('messages.dob'),'class' =>'form-control','id' => 'dob'])!!}
+                                        <label> @lang('messages.dob') </label>
+                                    </div>
+                                    <span class="text-danger"> {{ $errors->first('dob') }} </span>
+                                    <div class="form-floating mt-2">
+                                        {!! Form::text('phone_number',null,['placeholder' => trans('messages.phone_number'),'class' =>'form-control'])!!}
+                                        <label> @lang('messages.phone_number') </label>
+                                    </div>
+                                    <span class="text-danger"> {{ $errors->first('phone_number') }} </span>
+                                    <div class="form-floating mt-2">
+                                        {!! Form::text('address',null,['placeholder' => trans('messages.address'),'class' =>'form-control'])!!}
+                                        <label> @lang('messages.address') </label>
+                                    </div>
+                                    <span class="text-danger"> {{ $errors->first('address') }} </span>
+                                    <div class="form-floating mt-2">
+                                        {!! Form::text('city',null,['placeholder' => trans('messages.city'),'class' =>'form-control'])!!}
+                                        <label> @lang('messages.city') </label>
+                                    </div>
+                                    <span class="text-danger"> {{ $errors->first('city') }} </span>
+                                    
+                                    <div class="form-floating mt-4">
                                         <button type="submit" class="btn btn-rounded btn-primary w-100 py-2 d-flex align-items-center justify-content-center">
                                         @lang('messages.register')
                                         </button>
                                     </div>
                                     {!! Form::close() !!}
                                 </div>
-                                <p class="mt-3"> @lang('messages.dont_have_account')? <a href="{{ route('register') }}" class="d-inline-block"> @lang('messages.register') </a></p>
+                                <p class="mt-3"> @lang('messages.already_have_account')? <a href="{{ route('login') }}" class="d-inline-block"> @lang('messages.signin') </a></p>
                             </div>
                         </div>
                     </div>

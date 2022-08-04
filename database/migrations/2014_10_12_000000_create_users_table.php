@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('phone_code',5);
             $table->string('phone_number', 20)->unique()->nullable();
             $table->date('dob')->nullable();
-            $table->string('city');
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
             $table->enum('gender',['male', 'female', 'other'])->nullable();
             $table->string('google_id', 50)->unique()->nullable();
             $table->string('facebook_id', 50)->unique()->nullable();
