@@ -11,6 +11,7 @@ return [
 		"no" => "No",
 	],
 	"home" => "Home",
+	"dashboard" => "Dashboard",
 	"about" => "About",
 	"teams" => "Teams",
 	"previous_guess" => "Previous Guess",
@@ -37,4 +38,7 @@ return [
 	"address" => "Address",
 	"dob" => "Date of Birth",
 	"get_started" => "Get Started",
+	"contact_us" => "Contact Us",
+	"phone" => "Phone",
+	"useful_links" => "Useful Links",
 ];

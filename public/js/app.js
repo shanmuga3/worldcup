@@ -42884,10 +42884,12 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 var app = angular.module('App', ['ngSanitize']);
 app.controller('myApp', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
   $scope.isLoading = false;
+  $scope.userLanguage = 'en';
   $(document).ready(function () {
     setTimeout(function () {
       $scope.initRichTextEditor('.rich-text-editor');
     }, 500);
+    $scope.initDefaultValues();
     var deleteModalEl = document.getElementById('confirmDeleteModal');
 
     if (deleteModalEl !== null) {
@@ -42906,7 +42908,13 @@ app.controller('myApp', ['$scope', '$http', '$rootScope', function ($scope, $htt
       var value = $(this).find('option:selected').data('display_value');
       $(this).parent('.select-with-dropdown').find('.select-value').text(value);
     });
-  }); // Common function to perform http requests
+  });
+
+  $scope.initDefaultValues = function () {
+    $scope.userLanguage = userLanguage;
+    $scope.applyScope();
+  }; // Common function to perform http requests
+
 
   $scope.makePostRequest = function (url, data, callback) {
     if (!data) {
@@ -42997,6 +43005,21 @@ app.controller('myApp', ['$scope', '$http', '$rootScope', function ($scope, $htt
         }
       });
     });
+  };
+
+  $scope.updateUserDefault = function (type) {
+    $scope.isLoading = true;
+    var url = routeList.update_user_default;
+    var data_params = {
+      type: type,
+      language: $scope.userLanguage
+    };
+
+    var callback_function = function callback_function(response_data) {
+      window.location.reload();
+    };
+
+    $scope.makePostRequest(url, data_params, callback_function);
   };
 }]);
 app.controller('authController', ['$scope', '$http', function ($scope, $http) {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr'}}" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,7 +19,7 @@
         <link href="{!! global_settings('font_script_url') !!}" rel="stylesheet">
         <style type="text/css">
         :root {
-        --font-family: {!! global_settings('font_family') !!};
+            --font-family: {!! global_settings('font_family') !!};
         }
         </style>
         <!-- Include App Style Sheet -->
@@ -32,11 +32,11 @@
             <section id="topbar" class="topbar d-flex align-items-center">
                 <div class="container d-flex justify-content-center justify-content-md-between">
                     <div class="contact-info d-flex align-items-center">
-                        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:{{ global_settings('support_email') }}"> {{ global_settings('support_email') }} </a></i>
-                        <i class="bi bi-phone d-flex align-items-center ms-4"><span> {{ global_settings('support_number') }} </span></i>
+                        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:{{ global_settings('support_email') }}" class="me-2"> {{ global_settings('support_email') }} </a></i>
+                        <i class="bi bi-phone d-flex align-items-center ms-4"><a href="tel:{{ global_settings('support_number') }}" class="me-2"> {{ global_settings('support_number') }} </a></i>
                     </div>
                     <div class="social-links d-none d-md-flex align-items-center">
-                        @foreach(resolve("SocialMediaLink") as $link)
+                        @foreach(resolve("SocialMediaLink")->where('value','!=','') as $link)
                         <a href="{{ $link->value }}" class="{{ $link->name }}"><i class="bi bi-{{ $link->name }}"></i></a>
                         @endforeach
                     </div>
@@ -50,11 +50,12 @@
                         </a>
                         <nav id="navbar" class="navbar">
                             <ul>
-                                <li><a href="{{ route('home') }}"> @lang('messages.home') </a></li>
                                 @guest
+                                <li><a href="{{ route('home') }}"> @lang('messages.home') </a></li>
                                 <li><a href="{{ route('login') }}"> @lang('messages.login') </a></li>
                                 <li><a href="{{ route('register') }}"> @lang('messages.register') </a></li>
                                 @else
+                                <li><a href="{{ route('dashboard') }}"> @lang('messages.dashboard') </a></li>
                                 <li><a href="#"> @lang('messages.teams') </a></li>
                                 <li><a href="#"> @lang('messages.previous_guess') </a></li>
                                 @endif
@@ -82,45 +83,31 @@
                           </a>
                           <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
                           <div class="social-links d-flex mt-4">
-                            @foreach(resolve("SocialMediaLink") as $link)
+                            @foreach(resolve("SocialMediaLink")->where('value','!=','') as $link)
                                 <a href="{{ $link->value }}" class="{{ $link->name }}"><i class="bi bi-{{ $link->name }}"></i></a>
                             @endforeach
                           </div>
                         </div>
 
                         <div class="col-lg-2 col-6 footer-links">
-                          <h4>Useful Links</h4>
+                          {!! Form::select('language',['en' => 'English','ar' => 'عربي'], session('language'), ['id' => 'user-language','class' => 'form-select','ng-model' => 'userLanguage','ng-change' => "updateUserDefault('language')"]) !!}
+                        </div>
+
+                        <div class="col-lg-2 col-6 footer-links">
+                          <h4> {{ $site_name }} </h4>
                           <ul>
-                            <li><a href="{{ route('home') }}">Home</a></li>
-                            <li><a href="{{ route('login') }}"> Login </a></li>
-                            <li><a href="{{ route('register') }}"> Signup </a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Services</a></li>
                             <li><a href="#">Terms of service</a></li>
                             <li><a href="#">Privacy policy</a></li>
                           </ul>
                         </div>
 
-                        <div class="col-lg-2 col-6 footer-links">
-                          <h4>Our Services</h4>
-                          <ul>
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">Web Development</a></li>
-                            <li><a href="#">Product Management</a></li>
-                            <li><a href="#">Marketing</a></li>
-                            <li><a href="#">Graphic Design</a></li>
-                          </ul>
-                        </div>
-
                         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-                          <h4>Contact Us</h4>
+                          <h4> @lang('messages.contact_us') </h4>
                           <p>
-                            <strong>Phone:</strong> {{ global_settings('support_number') }} <br>
-                            <strong>Email:</strong> {{ global_settings('support_email') }} <br>
+                            <strong class="me-2">@lang('messages.phone'):</strong> {{ global_settings('support_number') }} <br>
+                            <strong class="me-2">@lang('messages.email'):</strong> {{ global_settings('support_email') }} <br>
                           </p>
-
                         </div>
-
                       </div>
                     </div>
 
@@ -129,7 +116,6 @@
                         &copy; <a href="{{ global_settings('copyright_link') }}" class="text-white"> {{ global_settings('copyright_text') }} </a>
                       </div>
                     </div>
-
                   </footer>
             </div>
             <script type="text/javascript">
@@ -137,9 +123,11 @@
                 const SITE_NAME = '{!! $site_name !!}';
                 const USER_ID = '{!! Auth::check() ? Auth::id() : 0 !!}';
                 const flatpickrFormat = "Y-m-d";
+                const userLanguage = "{!! session('language') !!}";
                 const routeList = {!!
                 json_encode([
                     'login' => route('login'),
+                    'update_user_default' => route('update_user_default'),
                 ]);
             !!}
             </script>

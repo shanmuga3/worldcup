@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,8 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::post('update-user-default', [HomeController::class,'updateUserDefaults'])->name('update_user_default');
+
 Route::group(['middleware' => ['guest']], function () {
     Route::view('login','auth.login')->name('login');
     Route::post('authenticate',[AuthController::class,'authenticate'])->name('authenticate');
@@ -39,9 +42,7 @@ Route::group(['middleware' => ['guest']], function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('home', function () {
-        return view('home');
-    })->name('dashboard');
+    Route::get('dashboard',[HomeController::class,'dashboard'])->name('dashboard');
 
     Route::get('logout', function () {
         session()->forget('url.intended');

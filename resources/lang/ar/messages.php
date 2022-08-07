@@ -37,4 +37,7 @@ return [
 	"address" => "تبوك",
 	"dob" => "تاريخ الولادة",
 	"get_started" => "البدء",
+	"contact_us" => "اتصل بنا",
+	"phone" => "هاتف",
+	"useful_links" => "روابط مفيدة",
 ];

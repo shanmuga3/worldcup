@@ -6,11 +6,14 @@ const app = angular.module('App', ['ngSanitize']);
 
 app.controller('myApp', ['$scope', '$http','$rootScope', function($scope, $http,$rootScope) {
     $scope.isLoading = false;
+    $scope.userLanguage = 'en';
 
     $(document).ready(function() {
     	setTimeout( () => {
     		$scope.initRichTextEditor('.rich-text-editor');
     	},500);
+
+        $scope.initDefaultValues();
 
     	let deleteModalEl = document.getElementById('confirmDeleteModal');
 	    if(deleteModalEl !== null) {
@@ -31,6 +34,11 @@ app.controller('myApp', ['$scope', '$http','$rootScope', function($scope, $http,
 			$(this).parent('.select-with-dropdown').find('.select-value').text(value);
 		});
     });
+
+    $scope.initDefaultValues = function() {
+        $scope.userLanguage = userLanguage;
+        $scope.applyScope();
+    };
 
     // Common function to perform http requests
     $scope.makePostRequest = function(url, data, callback) {
@@ -112,6 +120,18 @@ app.controller('myApp', ['$scope', '$http','$rootScope', function($scope, $http,
                 }
             });
         });
+    };
+
+    $scope.updateUserDefault = function(type) {
+        $scope.isLoading = true;
+        var url = routeList.update_user_default;
+        var data_params = {type: type,language: $scope.userLanguage};
+
+        var callback_function = (response_data) => {
+            window.location.reload();
+        };
+
+        $scope.makePostRequest(url,data_params,callback_function);
     };
 }]);
 
