@@ -74,7 +74,7 @@
                                     </div>
                                     {!! Form::close() !!}
                                 </div>
-                                <p class="mt-3"> @lang('messages.already_have_account')? <a href="{{ route('login') }}" class="d-inline-block"> @lang('messages.signin') </a></p>
+                                <p class="mt-3"> @lang('messages.already_have_account')? <a href="{{ route('login') }}" class="d-inline-block"> @lang('messages.login') </a></p>
                             </div>
                         </div>
                     </div>

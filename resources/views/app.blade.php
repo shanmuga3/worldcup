@@ -132,8 +132,9 @@
                 const currentRouteName = "{!! Route::currentRouteName() !!}";
                 const routeList = {!!
                 json_encode([
-                    'login' => route('login'),
                     'update_user_default' => route('update_user_default'),
+                    'get_matches' => route('get_matches'),
+                    'predict_match' => route('predict_match'),
                 ]);
             !!}
             </script>

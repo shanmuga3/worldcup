@@ -1,6 +1,6 @@
 @extends('app')
 @section('main')
-<main class="main-container">
+<main class="main-container" ng-controller="dashboardController">
 	<section id="hero" class="hero-dashboard">
 		<div class="container team position-relative">
 			<div class="row gy-4 py-5">
@@ -50,78 +50,106 @@
 			<div class="section-header">
 				<h2> @lang('messages.featured_matches') </h2>
 			</div>
-			<div class="row gy-4">
-				<div class="col-md-6">
+			<div class="row gy-4" ng-cloak>
+				<div class="col-md-6" ng-class="{'loading':isActiveLoading}">
                     <div class="card single-match-wrapper">
                         <div class="card-header">
                             <h5 class="match-title h3 mb-0 text-white"> @lang('messages.today_matches') </h5>
                         </div>
                         <div class="card-body">
-                        	@foreach($active_matches as $match)
-                        	<div class="part-team">
+                        	<div class="text-center" ng-if="active_matches.length == 0">
+                        		@lang('messages.no_active_matches')
+                        	</div>
+                        	<div class="part-team" ng-repeat="match in active_matches">
 	                            <div class="single-team">
 	                                <div class="logo">
-	                                    <img src="{{ $match->first_team->image_src }}" alt="{{ $match->first_team->name }}">
+	                                    <img ng-src="@{{ match.first_team_image }}" alt="@{{ match.first_team_name }}">
 	                                </div>
-	                                <span class="team-name"> {{ $match->first_team->short_name.' - '.$match->first_team->name }} </span>
+	                                <span class="team-name"> @{{ match.first_team_formatted_name }} </span>
 	                            </div>
 	                            <div class="match-details">
 	                                <div class="match-time">
-	                                    <span class="date"> {{ $match->duration }} </span>
-	                                    <span class="time"> {{ $match->match_time }} </span>
+	                                    <span class="date"> @{{ match.duration }} </span>
+	                                    <span class="time"> @{{ match.match_time }} </span>
 	                                </div>
 	                                <span class="versus">@lang('messages.vs')</span>
 	                                <div class="buttons">
-	                                    <a href="javascript:;" class="btn btn-primary"> @lang('messages.predict_now') </a>
+	                                    <a href="javascript:;" class="btn btn-primary" ng-click="predictNow(match)" ng-hide="showPredictionForm"> @lang('messages.predict_now') </a>
 	                                </div>
 	                            </div>
 	                            <div class="single-team">
 	                                <div class="logo">
-	                                    <img src="{{ $match->second_team->image_src }}" alt="{{ $match->second_team->name }}">
+	                                	<img ng-src="@{{match.second_team_image}}" alt="@{{ match.second_team_name }}">
 	                                </div>
-	                                <span class="team-name"> {{ $match->second_team->short_name.' - '.$match->second_team->name }} </span>
+	                                <span class="team-name"> @{{ match.second_team_formatted_name }} </span>
 	                            </div>
                         	</div>
-                        	@endforeach
+                        	<div class="prediction-form" ng-if="showPredictionForm">
+                        		<div class="row">
+                        			<div class="col-5">
+                        				<div class="form-group mb-2">
+                        					<label class="form-label"> @lang('messages.first_team_score') </label>
+                        					<input type="text" name="first_team_score" class="form-control" ng-model="prediction_form.first_team_score">
+                        					<span class="text-danger"> @{{ error_messages.first_team_score[0] }} </span>
+                        				</div>
+                        				<div class="form-group mb-2" ng-show="prediction_form.first_team_score != '' && prediction_form.first_team_score == prediction_form.second_team_score">
+                        					<label class="form-label"> @lang('messages.first_team_penalty') </label>
+                        					<input type="text" name="first_team_penalty" class="form-control" ng-model="prediction_form.first_team_penalty">
+                        					<span class="text-danger"> @{{ error_messages.first_team_penalty[0] }} </span>
+                        				</div>
+                        			</div>
+                        			<div class="col-2">
+                        				
+                        			</div>
+                        			<div class="col-5">
+                        				<div class="form-group mb-2">
+                        					<label class="form-label"> @lang('messages.first_team_score') </label>
+                        					<input type="text" name="second_team_score" class="form-control" ng-model="prediction_form.second_team_score">
+                        					<span class="text-danger"> @{{ error_messages.second_team_score[0] }} </span>
+                        				</div>
+                        				<div class="form-group mb-2" ng-show="prediction_form.first_team_score != '' && prediction_form.first_team_score == prediction_form.second_team_score">
+                        					<label class="form-label"> @lang('messages.second_team_penalty') </label>
+                        					<input type="text" name="second_team_penalty" class="form-control" ng-model="prediction_form.second_team_penalty">
+                        					<span class="text-danger"> @{{ error_messages.second_team_penalty[0] }} </span>
+                        				</div>
+                        			</div>
+                        		</div>
+                        		<div class="d-flex justify-content-around">
+                                    <a href="javascript:;" class="btn btn-defalut" ng-click="hidePrediction();"> @lang('messages.cancel') </a>
+                                    <a href="javascript:;" class="btn btn-primary" ng-click="submitPrediction()"> @lang('messages.submit') </a>
+                                </div>
+                        	</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" ng-class="{'loading':isUpcomingLoading}">
                     <div class="card upcoming-match-wrapper">
                         <div class="card-header">
                             <h5 class="h3 mb-0"> @lang('messages.upcoming_matches') </h5>
                         </div>
                         <div class="card-body upcoming-matches-list">
-                        	@if($upcoming_matches->count() == 0)
-                        	<div class="text-center">
+                        	<div class="text-center" ng-if="upcoming_matches.length == 0">
                         		@lang('messages.no_upcoming_matches')
                         	</div>
-                        	@endif
-                        	@foreach($upcoming_matches as $match)
-                            <div class="upcoming-match">
+                            <div class="upcoming-match" ng-repeat="match in upcoming_matches">
                                 <div class="single-team">
                                     <div class="part-logo me-4">
-                                         <img src="{{ $match->first_team->image_src }}" alt="{{ $match->first_team->name }}">
+                                         <img ng-src="@{{ match.first_team_image }}" alt="@{{ match.first_team_name }}">
                                     </div>
                                     <div class="part-text">
-                                        <span class="team-name">
-                                            {{ $match->first_team->short_name.' - '.$match->first_team->name }}
-                                        </span>
+                                        <span class="team-name"> @{{ match.first_team_formatted_name }} </span>
                                     </div>
                                 </div>
                                 <span class="versus">@lang('messages.vs')</span>
                                 <div class="single-team">
                                     <div class="part-text">
-                                        <span class="team-name">
-                                            {{ $match->second_team->short_name.' - '.$match->second_team->name }}
-                                        </span>
+                                        <span class="team-name"> @{{ match.second_team_formatted_name }} </span>
                                     </div>
                                     <div class="part-logo">
-                                         <img src="{{ $match->second_team->image_src }}" alt="{{ $match->second_team->name }}">
+                                         <img ng-src="@{{ match.second_team_image }}" alt="@{{ match.second_team_name }}">
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
                         </div>
                     </div>
                 </div>

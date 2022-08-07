@@ -74,6 +74,7 @@ class AuthController extends Controller
         $user->phone_number = $request->phone_number;
         $user->address = $request->address;
         $user->city = $request->city;
+        $user->score = 30;
         $user->save();
 
         $credentials = $request->only(['email','password']);

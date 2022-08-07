@@ -145,3 +145,104 @@ app.controller('authController', ['$scope', '$http', function($scope, $http) {
         });
     });
 }]);
+
+app.controller('dashboardController', ['$scope', '$http', function($scope, $http) {
+    $scope.prediction_form = {
+        first_team_score: '',
+        second_team_score: '',
+        first_team_penalty: '',
+        second_team_penalty: '',
+    };
+    $scope.active_match = {};
+    $scope.active_matches = [];
+    $scope.upcoming_matches = [];
+    $scope.showPredictionForm = false;
+    $scope.isActiveLoading = false;
+    $scope.isUpcomingLoading = false;
+
+    $(document).ready(function() {
+        $scope.getMatches('upcoming');
+        $scope.getMatches('active');
+    });
+    
+    $scope.getMatches = function(type) {
+        $scope.isLoading = true;
+        let url = routeList.get_matches;
+        let data_params = {
+            'type' : type,
+        }
+
+        if(type == 'upcoming') {
+            $scope.isUpcomingLoading = true;
+        }
+        else {
+            $scope.isActiveLoading = true;
+        }
+
+        let callback_function = (response_data) => {
+            if(type == 'upcoming') {
+                $scope.upcoming_matches = response_data.matches;
+                $scope.isUpcomingLoading = false;
+            }
+            else {
+                $scope.active_matches = response_data.matches;
+                $scope.isActiveLoading = false;
+            }
+        };
+
+        $scope.makePostRequest(url,data_params,callback_function);
+    };
+
+    $scope.predictNow = function(match) {
+        $scope.prediction_form = {
+            first_team_score: '',
+            second_team_score: '',
+            first_team_penalty: '',
+            second_team_penalty: '',
+        };
+        $scope.active_match = match;
+        $scope.showPredictionForm = true;
+    };
+    
+    $scope.hidePrediction = function() {
+        $scope.showPredictionForm = false;
+        $scope.applyScope();
+    };
+
+    $scope.submitPrediction = function() {
+        let url = routeList.predict_match;
+        let data_params = $scope.prediction_form;
+        data_params['match_id'] = $scope.active_match.id;
+        $scope.isActiveLoading = true;
+
+        let callback_function = (response_data) => {
+            $scope.isActiveLoading = false;
+            if(response_data.error) {
+                $scope.error_messages = response_data.error_messages;
+                return false;
+            }
+
+            $scope.error_messages = {};
+
+            if(!response_data.status) {
+                let content = {
+                    title: response_data.status_title,
+                    message: response_data.status_message,
+                };
+                flashMessage(content,"danger");
+                return false;
+            }
+
+            let content = {
+                title: response_data.status_title,
+                message: response_data.status_message,
+            };
+            flashMessage(content,"success");
+            $scope.showPredictionForm = false;
+            $scope.getMatches('active');
+        };
+
+        $scope.makePostRequest(url,data_params,callback_function);
+    };
+
+}]);

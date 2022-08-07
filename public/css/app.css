@@ -11914,6 +11914,12 @@ footer,
     display: none;
   }
 }
+[ng\:cloak],
+[ng-cloak],
+.ng-cloak {
+  display: none !important;
+}
+
 [v-cloak] {
   display: none;
 }

@@ -116,6 +116,12 @@ select::-webkit-scrollbar {
     }
 }
 
+[ng\:cloak],
+[ng-cloak],
+.ng-cloak {
+  display: none !important;
+}
+
 [v-cloak] {
     display: none;
 }

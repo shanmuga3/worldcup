@@ -40,7 +40,7 @@ class MatchController extends Controller
 	public function create()
 	{
 		$this->view_data['sub_title'] = Lang::get('admin_messages.matches.add_match');
-		$this->view_data['teams'] = Team::activeOnly()->get()->pluck('name','id');
+		$this->view_data['teams'] = Team::activeOnly()->get()->pluck('short_name','id');
 		$this->view_data['result'] = $result = new TeamMatch;
 		return view('admin.matches.add', $this->view_data);
 	}
@@ -82,7 +82,7 @@ class MatchController extends Controller
 	public function edit($id)
 	{
 		$this->view_data['sub_title'] = Lang::get('admin_messages.matches.edit_match');
-		$this->view_data['teams'] = Team::activeOnly()->get()->pluck('name','id');
+		$this->view_data['teams'] = Team::activeOnly()->get()->pluck('short_name','id');
 		$this->view_data['result'] = $result = TeamMatch::findOrFail($id);
 		return view('admin.matches.edit', $this->view_data);
 	}
