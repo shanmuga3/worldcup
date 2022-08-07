@@ -19,8 +19,8 @@ class CreateMatchesTable extends Migration
             $table->foreignId('second_team_id');
             $table->unsignedTinyInteger('round');
             $table->string('match_time');
-            $table->unsignedInteger('first_team_score');
-            $table->unsignedInteger('second_team_score');
+            $table->unsignedInteger('first_team_score')->nullable();
+            $table->unsignedInteger('second_team_score')->nullable();
             $table->unsignedInteger('first_team_penalty')->nullable();
             $table->unsignedInteger('second_team_penalty')->nullable();
             $table->timestamp('starting_at')->nullable();

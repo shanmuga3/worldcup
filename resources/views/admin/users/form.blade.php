@@ -71,9 +71,6 @@
 </div>
 @push('scripts')
 <script type="text/javascript">
-    window.vueInitData = {!! json_encode([
-        'verification_status' => old('verification_status',$result->verification_status),
-    ]) !!}
     $(document).ready(function() {
         var flatpickrOptions = {
             altInput: true,

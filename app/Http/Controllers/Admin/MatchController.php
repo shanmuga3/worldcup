@@ -58,7 +58,15 @@ class MatchController extends Controller
 		$match = new TeamMatch;
 		$match->first_team_id = $request->first_team;
 		$match->second_team_id = $request->second_team;
-		$match->status = $request->status;
+		$match->round = $request->round;
+		$match->match_time = $request->match_time;
+		$match->first_team_score = $request->first_team_score;
+		$match->second_team_score = $request->second_team_score;
+		$match->first_team_penalty = $request->first_team_penalty;
+		$match->second_team_penalty = $request->second_team_penalty;
+		$match->starting_at = $request->starting_at;
+		$match->ending_at = $request->ending_at;
+		$match->answer = $request->answer;
 		$match->save();
 
 		flashMessage('success',Lang::get('admin_messages.common.success'),Lang::get('admin_messages.common.successfully_added'));
@@ -93,7 +101,15 @@ class MatchController extends Controller
 		$match = TeamMatch::findOrFail($id);
 		$match->first_team_id = $request->first_team;
 		$match->second_team_id = $request->second_team;
-		$match->status = $request->status;
+		$match->round = $request->round;
+		$match->match_time = $request->match_time;
+		$match->first_team_score = $request->first_team_score;
+		$match->second_team_score = $request->second_team_score;
+		$match->first_team_penalty = $request->first_team_penalty;
+		$match->second_team_penalty = $request->second_team_penalty;
+		$match->starting_at = $request->starting_at;
+		$match->ending_at = $request->ending_at;
+		$match->answer = $request->answer;
 		$match->save();
 		
 		flashMessage('success',Lang::get('admin_messages.common.success'),Lang::get('admin_messages.common.successfully_updated'));
@@ -140,17 +156,38 @@ class MatchController extends Controller
 	*/
 	protected function validateRequest($request_data, $id = '')
 	{
-		$image_rule = ($id == '') ? 'required|':'';
 		$rules = array(
-			'order_id'		=> 'required|integer|min:1',
-			'image'			=> $image_rule.'mimes:'.view()->shared('valid_mimes'),
-			'status'		=> 'required',
+			'first_team' => 'required',
+			'second_team' => 'required',
+			'round' => 'required|min:1',
+			'match_time' => 'required',
+			'starting_at' => 'required',
+			'ending_at' => 'required',
+			'answer' => 'required|in:0,1',
 		);
 		$attributes = array(
-			'order_id'		=> Lang::get('admin_messages.fields.order_id'),
-			'image'			=> Lang::get('admin_messages.fields.image'),
-			'status'		=> Lang::get('admin_messages.fields.status'),
+			'first_team' => Lang::get('admin_messages.matches.first_team'),
+			'second_team' => Lang::get('admin_messages.matches.second_team'),
+			'round' => Lang::get('admin_messages.matches.round'),
+			'match_time' => Lang::get('admin_messages.matches.match_time'),
+			'first_team_score' => Lang::get('admin_messages.matches.first_team_score'),
+			'second_team_score' => Lang::get('admin_messages.matches.second_team_score'),
+			'first_team_penalty' => Lang::get('admin_messages.matches.first_team_penalty'),
+			'second_team_penalty' => Lang::get('admin_messages.matches.second_team_penalty'),
+			'starting_at' => Lang::get('admin_messages.matches.starting_at'),
+			'ending_at' => Lang::get('admin_messages.matches.ending_at'),
+			'answer' => Lang::get('admin_messages.matches.answer'),
 		);
+
+		if($request_data['answer'] == '1') {
+			$rules['first_team_score'] = 'required|numeric|min:0';
+			$rules['second_team_score'] = 'required|numeric|min:0';
+			
+			if($rules['first_team_score'] > 0 && $rules['first_team_score'] == $rules['second_team_score']) {
+				$rules['first_team_penalty'] = 'required|numeric|min:0';
+				$rules['second_team_penalty'] = 'required|numeric|min:0';				
+			}
+		}
 
 		$this->validate($request_data,$rules,[],$attributes);
 	}

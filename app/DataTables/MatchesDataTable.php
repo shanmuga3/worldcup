@@ -17,15 +17,21 @@ class MatchesDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-        ->addColumn('status', function($query) {
-            return getStatusText($query->status);
+        ->addColumn('first_team', function($query) {
+            return '<a href="'.route('admin.teams.edit',['id' => $query->first_team_id]).'" class="link" target="_blank"> '.$query->first_team->short_name.' </a>';
+        })
+        ->addColumn('second_team', function($query) {
+            return '<a href="'.route('admin.teams.edit',['id' => $query->second_team_id]).'" class="link" target="_blank"> '.$query->second_team->short_name.' </a>';
+        })
+        ->addColumn('answer', function($query) {
+            return getYesNoText($query->answer);
         })
         ->addColumn('action',function($query) {
             $edit = auth()->guard('admin')->user()->can('update-matches') ? '<a href="'.route('admin.matches.edit',['id' => $query->id]).'" class=""> <i class="fa fa-edit"></i> </a>' : '';
             $delete = auth()->guard('admin')->user()->can('delete-matches') ? '<a href="" data-action="'.route('admin.matches.delete',['id' => $query->id]).'" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"> <i class="fa fa-times"></i> </a>' : '';
             return $edit." &nbsp; ".$delete;
         })
-        ->rawColumns(['image','action']);
+        ->rawColumns(['first_team','second_team','action']);
     }
 
     /**
@@ -36,7 +42,7 @@ class MatchesDataTable extends DataTable
      */
     public function query(TeamMatch $model)
     {
-        return $model->select();
+        return $model->with('first_team','second_team')->select();
     }
 
     /**
@@ -66,8 +72,10 @@ class MatchesDataTable extends DataTable
             ['data' => 'first_team', 'name' => 'first_team', 'title' => Lang::get('admin_messages.matches.first_team')],
             ['data' => 'second_team', 'name' => 'second_team', 'title' => Lang::get('admin_messages.matches.second_team')],
             ['data' => 'round', 'name' => 'round', 'title' => Lang::get('admin_messages.matches.round')],
+            ['data' => 'match_time', 'name' => 'match_time', 'title' => Lang::get('admin_messages.matches.match_time')],
             ['data' => 'starting_at', 'name' => 'starting_at', 'title' => Lang::get('admin_messages.matches.starting_at')],
             ['data' => 'ending_at', 'name' => 'ending_at', 'title' => Lang::get('admin_messages.matches.ending_at')],
+            ['data' => 'answer', 'name' => 'answer', 'title' => Lang::get('admin_messages.matches.answer')],
         ];
     }
 

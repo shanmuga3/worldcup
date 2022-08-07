@@ -15,4 +15,22 @@ class TeamMatch extends Model
      * @var string
      */
     protected $table = 'matches';
+
+    /**
+     * Join With Team Table
+     *
+     */
+    public function first_team()
+    {
+        return $this->belongsTo(Team::class);
+    }
+
+    /**
+     * Join With Team Table
+     *
+     */
+    public function second_team()
+    {
+        return $this->belongsTo(Team::class);
+    }
 }
