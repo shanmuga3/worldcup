@@ -41,4 +41,12 @@ return [
 	"contact_us" => "Contact Us",
 	"phone" => "Phone",
 	"useful_links" => "Useful Links",
+	"groups" => "Groups",
+	"score" => "Score",
+	"how_earn_points" => "How to Earn Points",
+	"point_desc_1" => "10 points for every correct prediction",
+	"point_desc_2" => "10 points when registering a mobile number",
+	"point_desc_3" => "10 points when registering the date of birth",
+	"point_desc_4" => "10 points when registering the city",
+	"upcoming_matches" => "Upcoming Matches",
 ];

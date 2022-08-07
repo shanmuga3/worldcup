@@ -258,3 +258,14 @@ if (!function_exists('getCurrentUserId')) {
         return optional($user)->id;
     }
 }
+
+/**
+ * Check Locale is arabic or not
+ *
+ */
+if (!function_exists('isRtl')) {
+    function isRtl()
+    {
+        return app()->getLocale() == 'ar';
+    }
+}
