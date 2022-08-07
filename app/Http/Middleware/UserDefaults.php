@@ -41,6 +41,8 @@ class UserDefaults
 
         session(['language' => $user_language]);
 
+        \View::share('site_name', global_settings('site_name'));
+
         $response = $next($request);
         $response->headers->set('Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate');
         $response->headers->set('Pragma', 'no-cache');

@@ -32,6 +32,11 @@
 								<span class="text-danger">{{ $errors->first('site_name') }}</span>
 							</div>
 							<div class="form-group mb-2">
+								<label for="about"> @lang('admin_messages.global_settings.about') <em class="text-danger"> * </em> </label>
+								{!! Form::textarea('about', old('about',global_settings('about')), ['class' => 'form-control', 'id' => 'about','rows' => 3]) !!}
+								<span class="text-danger">{{ $errors->first('about') }}</span>
+							</div>
+							<div class="form-group mb-2">
 								<label for="version"> @lang('admin_messages.global_settings.version') <em class="text-danger"> * </em> </label>
 								{!! Form::text('version', old('version',global_settings('version')), ['class' => 'form-control', 'id' => 'version']) !!}
 								<span class="text-danger">{{ $errors->first('version') }}</span>

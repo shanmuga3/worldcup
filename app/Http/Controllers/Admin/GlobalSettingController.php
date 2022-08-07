@@ -51,6 +51,7 @@ class GlobalSettingController extends Controller
     public function update(GlobalSettingsRequest $request)
     {
         GlobalSetting::where(['name' => 'site_name'])->update(['value' => $request->site_name]);
+        GlobalSetting::where(['name' => 'about'])->update(['value' => $request->about]);
         GlobalSetting::where(['name' => 'version'])->update(['value' => $request->version]);
         GlobalSetting::where(['name' => 'admin_url'])->update(['value' => $request->admin_url]);
         GlobalSetting::where(['name' => 'auto_payout'])->update(['value' => $request->auto_payout]);

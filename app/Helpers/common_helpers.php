@@ -12,13 +12,23 @@ use Carbon\Carbon;
  */
 if (!function_exists('global_settings')) {
 
-    function global_settings($key)
+    function global_settings($key,$original = false)
     {
         try {
             $global_settings = resolve('GlobalSetting');
             $global_setting = $global_settings->where('name',$key)->first();
             
-            return optional($global_setting)->value;
+            $value = optional($global_setting)->value;
+            if($original) {
+                return $value;
+            }
+            if(in_array($key,['site_name','about'])) {
+                $value = json_decode($value,true);
+                $locale = app()->getLocale();
+                return $value[$locale] ?? '';
+            }
+
+            return $value;
         }
         catch (\Exception $e) {
             return '';

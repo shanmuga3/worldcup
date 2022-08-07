@@ -70,7 +70,7 @@
 	                                    <span class="date"> {{ $match->duration }} </span>
 	                                    <span class="time"> {{ $match->match_time }} </span>
 	                                </div>
-	                                <span class="versus">vs</span>
+	                                <span class="versus">@lang('messages.vs')</span>
 	                                <div class="buttons">
 	                                    <a href="javascript:;" class="btn btn-primary"> @lang('messages.predict_now') </a>
 	                                </div>
@@ -109,7 +109,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <span class="versus">vs</span>
+                                <span class="versus">@lang('messages.vs')</span>
                                 <div class="single-team">
                                     <div class="part-text">
                                         <span class="team-name">

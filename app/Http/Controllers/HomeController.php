@@ -33,6 +33,12 @@ class HomeController extends Controller
         ]);
     }
 
+    /**
+     * Display User Dashboard
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function dashboard(Request $request)
     {
         $data['user'] = Auth::user();
@@ -43,5 +49,27 @@ class HomeController extends Controller
         $data['active_matches'] = TeamMatch::whereRaw('? between starting_at and ending_at', [date('Y-m-d H:i:s')])->get();
         
         return view('dashboard',$data);
+    }
+
+    /**
+     * Display Static page
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function staticPages(Request $request)
+    {
+        $page = \App\Models\StaticPage::where('slug',$request->slug)->firstOrFail();
+
+        if($page->status == 0 && !\Auth::guard('admin')->check()) {
+            abort(404);
+        }
+
+        $replace_keys = ['SITE_NAME','SITE_URL'];
+        $replace_values = [SITE_NAME,url('/')];
+        $data['content'] = \Str::of($page->content)->replace($replace_keys,$replace_values);
+        $data['title'] = $page->name;
+        
+        return view('static_page',$data);
     }
 }

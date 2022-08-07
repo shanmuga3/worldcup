@@ -201,6 +201,7 @@ return [
     ],
     "global_settings" => [
         "admin_url" => "Admin URL",
+        "about" => "About",
         "aws" => "AWS",
         "monthly" => "Monthly",
         "copyright_link" => "Copyright Link",

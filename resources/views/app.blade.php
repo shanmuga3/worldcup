@@ -97,8 +97,9 @@
                         <div class="col-lg-2 col-6 footer-links">
                           <h4> {{ $site_name }} </h4>
                           <ul>
-                            <li><a href="#">Terms of service</a></li>
-                            <li><a href="#">Privacy policy</a></li>
+                            @foreach(resolve("StaticPage")->where('in_footer','1') as $page)
+                            <li><a href="{{ $page->url }}"> {{ $page->name }} </a></li>
+                            @endforeach
                           </ul>
                         </div>
 

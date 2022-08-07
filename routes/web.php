@@ -154,3 +154,5 @@ Route::group(['middleware' => ['auth']], function () {
         return redirect()->route('login');
     })->name('logout');
 });
+
+Route::get('{slug}', [HomeController::class,'staticPages'])->name('static_page');

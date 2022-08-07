@@ -70,7 +70,6 @@ class ShareServiceProvider extends ServiceProvider
                 \App\Models\GlobalSetting::where('name','site_url')->update(['value' =>  $url]);
             }
 
-            View::share('site_name', global_settings('site_name'));
             View::share('site_url', siteUrl());
             View::share('version', global_settings('version'));
             View::share('version', \Str::random(4)); // Load All JS & CSS without Cache
