@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\{ HomeController,
     SocialMediaController,
     MetaController,
     StaticPageController,
+    CountryController,
+    LanguageController,
     TeamController,
     MatchController,
 };
@@ -96,6 +98,46 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::get('/', [MetaController::class,'index'])->name('metas')->middleware('permission:view-metas');
         Route::get('{id}/edit', [MetaController::class,'edit'])->name('metas.edit')->middleware('permission:update-metas');
         Route::match(['PUT','PATCH'],'{id}', [MetaController::class,'update'])->name('metas.update')->middleware('permission:update-metas');
+    });
+
+    // Manage Countries Routes
+    Route::group(['prefix' => 'countries'], function () {
+        Route::get('/', [CountryController::class,'index'])->name('countries')->middleware('permission:view-countries');
+        Route::get('create', [CountryController::class,'create'])->name('countries.create')->middleware('permission:create-countries');
+        Route::post('/', [CountryController::class,'store'])->name('countries.store')->middleware('permission:create-countries');
+        Route::get('{id}/edit', [CountryController::class,'edit'])->name('countries.edit')->middleware('permission:update-countries');
+        Route::match(['PUT','PATCH'],'{id}', [CountryController::class,'update'])->name('countries.update')->middleware('permission:update-countries');
+        Route::delete('{id}', [CountryController::class,'destroy'])->name('countries.delete')->middleware('permission:delete-countries');
+    });
+
+    // Manage Currencies Routes
+    Route::group(['prefix' => 'currencies'], function () {
+        Route::get('/', [CurrencyController::class,'index'])->name('currencies')->middleware('permission:view-currencies');
+        Route::get('create', [CurrencyController::class,'create'])->name('currencies.create')->middleware('permission:create-currencies');
+        Route::post('/', [CurrencyController::class,'store'])->name('currencies.store')->middleware('permission:create-currencies');
+        Route::get('{id}/edit', [CurrencyController::class,'edit'])->name('currencies.edit')->middleware('permission:update-currencies');
+        Route::match(['PUT','PATCH'],'{id}', [CurrencyController::class,'update'])->name('currencies.update')->middleware('permission:update-currencies');
+        Route::delete('{id}', [CurrencyController::class,'destroy'])->name('currencies.delete')->middleware('permission:delete-currencies');
+    });
+
+    // Manage Languages Routes
+    Route::group(['prefix' => 'languages'], function () {
+        Route::get('/', [LanguageController::class,'index'])->name('languages')->middleware('permission:view-languages');
+        Route::get('create', [LanguageController::class,'create'])->name('languages.create')->middleware('permission:create-languages');
+        Route::post('/', [LanguageController::class,'store'])->name('languages.store')->middleware('permission:create-languages');
+        Route::get('{id}/edit', [LanguageController::class,'edit'])->name('languages.edit')->middleware('permission:update-languages');
+        Route::match(['PUT','PATCH'],'{id}', [LanguageController::class,'update'])->name('languages.update')->middleware('permission:update-languages');
+        Route::delete('{id}', [LanguageController::class,'destroy'])->name('languages.delete')->middleware('permission:delete-languages');
+    });
+
+    // Manage Static Pages Routes
+    Route::group(['prefix' => 'static-pages'], function () {
+        Route::get('/', [StaticPageController::class,'index'])->name('static_pages')->middleware('permission:view-static_pages');
+        Route::get('create', [StaticPageController::class,'create'])->name('static_pages.create')->middleware('permission:create-static_pages');
+        Route::post('/', [StaticPageController::class,'store'])->name('static_pages.store')->middleware('permission:create-static_pages');
+        Route::get('{id}/edit', [StaticPageController::class,'edit'])->name('static_pages.edit')->middleware('permission:update-static_pages');
+        Route::match(['PUT','PATCH'],'{id}', [StaticPageController::class,'update'])->name('static_pages.update')->middleware('permission:update-static_pages');
+        Route::delete('{id}', [StaticPageController::class,'destroy'])->name('static_pages.delete')->middleware('permission:delete-static_pages');
     });
 
     // Manage Teams Routes

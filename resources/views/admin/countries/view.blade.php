@@ -3,7 +3,7 @@
 <div class="content">
 	<div class="page-inner">
 		<div class="page-header">
-			<h4 class="page-title"> {{ $main_title }} </h4>
+			<h4 class="page-title"> {{ $sub_title }} </h4>
 			<ul class="breadcrumbs">
 				<li class="nav-home">
 					<a href="{{ route('admin.dashboard') }}">
@@ -14,7 +14,7 @@
 					<i class="flaticon-right-arrow"></i>
 				</li>
 				<li class="nav-item">
-					<a href="#">@lang("admin_messages.static_pages")</a>
+					<a href="#">@lang("admin_messages.countries")</a>
 				</li>
 			</ul>
 		</div>
@@ -23,10 +23,10 @@
 				<div class="card">
 					<div class="card-header">
 						<div class="d-flex align-items-center">
-							<h4 class="card-title"> {{ $sub_title }}</h4>
-							@checkPermission('create-static_pages')
-							<a href="{{ route('admin.static_pages.create') }}" class="btn btn-primary btn-round ms-auto">
-								@lang('admin_messages.add_static_page')
+							<h4 class="card-title"> @lang("admin_messages.countries") </h4>
+							@checkPermission('create-countries')
+							<a href="{{ route('admin.countries.create') }}" class="btn btn-primary btn-round ms-auto">
+								@lang('admin_messages.add_country')
 							</a>
 							@endcheckPermission
 						</div>

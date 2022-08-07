@@ -112,6 +112,14 @@ class AppServiceProvider extends ServiceProvider
             return \App\Models\Meta::get();
         });
 
+        $this->app->singleton('Country', function() {
+            return \App\Models\Country::get();
+        });
+
+        $this->app->singleton('Language', function() {
+            return \App\Models\Language::get();
+        });
+
         $this->app->singleton('DateFormat', function() {
             $path = app_path('Models/DateFormats.json');
             $date_formats = collect(json_decode(file_get_contents($path), true));

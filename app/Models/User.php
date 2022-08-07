@@ -19,7 +19,6 @@ class User extends Authenticatable
     protected $guarded = [
         'dob',
         'profile_picture',
-        'user_document_src',
     ];
 
     /**
@@ -211,27 +210,6 @@ class User extends Authenticatable
             $src = $handler->fetch($image_data);
         }
         return $src;
-    }
-
-    /**
-     * Get Document of the User
-     *
-     */
-    public function getUserDocumentSrcAttribute()
-    {
-        $document_src = $this->attributes['document_src'];
-        if($document_src == '') {
-            return NULL;
-        }
-        if($this->attributes['photo_source'] == 'site') {
-            $handler = $this->getImageHandler();
-            $image_data['name'] = $document_src;
-            $image_data['version_based'] = true;
-            $image_data['path'] = $this->getUploadPath();
-
-            $document_src = $handler->fetch($image_data);
-        }
-        return $document_src ;
     }
 
     /**

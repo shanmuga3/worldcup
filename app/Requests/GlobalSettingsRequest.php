@@ -1,16 +1,5 @@
 <?php
 
-/**
- * Global Settings validation
- *
- * @package     Hyra
- * @subpackage  Requests
- * @category    GlobalSettingsRequest
- * @author      Cron24 Technologies
- * @version     1.4
- * @link        https://cron24.com
- */
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;

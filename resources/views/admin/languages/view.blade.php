@@ -14,7 +14,7 @@
 					<i class="flaticon-right-arrow"></i>
 				</li>
 				<li class="nav-item">
-					<a href="#">@lang("admin_messages.static_pages")</a>
+					<a href="#">@lang("admin_messages.languages")</a>
 				</li>
 			</ul>
 		</div>
@@ -23,10 +23,10 @@
 				<div class="card">
 					<div class="card-header">
 						<div class="d-flex align-items-center">
-							<h4 class="card-title"> {{ $sub_title }}</h4>
-							@checkPermission('create-static_pages')
-							<a href="{{ route('admin.static_pages.create') }}" class="btn btn-primary btn-round ms-auto">
-								@lang('admin_messages.add_static_page')
+							<h4 class="card-title"> @lang("admin_messages.languages") </h4>
+							@checkPermission('create-languages')
+							<a href="{{ route('admin.languages.create') }}" class="btn btn-primary btn-round ms-auto">
+								@lang('admin_messages.add_language')
 							</a>
 							@endcheckPermission
 						</div>

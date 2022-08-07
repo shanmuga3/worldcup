@@ -128,6 +128,7 @@
                 const USER_ID = '{!! Auth::check() ? Auth::id() : 0 !!}';
                 const flatpickrFormat = "Y-m-d";
                 const userLanguage = "{!! session('language') !!}";
+                const currentRouteName = "{!! Route::currentRouteName() !!}";
                 const routeList = {!!
                 json_encode([
                     'login' => route('login'),

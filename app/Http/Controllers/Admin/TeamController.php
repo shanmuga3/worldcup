@@ -11,6 +11,8 @@ use Lang;
 
 class TeamController extends Controller
 {
+	use Translatable;
+	
 	/**
 	* Constructor
 	*

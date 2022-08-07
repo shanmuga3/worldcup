@@ -66,6 +66,7 @@
       <script src="{{ asset('admin_assets/plugins/angularjs/angular.min.js') }}"></script>
       <script src="{{ asset('admin_assets/plugins/angularjs/angular-sanitize.min.js') }}"></script>
       <script src="{{ asset('admin_assets/plugins/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
       <script src="{{ asset('admin_assets/js/adminlte.js') }}"></script>
       
       <script type="text/javascript">
@@ -75,8 +76,7 @@
         const SITE_NAME = '{!! $site_name !!}';
         const userCurrency = '{!! session("currency") !!}';
         const userLanguage = '{!! session("language") !!}';
-        const CURRENCY_SYMBOL = '{!! session("currency_symbol") !!}';
-        const DEFAULT_LANGUAGE = '{!! App::getLocale() !!}';
+        const flatpickrFormat = "Y-m-d";
         const currentRouteName = "{!! Route::currentRouteName() !!}";
 
         function flashMessage(content, state = 'success') {

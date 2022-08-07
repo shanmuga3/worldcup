@@ -84,7 +84,7 @@ Route::group(['prefix' => 'dev'], function () {
 
         return response()->json([
             'status' => true,
-            'status_message' => "Match Updated Successfully",
+            'status_message' => "Users Updated Successfully",
         ]);
     });
 

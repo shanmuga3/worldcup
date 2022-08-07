@@ -5,6 +5,9 @@
 
 @import "app/icons";
 
+@import "flatpickr/dist/flatpickr.min";
+@import "flatpickr/dist/themes/material_green";
+
 html {
     word-wrap: break-word;
     transition: all 0s ease;

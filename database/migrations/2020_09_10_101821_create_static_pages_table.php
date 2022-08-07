@@ -16,8 +16,8 @@ class CreateStaticPagesTable extends Migration
         Schema::create('static_pages', function (Blueprint $table) {
             $table->id();
             $table->string('slug',50);
-            $table->text('name');
-            $table->longText('content');
+            $table->json('name')->nullable();
+            $table->json('content')->nullable();
             $table->boolean('in_footer')->default(1);
             $table->unsignedTinyInteger('under_section')->nullable();
             $table->boolean('must_agree')->default(0);

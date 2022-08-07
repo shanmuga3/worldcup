@@ -18,9 +18,12 @@ class DatabaseSeeder extends Seeder
             GlobalSettingSeeder::class,
             CredentialSeeder::class,
             MetaSeeder::class,
+            CountrySeeder::class,
+            LanguageSeeder::class,
             LaravelEntrustSeeder::class,
             SocialMediaLinkSeeder::class,
             SliderSeeder::class,
+            StaticPageSeeder::class,
         ]);
 
         $this->call([

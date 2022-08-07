@@ -1,29 +1,34 @@
-@extends('admin.app')
+@extends('layouts.adminLayout.app')
 @section('content')
-<div class="content-wrapper">
-	<div class="content-header">
-		<div class="container-fluid">
-			<div class="row mb-2">
-				<div class="col-sm-6">
-					<h1 class="m-0">Static Pages</h1>
-				</div>
-				<div class="col-sm-6">
-					<ol class="breadcrumb float-sm-end">
-						<li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-						<li class="breadcrumb-item active">Static Pages</li>
-					</ol>
-				</div>
-			</div>
+<div class="content">
+	<div class="page-inner">
+		<div class="page-header">
+			<h4 class="page-title"> {{ $main_title }} </h4>
+			<ul class="breadcrumbs">
+				<li class="nav-home">
+					<a href="{{ route('admin.dashboard') }}">
+						<i class="flaticon-home"></i>
+					</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="{{ route('admin.static_pages') }}">@lang("admin_messages.static_pages")</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">@lang("admin_messages.edit")</a>
+				</li>
+			</ul>
 		</div>
-	</div>
-	<div class="content">
-		<div class="conainer-fluid">
-			<div class="row">
-				<div class="col-md-12">
-					{!! Form::open(['url' => route('admin.static_pages.update',['id' => $result->id]), 'class' => 'form-horizontal','method' => "PUT"]) !!}
-					@include('admin.static_pages.form')
-					{!! Form::close() !!}
-				</div>
+		<div class="row">
+			<div class="col-md-12">
+				{!! Form::open(['url' => route('admin.static_pages.update',['id' => $result->id]), 'class' => 'form-horizontal','method' => "PUT"]) !!}
+				@include('admin.static_pages.form')
+				{!! Form::close() !!}
 			</div>
 		</div>
 	</div>

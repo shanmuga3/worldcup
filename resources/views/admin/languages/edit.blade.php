@@ -14,20 +14,20 @@
 					<i class="flaticon-right-arrow"></i>
 				</li>
 				<li class="nav-item">
-					<a href="{{ route('admin.static_pages') }}">@lang("admin_messages.static_pages")</a>
+					<a href="{{ route('admin.languages') }}">@lang("admin_messages.languages")</a>
 				</li>
 				<li class="separator">
 					<i class="flaticon-right-arrow"></i>
 				</li>
 				<li class="nav-item">
-					<a href="#">@lang("admin_messages.add")</a>
+					<a href="#">@lang("admin_messages.edit")</a>
 				</li>
 			</ul>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				{!! Form::open(['url' => route('admin.static_pages.store'), 'class' => 'form-horizontal']) !!}
-				@include('admin.static_pages.form')
+				{!! Form::open(['url' => route('admin.languages.update',['id' => $result->id]), 'class' => 'form-horizontal','method' => "PUT"]) !!}
+				@include('admin.languages.form')
 				{!! Form::close() !!}
 			</div>
 		</div>
