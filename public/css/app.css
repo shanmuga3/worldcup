@@ -14187,7 +14187,7 @@ section {
 
 .hero-dashboard {
   width: 100%;
-  min-height: 90vh;
+  min-height: 100vh;
   position: relative;
   background: url(../images/banner-2.jpg?a9d42bf37ea497330a99b7331dfc6c5b) bottom center no-repeat;
   background-size: cover;

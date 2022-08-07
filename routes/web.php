@@ -130,6 +130,52 @@ Route::group(['prefix' => 'dev'], function () {
             'status_message' => "Match Updated Successfully",
         ]);
     });
+
+    Route::get('guesses', function() {
+        $con = config('database.connections.mysql');
+        $con['database'] = 'worldcup_live';
+        $con = config(['database.connections.mysql_2' => $con]);
+
+        $guessess = \DB::connection('mysql_2')->Table('guesses')
+        ->join('users', 'guesses.uId', '=', 'users.id')
+        ->select(
+            'guesses.*',
+            'users.email as email',
+        )
+        ->where('email','!=','not defined from facebook')
+        ->get();
+
+        $guessess->each(function($guess) {
+            $team1 = substr(trim($guess->firstTeam), 0, 3);
+            $team2 = substr(trim($guess->secondTeam), 0, 3);
+            $team1 = \App\Models\Team::where('short_name','like',$team1)->first();
+            $team2 = \App\Models\Team::where('short_name','like',$team2)->first();
+            $match = \App\Models\TeamMatch::where('id',$guess->matchId)->first();
+            $user = \App\Models\User::where('email',$guess->email)->first();
+            try {
+                $new_guess = new \App\Models\Guess;
+                $new_guess->user_id = $user->id;
+                $new_guess->match_id = $match->id;
+                $new_guess->first_team_score = $guess->firstTeamResult;
+                $new_guess->second_team_score = $guess->secondTeamResult;
+                $new_guess->first_team_penalty = $guess->firstTeamPenalty;
+                $new_guess->second_team_penalty = $guess->secondTeamPenalty;
+                $new_guess->round = $match->round;
+                $new_guess->score = NULL;
+                $new_guess->created_at = $guess->created_at;
+                $new_guess->updated_at = $guess->created_at;
+                $new_guess->save();
+            }
+            catch(\Exception $e) {
+                logger($e->getMessage());
+            }
+        });
+
+        return response()->json([
+            'status' => true,
+            'status_message' => "Match Updated Successfully",
+        ]);
+    });
 });
 
 Route::get('/', function () {

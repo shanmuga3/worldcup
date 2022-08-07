@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\DataTables\MatchesDataTable;
 use App\Models\Team;
 use App\Models\TeamMatch;
+use App\Models\Guess;
 use Lang;
 
 class MatchController extends Controller
@@ -99,6 +100,11 @@ class MatchController extends Controller
 		$this->validateRequest($request, $id);
 
 		$match = TeamMatch::findOrFail($id);
+		if($match->answer != 0) {
+			flashMessage('danger',Lang::get('admin_messages.common.failed'),Lang::get('admin_messages.errors.invalid_request'));
+			return redirect()->route('admin.matches');
+		}
+
 		$match->first_team_id = $request->first_team;
 		$match->second_team_id = $request->second_team;
 		$match->round = $request->round;
@@ -111,6 +117,38 @@ class MatchController extends Controller
 		$match->ending_at = $request->ending_at;
 		$match->answer = $request->answer;
 		$match->save();
+
+		$match = TeamMatch::findOrFail($id);
+		if($match->answer == 1) {
+			$guessess = Guess::with('user')->where('match_id',$match->id)->get();
+			$guessess->each(function($guess) use($match) {
+				$points = 0;
+				if($match->first_team_score == $guess->first_team_score && $match->second_team_score == $guess->second_team_score) {
+					if($match->first_team_penalty == $guess->first_team_penalty && $match->second_team_penalty == $guess->second_team_penalty) {
+						if($match->round == '1') {
+							$points = 10;
+						}
+						else if($match->round == '2') {
+							$points = 20;
+						}
+						else if($match->round == '3') {
+							$points = 30;
+						}
+						else if($match->round == '4') {
+							$points = 50;
+						}
+						else if($match->round == '5') {
+							$points = 100;
+						}
+					}
+				}
+				if($points > 0) {
+					$user = $guess->user;
+					$user->score += $points;
+					$user->save();
+				}
+			});
+		}
 		
 		flashMessage('success',Lang::get('admin_messages.common.success'),Lang::get('admin_messages.common.successfully_updated'));
 		return redirect()->route('admin.matches');
@@ -127,7 +165,6 @@ class MatchController extends Controller
 		$match = TeamMatch::findOrFail($id);
 		$can_destroy = $this->canDestroy($id);
 		if($can_destroy['status']) {
-			$match->deleteImageFile();
 			$match->delete();
 		}
 
@@ -183,7 +220,7 @@ class MatchController extends Controller
 			$rules['first_team_score'] = 'required|numeric|min:0';
 			$rules['second_team_score'] = 'required|numeric|min:0';
 			
-			if($rules['first_team_score'] > 0 && $rules['first_team_score'] == $rules['second_team_score']) {
+			if($rules['first_team_score'] >= 0 && $request_data['first_team_score'] == $request_data['second_team_score']) {
 				$rules['first_team_penalty'] = 'required|numeric|min:0';
 				$rules['second_team_penalty'] = 'required|numeric|min:0';				
 			}

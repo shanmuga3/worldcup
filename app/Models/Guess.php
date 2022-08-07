@@ -9,6 +9,15 @@ class Guess extends Model
     use HasFactory;
 
     /**
+     * Join With Team User Table
+     *
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
      * Join With Team Match Table
      *
      */

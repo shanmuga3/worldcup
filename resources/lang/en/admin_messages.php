@@ -121,6 +121,7 @@ return [
     ],
     "errors" => [
         "blocked_by_admin" => "Your Account is disabled. Please Contact Admin",
+        "invalid_request" => "Invalid Request",
         "confirm" => "Confirm",
         "confirm_delete" => "Confirm Delete",
         "failed_to_login" => "Failed To Login",

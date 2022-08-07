@@ -20,7 +20,7 @@
                                         <p class="team-name fw-bold"> {{ $guess->match->first_team->formatted_name }} </p>
                                         <p class="user-guess">
                                         	{{ $guess->first_team_score }}
-	                                        @if($guess->first_team_penalty >=0)
+	                                        @if($guess->first_team_penalty != '')
 	                                        <span class="user-penalty"> ({{ $guess->first_team_penalty }}) </span>
 	                                        @endif
                                         </p>
@@ -32,7 +32,7 @@
                                         <p class="team-name fw-bold"> {{ $guess->match->second_team->formatted_name }} </p>
                                         <p class="user-guess">
                                         	{{ $guess->second_team_score }}
-                                        	@if($guess->second_team_penalty >=0)
+                                        	@if($guess->second_team_penalty != '')
 	                                        <span class="user-penalty"> ({{ $guess->second_team_penalty }}) </span>
 	                                        @endif
                                         </p>

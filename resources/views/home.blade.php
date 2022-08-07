@@ -16,6 +16,7 @@
 				</div>
 			</div>
 		</div>
+		{{--
 		<div class="icon-boxes position-relative">
 			<div class="container position-relative">
 				<div class="row gy-4 mt-5">
@@ -46,6 +47,7 @@
 				</div>
 			</div>
 		</div>
+		--}}
 	</section>
 	{{--
 	<section id="faq" class="faq">
