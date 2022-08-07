@@ -149,6 +149,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard',[HomeController::class,'dashboard'])->name('dashboard');
     Route::post('get-matches',[HomeController::class,'getMatches'])->name('get_matches');
     Route::post('predict-match',[HomeController::class,'predictMatch'])->name('predict_match');
+    Route::get('previous-guesses',[HomeController::class,'previousGuesses'])->name('previous_guesses');
 
     Route::get('logout', function () {
         session()->forget('url.intended');

@@ -56,7 +56,7 @@
                                 <li><a href="{{ route('register') }}"> @lang('messages.register') </a></li>
                                 @else
                                 <li><a href="{{ route('dashboard') }}"> @lang('messages.dashboard') </a></li>
-                                <li><a href="#"> @lang('messages.previous_guess') </a></li>
+                                <li><a href="{{ route('previous_guesses') }}"> @lang('messages.previous_guess') </a></li>
                                 <li><a href="http://www.fifa.com/worldcup/teams" target="_blank"> @lang('messages.teams') </a></li>
                                 <li><a href="http://www.fifa.com/worldcup/groups" target="_blank"> @lang('messages.groups') </a></li>
                                 @endif

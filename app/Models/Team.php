@@ -23,4 +23,13 @@ class Team extends Model
      * @var string
      */
     public $filePath = "/images/teams";
+
+    /**
+     * Get Full name of current User
+     *
+     */
+    public function getFormattedNameAttribute()
+    {
+        return $this->short_name.' - '.$this->name;
+    }
 }

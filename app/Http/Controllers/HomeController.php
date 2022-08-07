@@ -45,7 +45,7 @@ class HomeController extends Controller
     {
         $data['user'] = Auth::user();
         
-        return view('dashboard',$data);
+        return view('user.dashboard',$data);
     }
 
     /**
@@ -148,6 +148,18 @@ class HomeController extends Controller
             'status_title' => Lang::get('messages.success'),
             'status_message' => Lang::get('messages.prediction_has_been_submitted'),
         ]);
+    }
+
+    /**
+     * Display previous Guesses
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function previousGuesses(Request $request)
+    {
+        $data['user_guesses'] = Guess::with('match.first_team','match.second_team')->where('user_id',Auth::id())->get();
+        return view('user.previous_guesses',$data);
     }
 
     /**

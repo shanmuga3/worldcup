@@ -66,4 +66,7 @@ return [
 	"cancel" => "Cancel",
 	"prediction_has_been_submitted" => "Prediction has been submitted successfully",
 	"your_prediction_already_submitted" => "Your Prediction already submitted",
+	"your_previous_guesses" => "Your Previous Guesses",
+	"points" => "Points",
+	"pending" => "Pending",
 ];

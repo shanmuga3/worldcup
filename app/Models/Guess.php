@@ -7,4 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Guess extends Model
 {
     use HasFactory;
+
+    /**
+     * Join With Team Match Table
+     *
+     */
+    public function match()
+    {
+        return $this->belongsTo(TeamMatch::class);
+    }
 }

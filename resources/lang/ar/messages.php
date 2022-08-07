@@ -66,4 +66,7 @@ return [
 	"cancel" => "يلغي",
 	"prediction_has_been_submitted" => "تم تقديم التنبؤ بنجاح",
 	"your_prediction_already_submitted" => "تم إرسال التنبؤ الخاص بك بالفعل",
+	"your_previous_guesses" => "تخميناتك السابقة",
+	"points" => "نقاط",
+	"pending" => "ريثما",
 ];
