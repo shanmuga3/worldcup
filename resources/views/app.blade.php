@@ -91,7 +91,7 @@
                         </div>
 
                         <div class="col-lg-2 col-6 footer-links">
-                          {!! Form::select('language',['en' => 'English','ar' => 'عربي'], session('language'), ['id' => 'user-language','class' => 'form-select','ng-model' => 'userLanguage','ng-change' => "updateUserDefault('language')"]) !!}
+                          
                         </div>
 
                         <div class="col-lg-2 col-6 footer-links">
@@ -108,6 +108,9 @@
                             <strong class="me-2">@lang('messages.phone'):</strong> {{ global_settings('support_number') }} <br>
                             <strong class="me-2">@lang('messages.email'):</strong> {{ global_settings('support_email') }} <br>
                           </p>
+                          <div class="d-flex w-50">
+                              {!! Form::select('language',['en' => 'English','ar' => 'عربي'], session('language'), ['id' => 'user-language','class' => 'form-select','ng-model' => 'userLanguage','ng-change' => "updateUserDefault('language')"]) !!}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -136,5 +139,19 @@
             <!-- Include JS files -->
             {!! Html::script('js/app.js?v='.$version) !!}
             {!! Html::script('js/common.js?v='.$version) !!}
+            @if(Session::has('message'))
+            <script type="text/javascript">
+                document.addEventListener('DOMContentLoaded',function() {
+                    var content = {};
+                    content.message = "{!! Session::get('message') !!}";
+                    content.title = "{!! Session::get('title') !!}";
+                    state = "{!! Session::get('state') !!}";
+
+                    flashMessage(content,state);
+                });
+                </script>
+            @endif
+            @stack('scripts')
+            {!! global_settings('foot_code') !!}
         </body>
     </html>

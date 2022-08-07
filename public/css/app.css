@@ -14983,6 +14983,208 @@ section {
   color: #fff;
 }
 
+.single-match-wrapper .card-header {
+  width: 100%;
+  text-align: center;
+  padding: 25px 0;
+  border-radius: 0 0 10px 10px;
+  background: url(../images/match-bg.jpg?c5d6142109f781011f65c64f56ba7537) center center no-repeat;
+  background-size: cover;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+.single-match-wrapper .card-header .match-title {
+  text-transform: uppercase;
+}
+.single-match-wrapper .part-team {
+  padding: 30px 60px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.single-match-wrapper .part-team .single-team {
+  display: inline-block;
+  text-align: center;
+  background: #fff;
+  border-radius: 3px;
+}
+.single-match-wrapper .part-team .single-team .logo {
+  width: 80px;
+  margin-bottom: 22px;
+  display: inline-block;
+}
+.single-match-wrapper .part-team .single-team .logo img {
+  width: 100%;
+}
+.single-match-wrapper .part-team .single-team span.team-name {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 14px;
+  color: #383838;
+  display: block;
+  opacity: 0.9;
+}
+.single-match-wrapper .part-team .match-details {
+  display: inline-block;
+  text-align: center;
+}
+.single-match-wrapper .part-team .match-details .match-time {
+  margin-bottom: 12px;
+}
+.single-match-wrapper .part-team .match-details .match-time span {
+  display: block;
+  display: block;
+  text-transform: uppercase;
+}
+.single-match-wrapper .part-team .match-details .match-time span.time {
+  font-size: 24px;
+  font-weight: 500;
+  color: #c40c49;
+}
+.single-match-wrapper .part-team .match-details .match-time span.date {
+  font-weight: 500;
+  color: #2a2a2a;
+  opacity: 0.6;
+  font-size: 14px;
+}
+.single-match-wrapper .part-team .match-details span.versus {
+  font-size: 18px;
+  font-weight: 500;
+  display: inline-block;
+  position: relative;
+  background: #fff;
+  width: 40px;
+  height: 40px;
+  line-height: 34px;
+  border-radius: 50%;
+  color: #c40c49;
+  border: 2px solid rgba(56, 56, 56, 0.3);
+  margin-bottom: 20px;
+  font-style: italic;
+}
+.single-match-wrapper .part-team .match-details span.versus:after {
+  position: absolute;
+  content: "";
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%;
+  width: 170px;
+  margin-top: -1px;
+  height: 2px;
+  background: rgba(56, 56, 56, 0.3);
+  z-index: -1;
+}
+.single-match-wrapper .part-team .match-details .buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.single-match-wrapper .part-team .match-details .buttons a {
+  display: inline-block;
+  width: 110px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+  padding: 0;
+}
+
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: 0 0 8px 6px rgba(0, 0, 0, 0.04);
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match:nth-child(2n+0) span.versus {
+  background: #383838;
+  border-color: #383838;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match:nth-child(2n+0) span.versus:after {
+  background: #383838;
+  transform: translateX(-50%) rotate(-40deg);
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 30px;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team:first-child {
+  padding-right: 0;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team:first-child .part-logo {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team:last-child {
+  padding-left: 0;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team:last-child .part-logo {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team .part-logo {
+  display: flex;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team .part-logo img {
+  width: 55px;
+  height: 60px;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team .part-text span.team-name {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 15px;
+  color: #383838;
+  opacity: 0.9;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match span.versus {
+  font-size: 18px;
+  font-weight: 500;
+  display: inline-block;
+  position: relative;
+  background: linear-gradient(160deg, #f81b64, #c40c49);
+  width: 40px;
+  height: 40px;
+  line-height: 34px;
+  border-radius: 50%;
+  color: #ffffff;
+  border: 2px solid #f81b64;
+  font-style: italic;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match span.versus:after {
+  position: absolute;
+  content: "";
+  left: 50%;
+  transform: translateX(-50%) rotate(-40deg);
+  top: 50%;
+  width: 160px;
+  margin-top: -1px;
+  height: 2px;
+  background: #f81b64;
+  z-index: 2;
+  opacity: 0.1;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match span.versus:before {
+  position: absolute;
+  content: "";
+  left: 50%;
+  transform: translateX(-50%) rotate(40deg);
+  top: 50%;
+  width: 160px;
+  margin-top: -1px;
+  height: 2px;
+  background: #f81b64;
+  z-index: 2;
+  opacity: 0.1;
+}
+
 /*!
  * Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)

@@ -48,5 +48,11 @@ return [
 	"point_desc_2" => "10 points when registering a mobile number",
 	"point_desc_3" => "10 points when registering the date of birth",
 	"point_desc_4" => "10 points when registering the city",
+	"featured_matches" => "Featured Matches",
 	"upcoming_matches" => "Upcoming Matches",
+	"today_matches" => "Today Matches",
+	"predict_now" => "Predict Now",
+	"success" => "Success",
+	"failed" => "Failed",
+	"login_failed" => "Invalid Username or Password,Please try again.",
 ];

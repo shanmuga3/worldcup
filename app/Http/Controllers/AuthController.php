@@ -31,7 +31,9 @@ class AuthController extends Controller
         if(Auth::attempt($credentials)) {
             return redirect()->route('dashboard');
         }
-        return back();
+
+        flashMessage('danger', Lang::get('messages.failed'), Lang::get('messages.login_failed'));
+        return redirect()->route('login');
     }
 
     public function createUser(Request $request)

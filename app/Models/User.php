@@ -170,6 +170,19 @@ class User extends Authenticatable
     }
 
     /**
+     * Get Full name of current User
+     *
+     */
+    public function getFormattedDobAttribute()
+    {
+        if(isset($this->attributes['dob'])) {
+            return date(DATE_FORMAT,strtotime($this->attributes['dob']));
+        }
+
+        return '';
+    }
+
+    /**
      * Get Member Since Attribute
      *
      */
