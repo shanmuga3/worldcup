@@ -269,3 +269,44 @@ if (!function_exists('isRtl')) {
         return app()->getLocale() == 'ar';
     }
 }
+
+/**
+ * Check given input is timestamp or not
+ *
+ * @param String|Timestamp $timestamp
+ * @return Boolean
+ */
+if (!function_exists('isValidTimeStamp')) {
+    function isValidTimeStamp($timestamp)
+    {
+        try {
+            new DateTime('@'.$timestamp);
+        }
+        catch(\Exception $e) {
+            return false;
+        }
+        return true;
+    }
+}
+
+/**
+ * Get Carbon Date Object from Given date or timestamp
+ *
+ * @param String|Timestamp $date
+ * @return Object $date_obj  instance of Carbon\Carbon
+ */
+if (!function_exists('getDateObject')) {
+    function getDateObject($date = '')
+    {
+        if($date == '') {
+            $date_obj = Carbon::now();
+        }
+        else if(isValidTimeStamp($date)) {
+            $date_obj = Carbon::createFromTimestamp($date);
+        }
+        else {
+            $date_obj = Carbon::createFromTimestamp(strtotime($date));
+        }
+        return $date_obj;
+    }
+}

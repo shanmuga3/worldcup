@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\TeamMatch;
 use Lang;
 use Auth;
 
@@ -36,6 +36,11 @@ class HomeController extends Controller
     public function dashboard(Request $request)
     {
         $data['user'] = Auth::user();
+
+        $matches = TeamMatch::with('first_team','second_team')->upcomingMatches()->get();
+        
+        $data['upcoming_matches'] = TeamMatch::upcomingMatches()->get();
+        $data['active_matches'] = TeamMatch::whereRaw('? between starting_at and ending_at', [date('Y-m-d H:i:s')])->get();
         
         return view('dashboard',$data);
     }

@@ -56,29 +56,33 @@
                         <div class="card-header">
                             <h5 class="match-title h3 mb-0 text-white"> @lang('messages.today_matches') </h5>
                         </div>
-                        <div class="card-body part-team">
-                            <div class="single-team">
-                                <div class="logo">
-                                    <img src="assets/img/team-1.png" alt="">
-                                </div>
-                                <span class="team-name">Khulna Tigers</span>
-                            </div>
-                            <div class="match-details">
-                                <div class="match-time">
-                                    <span class="date">Fri 09 Oct 2019</span>
-                                    <span class="time">09:00 am</span>
-                                </div>
-                                <span class="versus">vs</span>
-                                <div class="buttons">
-                                    <a href="#" class="btn btn-primary"> @lang('messages.predict_now') </a>
-                                </div>
-                            </div>
-                            <div class="single-team">
-                                <div class="logo">
-                                    <img src="assets/img/team-2.png" alt="">
-                                </div>
-                                <span class="team-name">Dhaka Platoon</span>
-                            </div>
+                        <div class="card-body">
+                        	@foreach($active_matches as $match)
+                        	<div class="part-team">
+	                            <div class="single-team">
+	                                <div class="logo">
+	                                    <img src="{{ $match->first_team->image_src }}" alt="{{ $match->first_team->name }}">
+	                                </div>
+	                                <span class="team-name"> {{ $match->first_team->short_name.' - '.$match->first_team->name }} </span>
+	                            </div>
+	                            <div class="match-details">
+	                                <div class="match-time">
+	                                    <span class="date"> {{ $match->duration }} </span>
+	                                    <span class="time"> {{ $match->match_time }} </span>
+	                                </div>
+	                                <span class="versus">vs</span>
+	                                <div class="buttons">
+	                                    <a href="javascript:;" class="btn btn-primary"> @lang('messages.predict_now') </a>
+	                                </div>
+	                            </div>
+	                            <div class="single-team">
+	                                <div class="logo">
+	                                    <img src="{{ $match->second_team->image_src }}" alt="{{ $match->second_team->name }}">
+	                                </div>
+	                                <span class="team-name"> {{ $match->second_team->short_name.' - '.$match->second_team->name }} </span>
+	                            </div>
+                        	</div>
+                        	@endforeach
                         </div>
                     </div>
                 </div>
@@ -88,15 +92,20 @@
                             <h5 class="h3 mb-0"> @lang('messages.upcoming_matches') </h5>
                         </div>
                         <div class="card-body upcoming-matches-list">
-                        	@foreach([1,2,3,4,5] as $match)
+                        	@if($upcoming_matches->count() == 0)
+                        	<div class="text-center">
+                        		@lang('messages.no_upcoming_matches')
+                        	</div>
+                        	@endif
+                        	@foreach($upcoming_matches as $match)
                             <div class="upcoming-match">
                                 <div class="single-team">
                                     <div class="part-logo me-4">
-                                         <img src="assets/img/team-1.png" alt="">
+                                         <img src="{{ $match->first_team->image_src }}" alt="{{ $match->first_team->name }}">
                                     </div>
                                     <div class="part-text">
                                         <span class="team-name">
-                                            Khulna tigers
+                                            {{ $match->first_team->short_name.' - '.$match->first_team->name }}
                                         </span>
                                     </div>
                                 </div>
@@ -104,11 +113,11 @@
                                 <div class="single-team">
                                     <div class="part-text">
                                         <span class="team-name">
-                                            dhaka platoon
+                                            {{ $match->second_team->short_name.' - '.$match->second_team->name }}
                                         </span>
                                     </div>
                                     <div class="part-logo">
-                                         <img src="assets/img/team-2.png" alt="">
+                                         <img src="{{ $match->second_team->image_src }}" alt="{{ $match->second_team->name }}">
                                     </div>
                                 </div>
                             </div>

@@ -54,5 +54,6 @@ return [
 	"predict_now" => "Predict Now",
 	"success" => "Success",
 	"failed" => "Failed",
+	"no_upcoming_matches" => "No Upcoming Matches",
 	"login_failed" => "Invalid Username or Password,Please try again.",
 ];

@@ -16,6 +16,17 @@ class TeamMatch extends Model
      */
     protected $table = 'matches';
 
+    // Local Scope of Match
+
+    /**
+     * Get All Active Users Only
+     *
+     */
+    public function scopeUpcomingMatches($query)
+    {
+        return $query->where('starting_at','>=',date('Y-m-d H:i:s'));
+    }
+
     /**
      * Join With Team Table
      *
@@ -32,5 +43,12 @@ class TeamMatch extends Model
     public function second_team()
     {
         return $this->belongsTo(Team::class);
+    }
+
+    public function getDurationAttribute()
+    {
+        $starting_at = getDateObject($this->attributes['starting_at']);
+        $ending_at = getDateObject($this->attributes['ending_at']);
+        return $starting_at->format(DATE_FORMAT.' '.TIME_FORMAT).' - '.$ending_at->format(DATE_FORMAT.' '.TIME_FORMAT);
     }
 }
