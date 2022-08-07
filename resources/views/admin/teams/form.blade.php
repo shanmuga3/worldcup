@@ -4,6 +4,11 @@
 	</div>
 	<div class="card-body">
 		<div class="form-group mb-2">
+			<label for="short_name"> @lang('admin_messages.fields.short_name') <em class="text-danger">*</em> </label>
+			{!! Form::text('short_name', $result->short_name, ['class' => 'form-control', 'id' => 'short_name']) !!}
+			<span class="text-danger">{{ $errors->first('short_name') }}</span>
+		</div>
+		<div class="form-group mb-2">
 			<label for="name"> @lang('admin_messages.fields.name') <em class="text-danger">*</em> </label>
 			{!! Form::text('name', $result->name, ['class' => 'form-control', 'id' => 'name']) !!}
 			<span class="text-danger">{{ $errors->first('name') }}</span>

@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.5",
         "shanmuga/laravel-entrust": "^2.0",
         "spatie/laravel-backup": "^6.0",
+        "spatie/laravel-translatable": "^4.6",
         "yajra/laravel-datatables": "^1.5"
     },
     "require-dev": {

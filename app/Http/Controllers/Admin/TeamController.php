@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\TeamsDataTable;
 use App\Models\Team;
+use App\Traits\Translatable;
 use Lang;
 
 class TeamController extends Controller
@@ -60,13 +61,16 @@ class TeamController extends Controller
 			flashMessage('danger',Lang::get('admin_messages.common.failed'),Lang::get('admin_messages.errors.failed_to_upload_image'));
 			return redirect()->route('admin.teams');
 		}
-
+		$team->setLocale(global_settings('default_language'));
+		$team->short_name = $request->short_name;
 		$team->name = $request->name;
 		$team->image = $upload_result['file_name'];
 		$team->upload_driver = $upload_result['upload_driver'];
 		$team->status = $request->status;
 
 		$team->save();
+
+		$this->updateTranslation($team,$request->translations ?? []);
 
 		flashMessage('success',Lang::get('admin_messages.common.success'),Lang::get('admin_messages.common.successfully_added'));
 		return redirect()->route('admin.teams');
@@ -97,6 +101,8 @@ class TeamController extends Controller
 		$this->validateRequest($request, $id);
 
 		$team = Team::findOrFail($id);
+		$team->setLocale(global_settings('default_language'));
+		$team->short_name = $request->short_name;
 		$team->name = $request->name;
 		$team->status = $request->status;
 		
@@ -114,6 +120,9 @@ class TeamController extends Controller
 		}
 
 		$team->save();
+
+		$this->deleteTranslations($team,$request->removed_translations);
+		$this->updateTranslation($team,$request->translations ?? []);
 		
 		flashMessage('success',Lang::get('admin_messages.common.success'),Lang::get('admin_messages.common.successfully_updated'));
 		return redirect()->route('admin.teams');

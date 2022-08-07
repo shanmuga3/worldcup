@@ -7,11 +7,9 @@
 				<div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
 					<h2> @lang('messages.welcome_to') <span> {{ $site_name }} </span></h2>
 					<p class="text-white"> @lang('messages.welcome_desc') </p>
-					@guest
 					<div class="d-flex justify-content-center justify-content-lg-start">
 						<a href="{{ route('dashboard') }}" class="btn btn-get-started bg-primary fw-bold"> @lang('messages.get_started') </a>
 					</div>
-					@endguest
 				</div>
 				<div class="col-lg-6 order-1 order-lg-2">
 					<img src="{{ asset('images/hero-img.png') }}" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100">

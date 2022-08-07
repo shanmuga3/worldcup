@@ -66,6 +66,7 @@ class TeamsDataTable extends DataTable
     {
         return [
             ['data' => 'id', 'name' => 'id', 'title' => Lang::get('admin_messages.fields.id')],
+            ['data' => 'short_name', 'name' => 'short_name', 'title' => Lang::get('admin_messages.fields.short_name'),'searchable' => false],
             ['data' => 'name', 'name' => 'name', 'title' => Lang::get('admin_messages.fields.name'),'searchable' => false],
             ['data' => 'image', 'name' => 'image', 'title' => Lang::get('admin_messages.fields.image'),'searchable' => false],
             ['data' => 'status', 'name' => 'status', 'title' => Lang::get('admin_messages.fields.status')],
