@@ -22,3 +22,5 @@ import "select2/dist/js/select2.js";
 
 import "angular/angular.js";
 import "angular-sanitize/angular-sanitize.js";
+
+import "aos/dist/aos.js";

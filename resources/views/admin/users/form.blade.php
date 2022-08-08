@@ -75,6 +75,7 @@
         var flatpickrOptions = {
             altInput: true,
             maxDate: 'today',
+            disableMobile: true,
             altFormat: flatpickrFormat,
             dateFormat: "Y-m-d",
         };

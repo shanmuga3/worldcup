@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Password;
 use App\Models\User;
 use Lang;
 use Auth;
@@ -38,17 +39,19 @@ class AuthController extends Controller
 
     public function createUser(Request $request)
     {
+        $password_rule = Password::min(8)->mixedCase()->numbers()->uncompromised();
         $rules = array(
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|min:8',
-            'dob' => 'required',
-            'gender' => 'required',
-            'phone_number' => 'required',
-            'address' => 'required',
-            'city' => 'required',
+            'first_name' => ['required','max:30'],
+            'last_name' => ['required','max:30'],
+            'email' => ['required','max:50','email','unique:users'],
+            'password' => ['required',$password_rule],
+            'dob' => ['required'],
+            'gender' => ['required'],
+            'phone_number' => ['required','unique:users'],
+            'address' => ['required'],
+            'city' => ['required'],
         );
+
         $attributes = array(
             'first_name' => Lang::get('messages.first_name'),
             'last_name' => Lang::get('messages.last_name'),
@@ -66,16 +69,23 @@ class AuthController extends Controller
         }
 
         $user = new User;
-        $user->name = $request->first_name.' '.$request->last_name;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
         $user->email = $request->email;
-        $user->password = bcrypt($request->password);
+        $user->password = $request->password;
         $user->dob = $request->dob;
         $user->gender = $request->gender;
         $user->phone_number = $request->phone_number;
         $user->address = $request->address;
         $user->city = $request->city;
         $user->score = 30;
-        $user->save();
+        try {
+            $user->save();
+        }
+        catch(\Exception $e) {
+            flashMessage('danger', Lang::get('messages.failed'), Lang::get('messages.login_failed'));
+            return back()->withInput();
+        }
 
         $credentials = $request->only(['email','password']);
 
@@ -83,6 +93,7 @@ class AuthController extends Controller
             return redirect()->route('dashboard');
         }
         
-        return back();
+        flashMessage('danger', Lang::get('messages.failed'), Lang::get('messages.login_failed'));
+        return back()->withInput();
     }
 }

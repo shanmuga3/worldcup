@@ -39,9 +39,9 @@
                                     <div class="form-floating mt-2">
                                         <select name="gender" class="form-select">
                                             <option value=""> @lang('messages.select') </option>
-                                            <option value="Male"> @lang('messages.male') </option>
-                                            <option value="Female"> @lang('messages.female') </option>
-                                            <option value="Other"> @lang('messages.other') </option>
+                                            <option value="male" ng-selected="{{ old('gender') == 'male' ? true : false }}"> @lang('messages.male') </option>
+                                            <option value="female" ng-selected="{{ old('gender') == 'female' ? true : false }}"> @lang('messages.female') </option>
+                                            <option value="other" ng-selected="{{ old('gender') == 'other' ? true : false }}"> @lang('messages.other') </option>
                                         </select>
                                         <label> @lang('messages.gender') </label>
                                     </div>

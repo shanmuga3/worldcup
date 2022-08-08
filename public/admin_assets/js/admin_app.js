@@ -42877,272 +42877,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./resources/js/app.js":
-/*!*****************************!*\
-  !*** ./resources/js/app.js ***!
-  \*****************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-
-
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-
-var app = angular.module('App', ['ngSanitize']);
-app.controller('myApp', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
-  $scope.isLoading = false;
-  $scope.userLanguage = 'en';
-  $(document).ready(function () {
-    setTimeout(function () {
-      $scope.initRichTextEditor('.rich-text-editor');
-    }, 500);
-    $scope.initDefaultValues();
-    var deleteModalEl = document.getElementById('confirmDeleteModal');
-
-    if (deleteModalEl !== null) {
-      var deleteModel = bootstrap.Modal.getOrCreateInstance(deleteModalEl);
-      $(document).on('click', '.confirm-delete', function () {
-        var url = $(this).attr('data-href');
-        $('.confirm-delete-action').attr('href', url);
-        deleteModel.show();
-      });
-      deleteModalEl.addEventListener('hidden.bs.modal', function (event) {
-        $('.confirm-delete-action').attr('href', '#');
-      });
-    }
-
-    $(document).on('change', '.select-with-dropdown .dropdown-field', function () {
-      var value = $(this).find('option:selected').data('display_value');
-      $(this).parent('.select-with-dropdown').find('.select-value').text(value);
-    });
-  });
-
-  $scope.initDefaultValues = function () {
-    $scope.userLanguage = userLanguage;
-    $scope.applyScope();
-  }; // Common function to perform http requests
-
-
-  $scope.makePostRequest = function (url, data, callback) {
-    if (!data) {
-      data = {};
-    }
-
-    $scope.isLoading = true;
-    $http.post(url, data).then(function (response) {
-      $scope.isLoading = false;
-
-      if (response.status == 200) {
-        if (callback) {
-          callback(response.data);
-        }
-      }
-    });
-  };
-
-  $scope.checkInValidInput = function (value) {
-    if (value == null) {
-      return true;
-    }
-
-    if (_typeof(value) == 'object') {
-      return value.length == 0;
-    }
-
-    return value == undefined || value == 0 || value == '';
-  };
-
-  $scope.truncateString = function (str) {
-    var num = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 20;
-
-    if (str.length > num) {
-      return str.slice(0, num) + "..";
-    } else {
-      return str;
-    }
-  }; // Common function to check and apply Scope value
-
-
-  $scope.applyScope = function () {
-    if (!$scope.$$phase) {
-      $scope.$apply();
-    }
-  }; // Get Checkbox Checked Values Based on given selector
-
-
-  $scope.getSelectedData = function (selector) {
-    var value = [];
-    $(selector + ':checked').each(function () {
-      value.push($(this).val());
-    });
-    return value;
-  };
-
-  $scope.initRichTextEditor = function (selector) {
-    var editors = document.querySelectorAll(selector);
-    editors.forEach(function (editor) {
-      var editorSelector = editor.id;
-      $('#' + editorSelector).summernote({
-        height: 250,
-        callbacks: {
-          onImageUpload: function onImageUpload(files) {
-            $('.note-editor').addClass('loading');
-
-            for (var i = 0; i < files.length; i++) {
-              var file = files[i];
-              var formData = new FormData();
-              formData.append('file', file, file.name);
-              axios.post(routeList.upload_image, formData, {
-                headers: {
-                  'Content-Type': 'multipart/form-data'
-                }
-              }).then(function (response) {
-                var response_data = response.data;
-
-                if (response_data.status) {
-                  var imgNode = document.createElement('img');
-                  imgNode.src = response_data.src;
-                  $('#' + editorSelector).summernote('insertNode', imgNode);
-                }
-
-                $('.note-editor').removeClass('loading');
-              });
-            }
-          }
-        }
-      });
-    });
-  };
-
-  $scope.updateUserDefault = function (type) {
-    $scope.isLoading = true;
-    var url = routeList.update_user_default;
-    var data_params = {
-      type: type,
-      language: $scope.userLanguage
-    };
-
-    var callback_function = function callback_function(response_data) {
-      window.location.reload();
-    };
-
-    $scope.makePostRequest(url, data_params, callback_function);
-  };
-}]);
-app.controller('authController', ['$scope', '$http', function ($scope, $http) {
-  $(document).ready(function () {
-    flatpickr('#dob', {
-      maxDate: 'today',
-      altInput: true,
-      disableMobile: true,
-      altFormat: flatpickrFormat,
-      dateFormat: "Y-m-d"
-    });
-  });
-}]);
-app.controller('dashboardController', ['$scope', '$http', function ($scope, $http) {
-  $scope.prediction_form = {
-    first_team_score: '',
-    second_team_score: '',
-    first_team_penalty: '',
-    second_team_penalty: ''
-  };
-  $scope.active_match = {};
-  $scope.active_matches = [];
-  $scope.upcoming_matches = [];
-  $scope.showPredictionForm = false;
-  $scope.isActiveLoading = false;
-  $scope.isUpcomingLoading = false;
-  $(document).ready(function () {
-    $scope.getMatches('upcoming');
-    $scope.getMatches('active');
-  });
-
-  $scope.getMatches = function (type) {
-    $scope.isLoading = true;
-    var url = routeList.get_matches;
-    var data_params = {
-      'type': type
-    };
-
-    if (type == 'upcoming') {
-      $scope.isUpcomingLoading = true;
-    } else {
-      $scope.isActiveLoading = true;
-    }
-
-    var callback_function = function callback_function(response_data) {
-      if (type == 'upcoming') {
-        $scope.upcoming_matches = response_data.matches;
-        $scope.isUpcomingLoading = false;
-      } else {
-        $scope.active_matches = response_data.matches;
-        $scope.isActiveLoading = false;
-      }
-    };
-
-    $scope.makePostRequest(url, data_params, callback_function);
-  };
-
-  $scope.predictNow = function (match) {
-    $scope.prediction_form = {
-      first_team_score: '',
-      second_team_score: '',
-      first_team_penalty: '',
-      second_team_penalty: ''
-    };
-    $scope.active_match = match;
-    $scope.showPredictionForm = true;
-  };
-
-  $scope.hidePrediction = function () {
-    $scope.showPredictionForm = false;
-    $scope.applyScope();
-  };
-
-  $scope.submitPrediction = function () {
-    var url = routeList.predict_match;
-    var data_params = $scope.prediction_form;
-    data_params['match_id'] = $scope.active_match.id;
-    $scope.isActiveLoading = true;
-
-    var callback_function = function callback_function(response_data) {
-      $scope.isActiveLoading = false;
-
-      if (response_data.error) {
-        $scope.error_messages = response_data.error_messages;
-        return false;
-      }
-
-      $scope.error_messages = {};
-
-      if (!response_data.status) {
-        var _content = {
-          title: response_data.status_title,
-          message: response_data.status_message
-        };
-        flashMessage(_content, "danger");
-        return false;
-      }
-
-      var content = {
-        title: response_data.status_title,
-        message: response_data.status_message
-      };
-      flashMessage(content, "success");
-      $scope.showPredictionForm = false;
-      $scope.getMatches('active');
-    };
-
-    $scope.makePostRequest(url, data_params, callback_function);
-  };
-}]);
-
-/***/ }),
-
 /***/ "./resources/js/bootstrap.js":
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
@@ -79049,32 +78783,6 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
-/***/ "./resources/sass/app.scss":
-/*!*********************************!*\
-  !*** ./resources/sass/app.scss ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./resources/sass/admin_app.scss":
-/*!***************************************!*\
-  !*** ./resources/sass/admin_app.scss ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -85500,42 +85208,7 @@ S2.define('jquery.select2',[
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/chunk loaded */
-/******/ 	(() => {
-/******/ 		var deferred = [];
-/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
-/******/ 			if(chunkIds) {
-/******/ 				priority = priority || 0;
-/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
-/******/ 				deferred[i] = [chunkIds, fn, priority];
-/******/ 				return;
-/******/ 			}
-/******/ 			var notFulfilled = Infinity;
-/******/ 			for (var i = 0; i < deferred.length; i++) {
-/******/ 				var [chunkIds, fn, priority] = deferred[i];
-/******/ 				var fulfilled = true;
-/******/ 				for (var j = 0; j < chunkIds.length; j++) {
-/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
-/******/ 						chunkIds.splice(j--, 1);
-/******/ 					} else {
-/******/ 						fulfilled = false;
-/******/ 						if(priority < notFulfilled) notFulfilled = priority;
-/******/ 					}
-/******/ 				}
-/******/ 				if(fulfilled) {
-/******/ 					deferred.splice(i--, 1)
-/******/ 					var r = fn();
-/******/ 					if (r !== undefined) result = r;
-/******/ 				}
-/******/ 			}
-/******/ 			return result;
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -85597,70 +85270,271 @@ S2.define('jquery.select2',[
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	(() => {
-/******/ 		// no baseURI
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"/js/app": 0,
-/******/ 			"css/app": 0,
-/******/ 			"admin_assets/css/admin_app": 0
-/******/ 		};
-/******/ 		
-/******/ 		// no chunk on demand loading
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
-/******/ 		
-/******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var [chunkIds, moreModules, runtime] = data;
-/******/ 			// add "moreModules" to the modules object,
-/******/ 			// then flag all "chunkIds" as loaded and fire callback
-/******/ 			var moduleId, chunkId, i = 0;
-/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
-/******/ 				for(moduleId in moreModules) {
-/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
-/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
-/******/ 					}
-/******/ 				}
-/******/ 				if(runtime) var result = runtime(__webpack_require__);
-/******/ 			}
-/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
-/******/ 			for(;i < chunkIds.length; i++) {
-/******/ 				chunkId = chunkIds[i];
-/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 					installedChunks[chunkId][0]();
-/******/ 				}
-/******/ 				installedChunks[chunkId] = 0;
-/******/ 			}
-/******/ 			return __webpack_require__.O(result);
-/******/ 		}
-/******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
-/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
-/******/ 	})();
-/******/ 	
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/app","admin_assets/css/admin_app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","admin_assets/css/admin_app"], () => (__webpack_require__("./resources/sass/app.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app","admin_assets/css/admin_app"], () => (__webpack_require__("./resources/sass/admin_app.scss")))
-/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
-/******/ 	
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+/*!***********************************!*\
+  !*** ./resources/js/admin_app.js ***!
+  \***********************************/
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
+var app = angular.module('App', ['ngSanitize']);
+app.controller('myApp', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
+  $scope.isLoading = false;
+  $scope.userLanguage = 'en';
+  $(document).ready(function () {
+    setTimeout(function () {
+      $scope.initRichTextEditor('.rich-text-editor');
+    }, 500);
+    $scope.initDefaultValues();
+    var deleteModalEl = document.getElementById('confirmDeleteModal');
+
+    if (deleteModalEl !== null) {
+      var deleteModel = bootstrap.Modal.getOrCreateInstance(deleteModalEl);
+      $(document).on('click', '.confirm-delete', function () {
+        var url = $(this).attr('data-href');
+        $('.confirm-delete-action').attr('href', url);
+        deleteModel.show();
+      });
+      deleteModalEl.addEventListener('hidden.bs.modal', function (event) {
+        $('.confirm-delete-action').attr('href', '#');
+      });
+    }
+
+    $(document).on('change', '.select-with-dropdown .dropdown-field', function () {
+      var value = $(this).find('option:selected').data('display_value');
+      $(this).parent('.select-with-dropdown').find('.select-value').text(value);
+    });
+  });
+
+  $scope.initDefaultValues = function () {
+    $scope.userLanguage = userLanguage;
+    $scope.applyScope();
+  }; // Common function to perform http requests
+
+
+  $scope.makePostRequest = function (url, data, callback) {
+    if (!data) {
+      data = {};
+    }
+
+    $scope.isLoading = true;
+    $http.post(url, data).then(function (response) {
+      $scope.isLoading = false;
+
+      if (response.status == 200) {
+        if (callback) {
+          callback(response.data);
+        }
+      }
+    });
+  };
+
+  $scope.checkInValidInput = function (value) {
+    if (value == null) {
+      return true;
+    }
+
+    if (_typeof(value) == 'object') {
+      return value.length == 0;
+    }
+
+    return value == undefined || value == 0 || value == '';
+  };
+
+  $scope.truncateString = function (str) {
+    var num = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 20;
+
+    if (str.length > num) {
+      return str.slice(0, num) + "..";
+    } else {
+      return str;
+    }
+  }; // Common function to check and apply Scope value
+
+
+  $scope.applyScope = function () {
+    if (!$scope.$$phase) {
+      $scope.$apply();
+    }
+  }; // Get Checkbox Checked Values Based on given selector
+
+
+  $scope.getSelectedData = function (selector) {
+    var value = [];
+    $(selector + ':checked').each(function () {
+      value.push($(this).val());
+    });
+    return value;
+  };
+
+  $scope.initRichTextEditor = function (selector) {
+    var editors = document.querySelectorAll(selector);
+    editors.forEach(function (editor) {
+      var editorSelector = editor.id;
+      $('#' + editorSelector).summernote({
+        height: 250,
+        callbacks: {
+          onImageUpload: function onImageUpload(files) {
+            $('.note-editor').addClass('loading');
+
+            for (var i = 0; i < files.length; i++) {
+              var file = files[i];
+              var formData = new FormData();
+              formData.append('file', file, file.name);
+              axios.post(routeList.upload_image, formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data'
+                }
+              }).then(function (response) {
+                var response_data = response.data;
+
+                if (response_data.status) {
+                  var imgNode = document.createElement('img');
+                  imgNode.src = response_data.src;
+                  $('#' + editorSelector).summernote('insertNode', imgNode);
+                }
+
+                $('.note-editor').removeClass('loading');
+              });
+            }
+          }
+        }
+      });
+    });
+  };
+
+  $scope.updateUserDefault = function (type) {
+    $scope.isLoading = true;
+    var url = routeList.update_user_default;
+    var data_params = {
+      type: type,
+      language: $scope.userLanguage
+    };
+
+    var callback_function = function callback_function(response_data) {
+      window.location.reload();
+    };
+
+    $scope.makePostRequest(url, data_params, callback_function);
+  };
+}]);
+app.controller('authController', ['$scope', '$http', function ($scope, $http) {
+  $(document).ready(function () {
+    flatpickr('#dob', {
+      maxDate: 'today',
+      altInput: true,
+      disableMobile: true,
+      altFormat: flatpickrFormat,
+      dateFormat: "Y-m-d"
+    });
+  });
+}]);
+app.controller('dashboardController', ['$scope', '$http', function ($scope, $http) {
+  $scope.prediction_form = {
+    first_team_score: '',
+    second_team_score: '',
+    first_team_penalty: '',
+    second_team_penalty: ''
+  };
+  $scope.active_match = {};
+  $scope.active_matches = [];
+  $scope.upcoming_matches = [];
+  $scope.showPredictionForm = false;
+  $scope.isActiveLoading = false;
+  $scope.isUpcomingLoading = false;
+  $(document).ready(function () {
+    $scope.getMatches('upcoming');
+    $scope.getMatches('active');
+  });
+
+  $scope.getMatches = function (type) {
+    $scope.isLoading = true;
+    var url = routeList.get_matches;
+    var data_params = {
+      'type': type
+    };
+
+    if (type == 'upcoming') {
+      $scope.isUpcomingLoading = true;
+    } else {
+      $scope.isActiveLoading = true;
+    }
+
+    var callback_function = function callback_function(response_data) {
+      if (type == 'upcoming') {
+        $scope.upcoming_matches = response_data.matches;
+        $scope.isUpcomingLoading = false;
+      } else {
+        $scope.active_matches = response_data.matches;
+        $scope.isActiveLoading = false;
+      }
+    };
+
+    $scope.makePostRequest(url, data_params, callback_function);
+  };
+
+  $scope.predictNow = function (match) {
+    $scope.prediction_form = {
+      first_team_score: '',
+      second_team_score: '',
+      first_team_penalty: '',
+      second_team_penalty: ''
+    };
+    $scope.active_match = match;
+    $scope.showPredictionForm = true;
+  };
+
+  $scope.hidePrediction = function () {
+    $scope.showPredictionForm = false;
+    $scope.applyScope();
+  };
+
+  $scope.submitPrediction = function () {
+    var url = routeList.predict_match;
+    var data_params = $scope.prediction_form;
+    data_params['match_id'] = $scope.active_match.id;
+    $scope.isActiveLoading = true;
+
+    var callback_function = function callback_function(response_data) {
+      $scope.isActiveLoading = false;
+
+      if (response_data.error) {
+        $scope.error_messages = response_data.error_messages;
+        return false;
+      }
+
+      $scope.error_messages = {};
+
+      if (!response_data.status) {
+        var _content = {
+          title: response_data.status_title,
+          message: response_data.status_message
+        };
+        flashMessage(_content, "danger");
+        return false;
+      }
+
+      var content = {
+        title: response_data.status_title,
+        message: response_data.status_message
+      };
+      flashMessage(content, "success");
+      $scope.showPredictionForm = false;
+      $scope.getMatches('active');
+    };
+
+    $scope.makePostRequest(url, data_params, callback_function);
+  };
+}]);
+})();
+
 /******/ })()
 ;

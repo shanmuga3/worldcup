@@ -70,6 +70,8 @@
         var flatpickrOptions = {
             altInput: true,
             enableTime: true,
+            disableMobile: true,
+            time_24hr: true,
             altFormat: "Y-m-d H:i:s",
             dateFormat: "Y-m-d H:i:s",
         };

@@ -29,5 +29,6 @@ mix.js('resources/js/app.js', 'public/js')
     'resources/js/common.js',
 ], 'public/js/common.js')
 .sass('resources/sass/app.scss', 'public/css')
+.js('resources/js/admin_app.js', 'admin_assets/js')
 .sass('resources/sass/admin_app.scss', 'public/admin_assets/css')
 .vue();

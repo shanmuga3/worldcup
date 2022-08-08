@@ -7,7 +7,7 @@
 				<div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
 					<h2> @lang('messages.welcome_to') <span> {{ $site_name }} </span></h2>
 					<p class="text-white"> @lang('messages.welcome_desc') </p>
-					<div class="d-flex justify-content-center justify-content-lg-start">
+					<div class="d-flex justify-content-center justify-content-lg-start my-3">
 						<a href="{{ route('dashboard') }}" class="btn btn-get-started bg-primary fw-bold"> @lang('messages.get_started') </a>
 					</div>
 				</div>
