@@ -320,3 +320,18 @@ if (!function_exists('getDateObject')) {
         return $date_obj;
     }
 }
+
+
+/**
+ * Send Notification to User
+ *
+ * @return Array
+ */
+if (!function_exists('resolveAndSendNotification')) {
+    function resolveAndSendNotification($functionName,...$args)
+    {
+        $notification_service = resolve("App\Services\NotificationService");
+        $return_data = $notification_service->$functionName(...$args);
+        return $return_data;
+    }
+}

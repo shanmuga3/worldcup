@@ -47,7 +47,7 @@ class NotificationService
 			
 			// return $mailable->locale($locale)->render();
 
-			Mail::to($email)->locale($locale)->queue($mailable);
+			$result = Mail::to($email)->locale($locale)->queue($mailable);
 			return [
 				'status' => true,
 				'status_message' => Lang::get('messages.home.mail_sent_successfully'),
@@ -106,5 +106,25 @@ class NotificationService
 		$mailable = new \App\Mail\Admin\ContactAdmin($contact_data);
 
 		return $this->sendEmailToAdmins($mailable);
+	}
+
+	/**
+	 * Send Confirmation Mail To User
+	 *
+	 * @param  Integer $user_id
+	 */
+	public function resetUserPassword($user_id)
+	{
+		$user = User::find($user_id);
+
+		$mail_data['name'] = $user->first_name;
+		$mail_data['reset_link'] = $user->resetPasswordUrl('reset_password');
+
+		$mail_data['subject'] = Lang::get('messages.reset_your_password',[],$user->user_language);
+
+		$mailable = new \App\Mail\ResetUserPassword($mail_data);
+		$result = $this->sendEmail($mailable,$user->email,$user->user_language);
+		
+		return $result;
 	}
 }

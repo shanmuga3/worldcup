@@ -24,7 +24,7 @@ class CredentialSeeder extends Seeder
 			['name' => 'from_name', 'value' => 'Meme','site' => 'EmailConfig'],
 			['name' => 'encryption', 'value' => 'tls','site' => 'EmailConfig'],
 			['name' => 'username', 'value' => 'shanmuga3demo@gmail.com','site' => 'EmailConfig'],
-			['name' => 'password', 'value' => 'xznhpohaijnwaiaj','site' => 'EmailConfig'],
+			['name' => 'password', 'value' => 'hopmhwcwzivwdhyq','site' => 'EmailConfig'],
 
             ['name' => 'is_enabled','value' => '0','site' => 'ReCaptcha'],
             ['name' => 'version','value' => '2','site' => 'ReCaptcha'],

@@ -78,7 +78,7 @@ class User extends Authenticatable
      */
     public function resetPasswordUrl($route)
     {
-        return url(resolveRoute($route, [
+        return url(route($route, [
             'token' => app('auth.password.broker')->createToken($this),
             'email' => $this->getEmailForPasswordReset(),
         ], false));

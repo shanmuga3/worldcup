@@ -189,6 +189,8 @@ Route::group(['middleware' => ['guest']], function () {
     Route::post('authenticate',[AuthController::class,'authenticate'])->name('authenticate');
     Route::view('register','auth.register')->name('register');
     Route::post('create_user',[AuthController::class,'createUser'])->name('create_user');
+    Route::match(['GET','POST'],'reset-password', [AuthController::class,'resetPassword'])->name('reset_password');
+    Route::post('set-password', [AuthController::class,'setNewPassword'])->name('set_password');
 });
 
 Route::group(['middleware' => ['auth']], function () {

@@ -38,7 +38,7 @@
                         <ul>
                             @guest
                             <li><a href="{{ route('home') }}"> @lang('messages.home') </a></li>
-                            <li><a href="{{ route('login') }}"> @lang('messages.login') </a></li>
+                            <li><a href="{{ route('login') }}"> @lang('messages.sign_in') </a></li>
                             <li><a href="{{ route('register') }}"> @lang('messages.register') </a></li>
                             @else
                             <li><a href="{{ route('dashboard') }}"> @lang('messages.dashboard') </a></li>
