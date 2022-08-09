@@ -124,29 +124,34 @@ class MatchController extends Controller
 			$guessess->each(function($guess) use($match) {
 				$points = 0;
 				if($match->first_team_score == $guess->first_team_score && $match->second_team_score == $guess->second_team_score) {
-					if($match->first_team_penalty == $guess->first_team_penalty && $match->second_team_penalty == $guess->second_team_penalty) {
-						if($match->round == '1') {
-							$points = 10;
-						}
-						else if($match->round == '2') {
-							$points = 20;
-						}
-						else if($match->round == '3') {
-							$points = 30;
-						}
-						else if($match->round == '4') {
-							$points = 50;
-						}
-						else if($match->round == '5') {
-							$points = 100;
-						}
+					if($match->round == '1') {
+						$points = 10;
 					}
+					else if($match->round == '2') {
+						$points = 20;
+					}
+					else if($match->round == '3') {
+						$points = 30;
+					}
+					else if($match->round == '4') {
+						$points = 50;
+					}
+					else if($match->round == '5') {
+						$points = 100;
+					}
+				}
+
+				if($match->round > 1 && ($match->first_team_penalty == $guess->first_team_penalty && $match->second_team_penalty == $guess->second_team_penalty)) {
+					$points += 10;
 				}
 				if($points > 0) {
 					$user = $guess->user;
 					$user->score += $points;
 					$user->save();
 				}
+				$match->score = $points;
+				$match->answer = 1;
+				$match->save();
 			});
 		}
 		
