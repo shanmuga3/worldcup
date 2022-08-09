@@ -40,6 +40,10 @@ class AuthController extends Controller
     public function createUser(Request $request)
     {
         $password_rule = Password::min(8)->mixedCase()->numbers()->uncompromised();
+        if(env('SHOW_CREDENTIALS') == true) {
+            $password_rule = Password::min(8);
+        }
+
         $rules = array(
             'first_name' => ['required','max:30'],
             'last_name' => ['required','max:30'],
@@ -48,7 +52,6 @@ class AuthController extends Controller
             'dob' => ['required'],
             'gender' => ['required'],
             'phone_number' => ['required','unique:users'],
-            'address' => ['required'],
             'city' => ['required'],
         );
 
@@ -75,8 +78,9 @@ class AuthController extends Controller
         $user->password = $request->password;
         $user->dob = $request->dob;
         $user->gender = $request->gender;
-        $user->phone_number = $request->phone_number;
-        $user->address = $request->address;
+        $user->phone_code = '05';
+        $user->phone_number = ltrim($request->phone_number,'05');
+        $user->address = $request->address ?? '';
         $user->city = $request->city;
         $user->score = 30;
         try {
@@ -85,6 +89,23 @@ class AuthController extends Controller
         catch(\Exception $e) {
             flashMessage('danger', Lang::get('messages.failed'), Lang::get('messages.sign_in_failed'));
             return back()->withInput();
+        }
+
+        if($request->file('profile_picture')) {
+            $image_handler = resolve('App\Services\ImageHandlers\LocalImageHandler');
+            $image_data['name_prefix'] = 'user_'.$user->id;
+            $image_data['add_time'] = false;
+            $image_data['target_dir'] = $user->getUploadPath();
+            $image_data['image_size'] = $user->getImageSize();
+
+            $upload_result = $image_handler->upload($request->file('profile_picture'),$image_data);
+            
+            if($upload_result['status']) {
+                $user->src = $upload_result['file_name'];
+                $user->photo_source = 'site';
+                $user->upload_driver = $upload_result['upload_driver'];
+                $user->save();
+            }
         }
 
         $credentials = $request->only(['email','password']);
