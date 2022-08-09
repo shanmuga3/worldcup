@@ -49,6 +49,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::get('{id}/edit', [AdminController::class,'edit'])->name('admin_users.edit')->middleware('permission:update-admin_users');
         Route::match(['PUT','PATCH'],'{id}', [AdminController::class,'update'])->name('admin_users.update')->middleware('permission:update-admin_users');
         Route::delete('{id}', [AdminController::class,'destroy'])->name('admin_users.delete')->middleware('permission:delete-admin_users');
+        Route::get('{id}/login', [UserController::class,'login'])->name('users.login')->middleware('permission:update-users');
     });
 
     // Manage Roles and Permission Routes

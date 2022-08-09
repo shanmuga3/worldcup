@@ -208,30 +208,33 @@ class UserController extends Controller
     }
 
     /**
+     * Login as User
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function login($id)
+    {        
+        if(\Auth::check()) {
+            \Auth::logout();
+        }
+        
+        if(\Auth::loginUsingId($id,true)) {
+            return redirect()->route('dashboard');
+        }
+
+        flashMessage('danger',Lang::get('admin_messages.common.failed'),Lang::get('admin_messages.errors.Invalid_request'));
+        return redirect()->route('admin.users');
+    }
+
+    /**
      * Check the specified resource Can be deleted or not.
      *
      * @param  int  $id
      * @return Array
      */
     protected function canDestroy($id)
-    {
-        $reservation_count = \App\Models\Reservation::where(function($query) use($id) {
-            $query->where('user_id',$id)->orWhere('host_id',$id);
-        })->count();
-        if($reservation_count > 0) {
-            return ['status' => false,'status_message' => Lang::get('admin_messages.errors.this_user_has_some_reservation')];    
-        }
-        
-        $room_count = \App\Models\Room::where('user_id',$id)->count();
-        if($room_count > 0) {
-            return ['status' => false,'status_message' => Lang::get('admin_messages.errors.this_user_has_some_reservation')];
-        }
-
-        $referral_count = \App\Models\ReferralUser::where('user_id',$id)->orWhere('referral_user_id',$id)->count();
-        if($referral_count > 0) {
-            return ['status' => false,'status_message' => Lang::get('admin_messages.errors.this_user_has_some_referral')];
-        }
-        
+    {        
         return ['status' => true,'status_message' => Lang::get('admin_messages.common.success')];
     }
 
