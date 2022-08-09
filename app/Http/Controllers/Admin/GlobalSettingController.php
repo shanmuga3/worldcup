@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\GlobalSettingsRequest;
+use Illuminate\Http\Request;
 use App\Models\GlobalSetting;
 use Illuminate\Support\Facades\Artisan;
+use Validator;
 use Lang;
 
 class GlobalSettingController extends Controller
@@ -48,10 +49,51 @@ class GlobalSettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(GlobalSettingsRequest $request)
+    public function update(Request $request)
     {
-        GlobalSetting::where(['name' => 'site_name'])->update(['value' => $request->site_name]);
-        GlobalSetting::where(['name' => 'about'])->update(['value' => $request->about]);
+        $rules = array(
+            'site_name' => 'required|max:20',
+            'about' => 'nullable|max:500',
+            'admin_url' => 'required',
+            'maintenance_mode' => 'required',
+            'upload_driver' => 'required',
+            'support_number' => 'required',
+            'support_email' => 'required',
+            'date_format' => 'required',
+            'copyright_link' => 'nullable|url',
+            'copyright_text' => 'required',
+        );
+        $attributes = array(
+            'site_name' => Lang::get('admin_messages.global_settings.site_name'),
+            'about' => Lang::get('admin_messages.global_settings.about'),
+            'admin_url' => Lang::get('admin_messages.global_settings.admin_url'),
+            'is_locale_based' => Lang::get('admin_messages.global_settings.is_locale_based'),
+            'maintenance_mode' => Lang::get('admin_messages.global_settings.maintenance_mode'),
+            'app_maintenance_mode' => Lang::get('admin_messages.global_settings.app_maintenance_mode'),
+            'upload_driver' => Lang::get('admin_messages.global_settings.upload_driver'),
+            'support_number' => Lang::get('admin_messages.global_settings.support_number'),
+            'support_email' => Lang::get('admin_messages.global_settings.support_email'),
+            'date_format' => Lang::get('admin_messages.global_settings.date_format'),
+            'timezone' => Lang::get('admin_messages.global_settings.timezone'),
+            'copyright_link' => Lang::get('admin_messages.global_settings.copyright_link'),
+            'copyright_text' => Lang::get('admin_messages.global_settings.copyright_text'),
+        );
+        $validator = Validator::make($request->all(), $rules, [], $attributes);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $site_name = GlobalSetting::where(['name' => 'site_name'])->first();
+        $site_name = json_decode($site_name->value,true);
+        $site_name['ar'] = $request->site_name;
+        GlobalSetting::where(['name' => 'site_name'])->update(['value' => json_encode($site_name)]);
+
+        $about = GlobalSetting::where(['name' => 'about'])->first();
+        $about = json_decode($about->value,true);
+        $about['ar'] = $request->about;
+        GlobalSetting::where(['name' => 'about'])->update(['value' => json_encode($about)]);
+
         GlobalSetting::where(['name' => 'version'])->update(['value' => $request->version]);
         GlobalSetting::where(['name' => 'admin_url'])->update(['value' => $request->admin_url]);
         GlobalSetting::where(['name' => 'auto_payout'])->update(['value' => $request->auto_payout]);
@@ -75,7 +117,6 @@ class GlobalSettingController extends Controller
         
         GlobalSetting::where(['name' => 'head_code'])->update(['value' => $request->head_code]);
         GlobalSetting::where(['name' => 'foot_code'])->update(['value' => $request->foot_code]);
-        GlobalSetting::where(['name' => 'user_inactive_days'])->update(['value' => $request->user_inactive_days]);
 
         $maintenance_mode = (\App::isDownForMaintenance()) ? 'down' : 'up';
         if($maintenance_mode != $request->maintenance_mode) {

@@ -106,11 +106,6 @@
 								<span class="text-danger"> {{ $errors->first('backup_period') }} </span>
 							</div>
 							<div class="form-group mb-2">
-								<label for="user_inactive_days"> @lang('admin_messages.global_settings.user_inactive_days') <em class="text-danger"> * </em> </label>
-								{!! Form::text('user_inactive_days', old('user_inactive_days',global_settings('user_inactive_days')), ['class' => 'form-control', 'id' => 'user_inactive_days']) !!}
-								<span class="text-danger">{{ $errors->first('user_inactive_days') }}</span>
-							</div>
-							<div class="form-group mb-2">
 								<label for="copyright_link"> @lang('admin_messages.global_settings.copyright_link') <em class="text-danger"> * </em> </label>
 								{!! Form::text('copyright_link', old('copyright_link',global_settings('copyright_link')), ['class' => 'form-control', 'id' => 'copyright_link']) !!}
 								<span class="text-danger">{{ $errors->first('copyright_link') }}</span>

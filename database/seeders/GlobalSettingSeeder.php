@@ -40,6 +40,7 @@ class GlobalSettingSeeder extends Seeder
             ['name' => 'maintenance_mode_secret', 'value' => ''],
             ['name' => 'default_user_status', 'value' => 'active'],
             ['name' => 'backup_period', 'value' => 'never'],
+            ['name' => 'user_inactive_days', 'value' => 0],
             ['name' => 'copyright_link', 'value' => '#'],
             ['name' => 'copyright_text', 'value' => 'All Rights Reserved'],
             ['name' => 'font_script_url', 'value' => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap'],
