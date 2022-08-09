@@ -60,8 +60,9 @@ class HomeController extends Controller
             $matches = TeamMatch::with('first_team','second_team')->upcomingMatches()->limit(4)->get();
         }
         else {
+            $limit = Auth::check() ? 100 : 1;
             $already_predicted = Guess::where('user_id',Auth::id())->get()->pluck('match_id');
-            $matches = TeamMatch::with('first_team','second_team')->whereNotIn('id',$already_predicted)->whereRaw('? between starting_at and ending_at', [date('Y-m-d H:i:s')])->limit(1)->get();
+            $matches = TeamMatch::with('first_team','second_team')->whereNotIn('id',$already_predicted)->whereRaw('? between starting_at and ending_at', [date('Y-m-d H:i:s')])->limit($limit)->get();
         }
 
         $matches = $matches->map(function($match) {
@@ -73,6 +74,7 @@ class HomeController extends Controller
                 'second_team_formatted_name' => $match->second_team->short_name.' - '.$match->first_team->name,
                 'second_team_name' => $match->second_team->name,
                 'second_team_image' => $match->second_team->image_src,
+                'round' => $match->round,
                 'duration' => $match->duration,
                 'match_time' => $match->match_time,
             ];

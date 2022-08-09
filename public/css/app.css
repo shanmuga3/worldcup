@@ -12601,10 +12601,6 @@ section {
   margin-left: 20px;
 }
 
-.topbar .social-links a:hover {
-  color: #fff;
-}
-
 .header {
   transition: all 0.5s;
   z-index: 997;
@@ -14914,16 +14910,10 @@ section {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
   font-size: 16px;
   color: rgba(255, 255, 255, 0.7);
   margin-right: 10px;
   transition: 0.3s;
-}
-
-.footer .social-links a:hover {
-  color: #fff;
-  border-color: #fff;
 }
 
 .footer h4, .footer .h4 {

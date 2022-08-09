@@ -1,6 +1,6 @@
 @extends('app')
 @section('main')
-<main>
+<main class="main-container" ng-controller="homeController">
 	<section id="hero" class="hero hero-home">
 		<div class="container position-relative">
 			<div class="row gy-5 invisible" data-aos="fade-in">
@@ -48,6 +48,82 @@
 			</div>
 		</div>
 		--}}
+	</section>
+	<section id="recent-posts" class="recent-posts sections-bg">
+		<div class="container" data-aos="fade-up">
+			<div class="section-header">
+				<h2> @lang('messages.featured_matches') </h2>
+			</div>
+			<div class="row gy-4" ng-cloak>
+				<div class="col-md-6" ng-class="{'loading':isActiveLoading}">
+                    <div class="card single-match-wrapper">
+                        <div class="card-header">
+                            <h5 class="match-title h3 mb-0 text-white"> @lang('messages.today_matches') </h5>
+                        </div>
+                        <div class="card-body">
+                        	<div class="text-center" ng-if="active_matches.length == 0">
+                        		@lang('messages.no_active_matches')
+                        	</div>
+                        	<div class="part-team" ng-repeat="match in active_matches">
+	                            <div class="single-team">
+	                                <div class="logo">
+	                                    <img ng-src="@{{ match.first_team_image }}" alt="@{{ match.first_team_name }}">
+	                                </div>
+	                                <span class="team-name"> @{{ match.first_team_formatted_name }} </span>
+	                            </div>
+	                            <div class="match-details">
+	                                <div class="match-time">
+	                                    <span class="date"> @{{ match.duration }} </span>
+	                                    <span class="time"> @{{ match.match_time }} </span>
+	                                </div>
+	                                <span class="versus">@lang('messages.vs')</span>
+	                                <div class="buttons">
+	                                    <a href="{{ route('dashboard') }}" class="btn btn-primary" > @lang('messages.predict_now') </a>
+	                                </div>
+	                            </div>
+	                            <div class="single-team">
+	                                <div class="logo">
+	                                	<img ng-src="@{{match.second_team_image}}" alt="@{{ match.second_team_name }}">
+	                                </div>
+	                                <span class="team-name"> @{{ match.second_team_formatted_name }} </span>
+	                            </div>
+                        	</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" ng-class="{'loading':isUpcomingLoading}">
+                    <div class="card upcoming-match-wrapper">
+                        <div class="card-header">
+                            <h5 class="h3 mb-0"> @lang('messages.upcoming_matches') </h5>
+                        </div>
+                        <div class="card-body upcoming-matches-list">
+                        	<div class="text-center" ng-if="upcoming_matches.length == 0">
+                        		@lang('messages.no_upcoming_matches')
+                        	</div>
+                            <div class="upcoming-match" ng-repeat="match in upcoming_matches">
+                                <div class="single-team">
+                                    <div class="part-logo me-4">
+                                         <img ng-src="@{{ match.first_team_image }}" alt="@{{ match.first_team_name }}">
+                                    </div>
+                                    <div class="part-text">
+                                        <span class="team-name"> @{{ match.first_team_formatted_name }} </span>
+                                    </div>
+                                </div>
+                                <span class="versus">@lang('messages.vs')</span>
+                                <div class="single-team">
+                                    <div class="part-text">
+                                        <span class="team-name"> @{{ match.second_team_formatted_name }} </span>
+                                    </div>
+                                    <div class="part-logo">
+                                         <img ng-src="@{{ match.second_team_image }}" alt="@{{ match.second_team_name }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+		</div>
 	</section>
 	{{--
 	<section id="faq" class="faq">

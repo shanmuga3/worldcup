@@ -17,15 +17,15 @@ class SocialMediaLinkSeeder extends Seeder
 		DB::table('social_media_links')->delete();
 
 		DB::table('social_media_links')->insert([
-			['name' => 'facebook', 'value' => 'https://www.facebook.com/'],
-			['name' => 'instagram', 'value' => 'https://www.instagram.com/'],
-			['name' => 'twitter', 'value' => 'https://twitter.com/'],
-			['name' => 'linkedin', 'value' => 'https://www.linkedin.com/'],
-			['name' => 'pinterest', 'value' => 'https://www.pinterest.com/'],
-			['name' => 'youtube', 'value' => 'https://www.youtube.com/'],
+			['name' => 'facebook', 'value' => 'https://www.facebook.com/indomieksa'],
+			['name' => 'instagram', 'value' => 'https://www.instagram.com/indomieksa/'],
+			['name' => 'twitter', 'value' => 'https://twitter.com/@indomieksa'],
+			['name' => 'linkedin', 'value' => ''],
+			['name' => 'pinterest', 'value' => ''],
+			['name' => 'youtube', 'value' => 'https://www.youtube.com/indomieksa'],
 			['name' => 'skype', 'value' => ''],
-			['name' => 'snapchat', 'value' => ''],
-			['name' => 'tiktok', 'value' => ''],
+			['name' => 'snapchat', 'value' => 'https://www.snapchat.com/add/indomieksa'],
+			['name' => 'tiktok', 'value' => 'https://www.tiktok.com/@indomieksa'],
 		]);
     }
 }

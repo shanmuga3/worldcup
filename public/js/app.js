@@ -43043,6 +43043,42 @@ app.controller('authController', ['$scope', '$http', function ($scope, $http) {
     });
   });
 }]);
+app.controller('homeController', ['$scope', '$http', function ($scope, $http) {
+  $scope.active_matches = [];
+  $scope.upcoming_matches = [];
+  $scope.isActiveLoading = false;
+  $scope.isUpcomingLoading = false;
+  $(document).ready(function () {
+    $scope.getMatches('upcoming');
+    $scope.getMatches('active');
+  });
+
+  $scope.getMatches = function (type) {
+    $scope.isLoading = true;
+    var url = routeList.get_matches;
+    var data_params = {
+      'type': type
+    };
+
+    if (type == 'upcoming') {
+      $scope.isUpcomingLoading = true;
+    } else {
+      $scope.isActiveLoading = true;
+    }
+
+    var callback_function = function callback_function(response_data) {
+      if (type == 'upcoming') {
+        $scope.upcoming_matches = response_data.matches;
+        $scope.isUpcomingLoading = false;
+      } else {
+        $scope.active_matches = response_data.matches;
+        $scope.isActiveLoading = false;
+      }
+    };
+
+    $scope.makePostRequest(url, data_params, callback_function);
+  };
+}]);
 app.controller('dashboardController', ['$scope', '$http', function ($scope, $http) {
   $scope.prediction_form = {
     first_team_score: '',

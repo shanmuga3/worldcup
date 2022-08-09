@@ -60,64 +60,66 @@
                         	<div class="text-center" ng-if="active_matches.length == 0">
                         		@lang('messages.no_active_matches')
                         	</div>
-                        	<div class="part-team" ng-repeat="match in active_matches">
-	                            <div class="single-team">
-	                                <div class="logo">
-	                                    <img ng-src="@{{ match.first_team_image }}" alt="@{{ match.first_team_name }}">
+                        	<div class="today-matches" ng-repeat="match in active_matches">
+	                        	<div class="part-team">
+		                            <div class="single-team">
+		                                <div class="logo">
+		                                    <img ng-src="@{{ match.first_team_image }}" alt="@{{ match.first_team_name }}">
+		                                </div>
+		                                <span class="team-name"> @{{ match.first_team_formatted_name }} </span>
+		                            </div>
+		                            <div class="match-details">
+		                                <div class="match-time">
+		                                    <span class="date"> @{{ match.duration }} </span>
+		                                    <span class="time"> @{{ match.match_time }} </span>
+		                                </div>
+		                                <span class="versus">@lang('messages.vs')</span>
+		                                <div class="buttons">
+		                                    <a href="javascript:;" class="btn btn-primary" ng-click="predictNow(match)" ng-hide="showPredictionForm"> @lang('messages.predict_now') </a>
+		                                </div>
+		                            </div>
+		                            <div class="single-team">
+		                                <div class="logo">
+		                                	<img ng-src="@{{match.second_team_image}}" alt="@{{ match.second_team_name }}">
+		                                </div>
+		                                <span class="team-name"> @{{ match.second_team_formatted_name }} </span>
+		                            </div>
+	                        	</div>
+	                        	<div class="prediction-form" ng-if="showPredictionForm && active_match.id == match.id">
+	                        		<div class="row">
+	                        			<div class="col-5">
+	                        				<div class="form-group mb-2">
+	                        					<label class="form-label"> @lang('messages.first_team_score') </label>
+	                        					<input type="text" name="first_team_score" class="form-control" ng-model="prediction_form.first_team_score">
+	                        					<span class="text-danger"> @{{ error_messages.first_team_score[0] }} </span>
+	                        				</div>
+	                        				<div class="form-group mb-2" ng-show="active_match.round > 1 && prediction_form.first_team_score != '' && prediction_form.first_team_score == prediction_form.second_team_score">
+	                        					<label class="form-label"> @lang('messages.first_team_penalty') </label>
+	                        					<input type="text" name="first_team_penalty" class="form-control" ng-model="prediction_form.first_team_penalty">
+	                        					<span class="text-danger"> @{{ error_messages.first_team_penalty[0] }} </span>
+	                        				</div>
+	                        			</div>
+	                        			<div class="col-2">
+	                        				
+	                        			</div>
+	                        			<div class="col-5">
+	                        				<div class="form-group mb-2">
+	                        					<label class="form-label"> @lang('messages.first_team_score') </label>
+	                        					<input type="text" name="second_team_score" class="form-control" ng-model="prediction_form.second_team_score">
+	                        					<span class="text-danger"> @{{ error_messages.second_team_score[0] }} </span>
+	                        				</div>
+	                        				<div class="form-group mb-2" ng-show="active_match.round > 1 && prediction_form.first_team_score != '' && prediction_form.first_team_score == prediction_form.second_team_score">
+	                        					<label class="form-label"> @lang('messages.second_team_penalty') </label>
+	                        					<input type="text" name="second_team_penalty" class="form-control" ng-model="prediction_form.second_team_penalty">
+	                        					<span class="text-danger"> @{{ error_messages.second_team_penalty[0] }} </span>
+	                        				</div>
+	                        			</div>
+	                        		</div>
+	                        		<div class="d-flex justify-content-around">
+	                                    <a href="javascript:;" class="btn btn-defalut" ng-click="hidePrediction();"> @lang('messages.cancel') </a>
+	                                    <a href="javascript:;" class="btn btn-primary" ng-click="submitPrediction()"> @lang('messages.submit') </a>
 	                                </div>
-	                                <span class="team-name"> @{{ match.first_team_formatted_name }} </span>
-	                            </div>
-	                            <div class="match-details">
-	                                <div class="match-time">
-	                                    <span class="date"> @{{ match.duration }} </span>
-	                                    <span class="time"> @{{ match.match_time }} </span>
-	                                </div>
-	                                <span class="versus">@lang('messages.vs')</span>
-	                                <div class="buttons">
-	                                    <a href="javascript:;" class="btn btn-primary" ng-click="predictNow(match)" ng-hide="showPredictionForm"> @lang('messages.predict_now') </a>
-	                                </div>
-	                            </div>
-	                            <div class="single-team">
-	                                <div class="logo">
-	                                	<img ng-src="@{{match.second_team_image}}" alt="@{{ match.second_team_name }}">
-	                                </div>
-	                                <span class="team-name"> @{{ match.second_team_formatted_name }} </span>
-	                            </div>
-                        	</div>
-                        	<div class="prediction-form" ng-if="showPredictionForm">
-                        		<div class="row">
-                        			<div class="col-5">
-                        				<div class="form-group mb-2">
-                        					<label class="form-label"> @lang('messages.first_team_score') </label>
-                        					<input type="text" name="first_team_score" class="form-control" ng-model="prediction_form.first_team_score">
-                        					<span class="text-danger"> @{{ error_messages.first_team_score[0] }} </span>
-                        				</div>
-                        				<div class="form-group mb-2" ng-show="prediction_form.first_team_score != '' && prediction_form.first_team_score == prediction_form.second_team_score">
-                        					<label class="form-label"> @lang('messages.first_team_penalty') </label>
-                        					<input type="text" name="first_team_penalty" class="form-control" ng-model="prediction_form.first_team_penalty">
-                        					<span class="text-danger"> @{{ error_messages.first_team_penalty[0] }} </span>
-                        				</div>
-                        			</div>
-                        			<div class="col-2">
-                        				
-                        			</div>
-                        			<div class="col-5">
-                        				<div class="form-group mb-2">
-                        					<label class="form-label"> @lang('messages.first_team_score') </label>
-                        					<input type="text" name="second_team_score" class="form-control" ng-model="prediction_form.second_team_score">
-                        					<span class="text-danger"> @{{ error_messages.second_team_score[0] }} </span>
-                        				</div>
-                        				<div class="form-group mb-2" ng-show="prediction_form.first_team_score != '' && prediction_form.first_team_score == prediction_form.second_team_score">
-                        					<label class="form-label"> @lang('messages.second_team_penalty') </label>
-                        					<input type="text" name="second_team_penalty" class="form-control" ng-model="prediction_form.second_team_penalty">
-                        					<span class="text-danger"> @{{ error_messages.second_team_penalty[0] }} </span>
-                        				</div>
-                        			</div>
-                        		</div>
-                        		<div class="d-flex justify-content-around">
-                                    <a href="javascript:;" class="btn btn-defalut" ng-click="hidePrediction();"> @lang('messages.cancel') </a>
-                                    <a href="javascript:;" class="btn btn-primary" ng-click="submitPrediction()"> @lang('messages.submit') </a>
-                                </div>
+	                        	</div>
                         	</div>
                         </div>
                     </div>

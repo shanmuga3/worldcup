@@ -66,10 +66,11 @@
                             <a href="{{ route('home') }}" class="logo d-flex align-items-center">
                                 <span> {{ $site_name }} </span>
                             </a>
-                            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
                             <div class="social-links d-flex mt-4">
-                                @foreach(resolve("SocialMediaLink")->where('value','!=','') as $link)
-                                <a href="{{ $link->value }}" class="{{ $link->name }}"><i class="bi bi-{{ $link->name }}"></i></a>
+                                @foreach(resolve("SocialMediaLink")->where('value','!=','') as $media)
+                                <a href="{{ $media->value }}" class="{{ $media->name }}">
+                                    <img src="{{ asset('images/email/logo_'.$media->name.'.png') }}" alt="{{ ucfirst($media->name) }}" height="40" width="40">
+                                </a>
                                 @endforeach
                             </div>
                         </div>

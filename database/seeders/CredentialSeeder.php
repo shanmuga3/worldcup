@@ -21,7 +21,7 @@ class CredentialSeeder extends Seeder
 			['name' => 'host', 'value' => 'smtp.gmail.com','site' => 'EmailConfig'],
 			['name' => 'port', 'value' => '587','site' => 'EmailConfig'],
 			['name' => 'from_address', 'value' => 'shanmuga3demo@gmail.com','site' => 'EmailConfig'],
-			['name' => 'from_name', 'value' => 'Meme','site' => 'EmailConfig'],
+			['name' => 'from_name', 'value' => 'Indomie','site' => 'EmailConfig'],
 			['name' => 'encryption', 'value' => 'tls','site' => 'EmailConfig'],
 			['name' => 'username', 'value' => 'shanmuga3demo@gmail.com','site' => 'EmailConfig'],
 			['name' => 'password', 'value' => 'hopmhwcwzivwdhyq','site' => 'EmailConfig'],

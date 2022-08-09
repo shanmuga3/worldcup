@@ -25,7 +25,7 @@ class GlobalSettingSeeder extends Seeder
             ['name' => 'play_store', 'value' => ''],
             ['name' => 'app_store', 'value' => ''],
             ['name' => 'admin_url', 'value' => 'admin'],
-            ['name' => 'timezone', 'value' => 'Asia/Kolkata'],
+            ['name' => 'timezone', 'value' => 'Asia/Kuwait'],
             ['name' => 'upload_driver', 'value' => '0'],
             ['name' => 'support_number', 'value' => '9876543210'],
             ['name' => 'support_email', 'value' => 'support@gmail.com'],
