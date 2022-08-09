@@ -17,7 +17,7 @@ class GlobalSettingSeeder extends Seeder
         DB::table('global_settings')->truncate();
         
         DB::table('global_settings')->insert([
-            ['name' => 'site_name', 'value' => '{"en":"World Cup","ar":"كأس العالم"}'],
+            ['name' => 'site_name', 'value' => '{"en":"World Cup","ar":"إندومي"}'],
             ['name' => 'about', 'value' => '{"en":"We\'re football fanatics and inside our prediction hub you\'ll find all manner of game prediction, aids and insights on everything the game has to offer.","ar":"نحن متعصبون لكرة القدم وداخل مركز التنبؤ الخاص بنا ستجد كل أنواع تنبؤات اللعبة والمساعدات والأفكار حول كل ما تقدمه اللعبة."}'],
             ['name' => 'site_url', 'value' => ''],
             ['name' => 'version', 'value' => '1.0'],

@@ -104,7 +104,7 @@ class GlobalSettingController extends Controller
         GlobalSetting::where(['name' => 'support_number'])->update(['value' => $request->support_number]);
         GlobalSetting::where(['name' => 'support_email'])->update(['value' => $request->support_email]);
         GlobalSetting::where(['name' => 'default_currency'])->update(['value' => $request->default_currency]);
-        GlobalSetting::where(['name' => 'default_language'])->update(['value' => $request->default_language]);
+        GlobalSetting::where(['name' => 'default_language'])->update(['value' => $request->default_language ?? 'ar']);
         GlobalSetting::where(['name' => 'date_format'])->update(['value' => $request->date_format]);
         GlobalSetting::where(['name' => 'timezone'])->update(['value' => $request->timezone]);
         GlobalSetting::where(['name' => 'copyright_link'])->update(['value' => $request->copyright_link]);
