@@ -182,6 +182,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Get City name of current User
+     *
+     */
+    public function getCityNameAttribute()
+    {
+        $city = resolve("City")->where('id',$this->city)->first();
+        return $city['name'] ?? '';
+    }
+
+    /**
      * Get Member Since Attribute
      *
      */

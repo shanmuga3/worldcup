@@ -125,6 +125,30 @@ class AppServiceProvider extends ServiceProvider
             $date_formats = collect(json_decode(file_get_contents($path), true));
             return $date_formats;
         });
+
+        $this->app->singleton('City', function() {
+            return collect([
+                ["id" => 1, "name" => "Riyadh / الرياض"],
+                ["id" => 2, "name" => "Jeddah / جدة"],
+                ["id" => 3, "name" => "Dammam / الدمام"],
+                ["id" => 4, "name" => "Medina / المدينة المنورة"],
+                ["id" => 5, "name" => "Makkah / مكه  "],
+                ["id" => 6, "name" => "Tabuk / تبوك"],
+                ["id" => 7, "name" => "Taif / الطائف"],
+                ["id" => 8, "name" => "Khobar / مدينه الخبر"],
+                ["id" => 9, "name" => "Buraydah / بريدة "],
+                ["id" => 10, "name" => "Jubail / الجبيل"],
+                ["id" => 11, "name" => "Dhahran / الظهران"],
+                ["id" => 12, "name" => "Abha / أبها"],
+                ["id" => 13, "name" => "Yanbu / ينبع"],
+                ["id" => 14, "name" => "Hofuf / الهفوف"],
+                ["id" => 15, "name" => "Khamis  Mushait / خميس مشيط"],
+                ["id" => 16, "name" => "Qatif / القطيف"],
+                ["id" => 17, "name" => "Najran / نجران"],
+                ["id" => 18, "name" => "Jizan / نجران"],
+                ["id" => 19, "name" => "Others / آخر"],
+            ]);
+        });
     }
 
     /**

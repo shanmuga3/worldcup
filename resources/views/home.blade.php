@@ -3,7 +3,7 @@
 <main>
 	<section id="hero" class="hero hero-home">
 		<div class="container position-relative">
-			<div class="row gy-5 d-none" data-aos="fade-in">
+			<div class="row gy-5 invisible" data-aos="fade-in">
 				<div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
 					<h2> @lang('messages.welcome_to') <span> {{ $site_name }} </span></h2>
 					<p class="text-white"> @lang('messages.welcome_desc') </p>

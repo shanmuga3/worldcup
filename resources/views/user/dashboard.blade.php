@@ -12,8 +12,8 @@
 						@if($user->address != '')
 						<span> {{ $user->address }} </span>
 						@endif
-						@if($user->city != '')
-						<span> {{ $user->city }} </span>
+						@if($user->city_name != '')
+						<span> {{ $user->city_name }} </span>
 						@endif
 						@if($user->formatted_dob != '')
 						<span> {{ $user->formatted_dob }} </span>

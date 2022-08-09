@@ -62,7 +62,7 @@
                                     </div>
                                     <span class="text-danger"> {{ $errors->first('address') }} </span>
                                     <div class="form-floating mt-2">
-                                        {!! Form::text('city',null,['placeholder' => trans('messages.city'),'class' =>'form-control'])!!}
+                                        {!! Form::select('city',resolve("City")->pluck('name','id'),null,['placeholder' => trans('messages.select'),'class' =>'form-select'])!!}
                                         <label> @lang('messages.city') </label>
                                     </div>
                                     <span class="text-danger"> {{ $errors->first('city') }} </span>
