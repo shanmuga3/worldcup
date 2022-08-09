@@ -34291,3 +34291,96 @@ select::-webkit-scrollbar {
   bottom: 0;
   opacity: 0;
 }
+
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: 0 0 8px 6px rgba(0, 0, 0, 0.04);
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match:nth-child(2n+0) span.versus {
+  background: #383838;
+  border-color: #383838;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match:nth-child(2n+0) span.versus:after {
+  background: #383838;
+  transform: translateX(-50%) rotate(-40deg);
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 30px;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team:first-child {
+  padding-right: 0;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team:first-child .part-logo {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team:last-child {
+  padding-left: 0;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team:last-child .part-logo {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team .part-logo {
+  display: flex;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team .part-logo img {
+  width: 55px;
+  height: 60px;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team .part-text span.team-name {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 15px;
+  color: #383838;
+  opacity: 0.9;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match span.versus {
+  font-size: 18px;
+  font-weight: 500;
+  display: inline-block;
+  position: relative;
+  background: linear-gradient(160deg, #f81b64, #c40c49);
+  width: 40px;
+  height: 40px;
+  line-height: 34px;
+  border-radius: 50%;
+  color: #ffffff;
+  border: 2px solid #f81b64;
+  font-style: italic;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match span.versus:after {
+  position: absolute;
+  content: "";
+  left: 50%;
+  transform: translateX(-50%) rotate(-40deg);
+  top: 50%;
+  width: 160px;
+  margin-top: -1px;
+  height: 2px;
+  background: #f81b64;
+  z-index: 2;
+  opacity: 0.1;
+}
+.upcoming-match-wrapper .upcoming-matches-list .upcoming-match span.versus:before {
+  position: absolute;
+  content: "";
+  left: 50%;
+  transform: translateX(-50%) rotate(40deg);
+  top: 50%;
+  width: 160px;
+  margin-top: -1px;
+  height: 2px;
+  background: #f81b64;
+  z-index: 2;
+  opacity: 0.1;
+}

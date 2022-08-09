@@ -10,6 +10,7 @@ use App\Models\Admin;
 use App\Models\LoginSlider;
 use App\Models\Team;
 use App\Models\TeamMatch;
+use App\Models\Guess;
 use Carbon\Carbon;
 use Lang;
 use Auth;
@@ -110,9 +111,40 @@ class HomeController extends Controller
         $this->view_data['recent_users'] = $users->map(function($user) {
             return [
                 'id' => $user->id,
+                'link' => route('admin.users.edit',['id' => $user->id]),
                 'profile_picture' => $user->profile_picture_src,
-                'name' => $user->name,
+                'name' => $user->full_name,
                 'email' => $user->email,
+                'score' => $user->score,
+            ];
+        });
+
+        $users = User::orderByDesc('score')->limit(4)->get();
+        $this->view_data['top_users'] = $users->map(function($user) {
+            return [
+                'id' => $user->id,
+                'link' => route('admin.users.edit',['id' => $user->id]),
+                'profile_picture' => $user->profile_picture_src,
+                'name' => $user->full_name,
+                'email' => $user->email,
+                'score' => $user->score,
+            ];
+        });
+
+        $matches = TeamMatch::with('first_team','second_team')->whereRaw('? between starting_at and ending_at', [date('Y-m-d H:i:s')])->orderByDesc('id')->limit(5)->get();
+
+        $this->view_data['today_matches'] = $matches->map(function($match) {
+            return [
+                'id' => $match->id,
+                'first_team_name' => $match->first_team->name,
+                'first_team_formatted_name' => $match->first_team->short_name.' - '.$match->first_team->name,
+                'first_team_image' => $match->first_team->image_src,
+                'second_team_formatted_name' => $match->second_team->short_name.' - '.$match->first_team->name,
+                'second_team_name' => $match->second_team->name,
+                'second_team_image' => $match->second_team->image_src,
+                'round' => $match->round,
+                'duration' => $match->duration,
+                'match_time' => $match->match_time,
             ];
         });
 
@@ -135,6 +167,7 @@ class HomeController extends Controller
             $today_users = User::whereDate('created_at',$today)->count();
             $today_matches = TeamMatch::whereDate('created_at',$today)->count();
             $today_teams = Team::whereDate('created_at',$today)->count();
+            $today_guesses = Guess::whereDate('created_at',$today)->count();
         }
 
         $statistics_data = [
@@ -153,6 +186,12 @@ class HomeController extends Controller
             "matches" => [
                 "count" => TeamMatch::count(),
                 "new" => $today_matches ?? 0,
+                "colors" => ['#f1f1f1', '#FF9E27'],
+                "value" => 100,
+            ],
+            "guesses" => [
+                "count" => Guess::count(),
+                "new" => $today_guesses ?? 0,
                 "colors" => ['#f1f1f1', '#FF9E27'],
                 "value" => 100,
             ],
