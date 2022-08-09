@@ -49,6 +49,7 @@
 		</div>
 		--}}
 	</section>
+	@guest
 	<section id="recent-posts" class="recent-posts sections-bg">
 		<div class="container" data-aos="fade-up">
 			<div class="section-header">
@@ -125,6 +126,7 @@
 			</div>
 		</div>
 	</section>
+	@endguest
 	{{--
 	<section id="faq" class="faq">
 		<div class="container" data-aos="fade-up">

@@ -13,6 +13,7 @@ return [
 	"home" => "Home",
 	"dashboard" => "Dashboard",
 	"about" => "About",
+	"total" => "Total",
 	"teams" => "Teams",
 	"previous_guess" => "Previous Guess",
 	"contact" => "Contact",

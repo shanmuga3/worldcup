@@ -149,9 +149,9 @@ class MatchController extends Controller
 					$user->score += $points;
 					$user->save();
 				}
-				$match->score = $points;
-				$match->answer = 1;
-				$match->save();
+				$guess->score = $points;
+				$guess->answer = 1;
+				$guess->save();
 			});
 		}
 		
@@ -224,8 +224,10 @@ class MatchController extends Controller
 		if($request_data['answer'] == '1') {
 			$rules['first_team_score'] = 'required|numeric|min:0';
 			$rules['second_team_score'] = 'required|numeric|min:0';
+
+			$result = TeamMatch::findOrFail($id);
 			
-			if($rules['first_team_score'] >= 0 && $request_data['first_team_score'] == $request_data['second_team_score']) {
+			if($result->round > 1 && $rules['first_team_score'] >= 0 && $request_data['first_team_score'] == $request_data['second_team_score']) {
 				$rules['first_team_penalty'] = 'required|numeric|min:0';
 				$rules['second_team_penalty'] = 'required|numeric|min:0';				
 			}

@@ -99,8 +99,10 @@ class HomeController extends Controller
             'first_team_score' => 'required|numeric|min:0',
             'second_team_score' => 'required|numeric|min:0',
         ];
+
+        $match = TeamMatch::find($request->match_id);
         
-        if($request->first_team_score != '' && $request->first_team_score == $request->second_team_score) {
+        if(optional($match)->round > 1 && $request->first_team_score != '' && $request->first_team_score == $request->second_team_score) {
             $rules['first_team_penalty'] = 'required|numeric|min:0';
             $rules['second_team_penalty'] = 'required|numeric|min:0';
         }
@@ -114,7 +116,6 @@ class HomeController extends Controller
             ]);
         }
 
-        $match = TeamMatch::find($request->match_id);
         if($match == '') {
             return response()->json([
                 'status' => false,

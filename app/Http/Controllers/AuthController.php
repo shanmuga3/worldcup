@@ -82,6 +82,7 @@ class AuthController extends Controller
         $user->phone_number = ltrim($request->phone_number,'05');
         $user->address = $request->address ?? '';
         $user->city = $request->city;
+        $user->status = 'active';
         $user->score = 30;
         try {
             $user->save();
