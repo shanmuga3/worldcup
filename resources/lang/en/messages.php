@@ -88,4 +88,6 @@ return [
 	"favourite_team" => "Favourite Team",
 	"password_updated_successfully" => "Password Updated Successfully",
 	"number_of_guess" => "Number of Predictions",
+	"guess" => "Guess",
+	"result" => "Result",
 ];

@@ -19,11 +19,21 @@
                                     <div class="part-text">
                                         <p class="team-name fw-bold"> {{ $guess->match->first_team->formatted_name }} </p>
                                         <p class="user-guess">
+                                            <span class="fw-bold mx-2"> @lang('messages.guess'):</span>
                                         	{{ $guess->first_team_score }}
 	                                        @if($guess->first_team_penalty != '')
 	                                        <span class="user-penalty"> ({{ $guess->first_team_penalty }}) </span>
 	                                        @endif
                                         </p>
+                                        @if($guess->match->answer == 1)
+                                        <p class="match-result">
+                                            <span class="fw-bold mx-2"> @lang('messages.result'):</span>
+                                            {{ $guess->match->first_team_score }}
+                                            @if($guess->match->first_team_penalty != '')
+                                            <span class="user-penalty"> ({{ $guess->match->first_team_penalty }}) </span>
+                                            @endif
+                                        </p>
+                                        @endif
                                     </div>
                                 </div>
                                 <span class="versus">@lang('messages.vs')</span>
@@ -31,11 +41,21 @@
                                     <div class="part-text">
                                         <p class="team-name fw-bold"> {{ $guess->match->second_team->formatted_name }} </p>
                                         <p class="user-guess">
+                                            <span class="fw-bold mx-2"> @lang('messages.guess'):</span>
                                         	{{ $guess->second_team_score }}
                                         	@if($guess->second_team_penalty != '')
 	                                        <span class="user-penalty"> ({{ $guess->second_team_penalty }}) </span>
 	                                        @endif
                                         </p>
+                                        @if($guess->match->answer == 1)
+                                        <p class="match-result">
+                                            <span class="fw-bold mx-2"> @lang('messages.result'):</span>
+                                            {{ $guess->match->second_team_score }}
+                                            @if($guess->match->second_team_penalty != '')
+                                            <span class="user-penalty"> ({{ $guess->match->second_team_penalty }}) </span>
+                                            @endif
+                                        </p>
+                                        @endif
                                     </div>
                                     <div class="part-logo {{ isRtl() ? 'me-4' : 'ms-4' }}">
                                          <img src="{{ $guess->match->second_team->image_src }}" alt="{{ $guess->match->second_team->name }}">
