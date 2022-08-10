@@ -85,4 +85,5 @@ return [
 	"profile_picture" => "الصوره الشخصيه",
 	"favourite_team" => "الفريق المفضل",
 	"password_updated_successfully" => "تم تحديث كلمة السر بنجاح",
+	"number_of_guess" => "عدد المشاركات",
 ];

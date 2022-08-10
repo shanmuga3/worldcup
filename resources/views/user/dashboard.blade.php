@@ -29,7 +29,12 @@
 							<h3 class="text-center"> @lang('messages.score') </h3>
 						</div>
 						<div class="card-body">
-							<h2 class="fw-bold score mb-3"> {{ $user->score }} </h2>
+							<h2 class="fw-bold score mb-3">
+								{{ $user->score }}
+							</h2>
+							<h5 class="">
+								@lang('messages.number_of_guess'): <strong class="text-success"> {{ $user->total_predictions }} </strong>
+							</h5>
 							<div class="help border-top">
 								<div class="dropdown">
 								  <a class="" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">

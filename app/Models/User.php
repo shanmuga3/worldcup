@@ -240,12 +240,14 @@ class User extends Authenticatable
         return $this->password != '';
     }
 
-    /**
-     * Check User loing with Social Media or not
-     *
-     */
     public function getTeamLogoAttribute()
     {
         return optional($this->team)->image_src;
+    }
+
+    public function getTotalPredictionsAttribute()
+    {
+        $guesses = \DB::Table('guesses')->where('user_id',$this->id)->where('answer',1)->count();
+        return $guesses;
     }
 }
