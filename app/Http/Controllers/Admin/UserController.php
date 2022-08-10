@@ -41,12 +41,6 @@ class UserController extends Controller
     {
         $this->view_data['sub_title'] = Lang::get('admin_messages.users.add_user');
         $this->view_data['result'] = new User;
-        $this->view_data['countries'] = resolve("Country")->map(function($country) {
-            return [
-                'name' => $country->name,
-                'value' => $country->full_name.' (+'.$country->phone_code.')',
-            ];
-        })->pluck('value','name');
         return view('admin.users.add', $this->view_data);
     }
 
@@ -60,8 +54,7 @@ class UserController extends Controller
     {
         $this->validateRequest($request);
 
-        $validated = $request->only(['first_name', 'last_name', 'password', 'phone_number','email', 'status']);
-        $validated['country_code'] = $request->country_code ?? '';
+        $validated = $request->only(['first_name', 'last_name', 'password', 'phone_number','email', 'status','team']);
         $user = User::create($validated);
 
         if($request->hasFile('profile_picture')) {
@@ -107,12 +100,7 @@ class UserController extends Controller
     {
         $this->view_data['sub_title'] = Lang::get('admin_messages.users.edit_user');
         $this->view_data['result'] = User::findOrFail($id);
-        $this->view_data['countries'] = resolve("Country")->map(function($country) {
-            return [
-                'name' => $country->name,
-                'value' => $country->full_name.' (+'.$country->phone_code.')',
-            ];
-        })->pluck('value','name');
+
         return view('admin.users.edit', $this->view_data);
     }
 
@@ -134,8 +122,10 @@ class UserController extends Controller
         if($request->filled('password')) {
             $user->password = $request->password;
         }
-        $user->country_code = $request->country_code ?? '';
+        $user->team_id = $request->team;
         $user->phone_number = $request->phone_number;
+        $user->dob = $request->dob;
+        $user->gender = $request->gender;
         $user->status = $request->status;
         $user->save();
 
@@ -161,22 +151,8 @@ class UserController extends Controller
             $user->photo_source = 'Site';
             $user->upload_driver = $upload_result['upload_driver'];
         }
-        $user->verification_status = $request->verification_status;
-        if($user->verification_status == 'resubmit') {
-            $user->resubmit_reason = $request->resubmit_reason;
-        }
+
         $user->save();
-
-        $user_info = $user->user_information;
-        $user_info->dob = $request->dob;
-        $user_info->gender = $request->gender;
-        $user_info->save();
-
-        if($user->phone_number == '') {
-            $user_verification = $user->user_verification;
-            $user_verification->phone_number = 0;
-            $user_verification->save();
-        }
 
         flashMessage('success',Lang::get('admin_messages.common.success'),Lang::get('admin_messages.common.successfully_updated'));
         return redirect()->route('admin.users');
@@ -247,13 +223,12 @@ class UserController extends Controller
      */
     protected function validateRequest($request_data, $id = '')
     {
-        $password_rule = Password::min(8)->mixedCase()->numbers()->uncompromised();
+        $password_rule = Password::min(8);
         $rules = array(
             'first_name' => ['required','max:20'],
             'last_name' => ['required','max:20'],
             'email' => ['required','email','unique:users,email,'.$id],
             'password' => ['required',$password_rule],
-            'country_code' => ['nullable','exists:countries,name'],
             'phone_number' => ['nullable','numeric','unique:users,phone_number,'.$id],
             'dob' => ['required'],
             'gender' => ['required'],
@@ -270,7 +245,7 @@ class UserController extends Controller
             'last_name' => Lang::get('admin_messages.fields.last_name'),
             'email' => Lang::get('admin_messages.fields.email'),
             'password' => Lang::get('admin_messages.fields.password'),
-            'country_code' => Lang::get('admin_messages.fields.country_code'),
+            'team' => Lang::get('admin_messages.fields.team'),
             'phone_number' => Lang::get('admin_messages.fields.phone_number'),
             'dob' => Lang::get('admin_messages.fields.dob'),
             'gender' => Lang::get('admin_messages.fields.gender'),

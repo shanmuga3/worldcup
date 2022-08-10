@@ -24,7 +24,7 @@ class UsersDataTable extends DataTable
         ->addColumn('action',function($query) {
             $edit = auth()->guard('admin')->user()->can('update-users') ? '<a href="'.route('admin.users.edit',['id' => $query->id]).'" class=""> <i class="fa fa-edit"></i> </a>' : '';
             $delete = auth()->guard('admin')->user()->can('delete-users') ? '<a href="" data-action="'.route('admin.users.delete',['id' => $query->id]).'" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"> <i class="fa fa-times"></i> </a>' : '';
-            $login = auth()->guard('admin')->user()->can('update-users') ? '<a href="'.route('admin.users.login',['id' => $query->id]).'" target="_blank" class="d-none"> <i class="fa fas fa-sign-in-alt"></i> </a>' : '';
+            $login = auth()->guard('admin')->user()->can('update-users') ? '<a href="'.route('admin.users.login',['id' => $query->id]).'" target="_blank" class="'.(env('SHOW_CREDENTIALS') ? "":"d-none").'"> <i class="fa fas fa-sign-in-alt"></i> </a>' : '';
             return $edit.' &nbsp; '.$delete.' &nbsp; '.$login;
         });
     }

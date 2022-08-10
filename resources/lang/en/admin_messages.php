@@ -135,6 +135,7 @@ return [
     "fields" => [
         "address" => "Address",
         "amount" => "Amount",
+        "team" => "Team",
         "category" => "Category",
         "city_name" => "City Name",
         "code" => "Code",

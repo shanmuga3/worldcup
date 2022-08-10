@@ -33,8 +33,8 @@
             {!! Form::select('gender', ["Male"=> Lang::get('messages.male'),"Female"=> Lang::get('messages.female'),"Other"=> Lang::get('messages.other')],$result->gender, ['class' => 'form-select', 'id' => 'gender']) !!}
         </div>
         <div class="form-group mb-2">
-            <label for="country_code"> @lang('admin_messages.fields.country_code') </label>
-            {!! Form::select('country_code', $countries ,$result->country_code, ['class' => 'form-select', 'id' => 'country_code','placeholder' => Lang::get('admin_messages.common.select')]) !!}
+            <label for="team"> @lang('admin_messages.fields.team') </label>
+            {!! Form::select('team', resolve("Team")->pluck('short_name','id') ,$result->team_id, ['class' => 'form-select', 'id' => 'team','placeholder' => Lang::get('admin_messages.common.select')]) !!}
         </div>
         <div class="form-group mb-2">
             <label for="phone_number"> @lang('admin_messages.fields.phone_number') </label>

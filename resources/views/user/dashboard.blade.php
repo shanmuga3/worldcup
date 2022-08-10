@@ -31,14 +31,24 @@
 						<div class="card-body">
 							<h2 class="fw-bold score mb-3"> {{ $user->score }} </h2>
 							<div class="help border-top">
-								<h4> @lang('messages.how_earn_points') </h4>
-								<ul class="list-unstyled">
-									<li> <p class="text-small mb-0"> @lang('messages.point_desc_1') </p> </li>
-									<li> <p class="text-small mb-0"> @lang('messages.point_desc_2') </p> </li>
-									<li> <p class="text-small mb-0"> @lang('messages.point_desc_3') </p> </li>
-									<li> <p class="text-small mb-0"> @lang('messages.point_desc_4') </p> </li>
-								</ul>
+								<div class="dropdown">
+								  <a class="" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+									<h4 class="dropdown-toggle"> @lang('messages.how_earn_points') </h4>
+								  </a>
+								  <ul class="dropdown-menu px-3" aria-labelledby="dropdownMenuButton1">
+									<li> <p class="mb-2"> @lang('messages.point_desc_1') </p> </li>
+									<li> <p class="mb-2"> @lang('messages.point_desc_2') </p> </li>
+									<li> <p class="mb-2"> @lang('messages.point_desc_3') </p> </li>
+									<li> <p class="mb-2"> @lang('messages.point_desc_4') </p> </li>
+								  </ul>
+								</div>
 							</div>
+							@if($user->team_logo != '')
+							<div class="favourite-team mt-2 border-top">
+								<h4 class="mb-3"> @lang('messages.favourite_team') </h4>
+								<img class="img" src="{{ $user->team_logo }}" alt="{{ $user->team->short_name }}" title="{{ $user->team->short_name }}">
+							</div>
+							@endif
 						</div>
 					</div>
 				</div>

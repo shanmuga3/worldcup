@@ -120,6 +120,10 @@ class AppServiceProvider extends ServiceProvider
             return \App\Models\Language::get();
         });
 
+        $this->app->singleton('Team', function() {
+            return \App\Models\Team::get();
+        });
+
         $this->app->singleton('DateFormat', function() {
             $path = app_path('Models/DateFormats.json');
             $date_formats = collect(json_decode(file_get_contents($path), true));

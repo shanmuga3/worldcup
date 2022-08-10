@@ -94,6 +94,15 @@ class User extends Authenticatable
     }
 
     /**
+     * Join With Team Match Table
+     *
+     */
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
+
+    /**
      * Get Current Image Handler
      *
      * @return ImageHandler
@@ -229,5 +238,14 @@ class User extends Authenticatable
     public function getHasSignupWithEmailAttribute()
     {
         return $this->password != '';
+    }
+
+    /**
+     * Check User loing with Social Media or not
+     *
+     */
+    public function getTeamLogoAttribute()
+    {
+        return optional($this->team)->image_src;
     }
 }
