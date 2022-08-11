@@ -135,8 +135,13 @@ class AuthController extends Controller
                 return redirect($redirect_url);
             }
             
-            resolveAndSendNotification("resetUserPassword",$user->id);
-            flashMessage('success', Lang::get('messages.success'), Lang::get('messages.reset_link_sent_to_mail'));
+            $result = resolveAndSendNotification("resetUserPassword",$user->id);
+            if(!$result['status']) {
+                flashMessage('danger', Lang::get('messages.failed'), $result['status_message']);
+            }
+            else {
+                flashMessage('success', Lang::get('messages.success'), Lang::get('messages.reset_link_sent_to_mail'));
+            }
             $redirect_url = route('login');
             return redirect($redirect_url);
         }

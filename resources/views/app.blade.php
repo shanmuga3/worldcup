@@ -61,11 +61,20 @@
             @yield('main')
             <footer id="footer" class="footer">
                 <div class="container">
-                    <div class="row gy-4">
-                        <div class="col-lg-5 col-md-12 footer-info">
-                            <a href="{{ route('home') }}" class="logo d-flex align-items-center">
-                                <span> {{ $site_name }} </span>
-                            </a>
+                    <div class="d-flex justify-content-around gy-4">
+                        <div class="footer-links">
+                            <h4> {{ $site_name }} </h4>
+                            <div class="d-flex align-items-bottom">
+                                <div class="img">
+                                    <img src="http://worldcup.indomie.com.sa/images/sport_ball.jpg" class="img" style="height: 50px;">
+                                </div>
+                                <div class="info ms-3">
+                                    <a href="{{ global_settings('copyright_link') }}" class="text-white"> {{ global_settings('copyright_link') }} </a>
+                                    <h5> {{ global_settings('copyright_text') }} </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-social-link">
                             <div class="social-links d-flex mt-4">
                                 @foreach(resolve("SocialMediaLink")->where('value','!=','') as $media)
                                 <a href="{{ $media->value }}" class="{{ $media->name }}">
@@ -73,33 +82,12 @@
                                 </a>
                                 @endforeach
                             </div>
-                        </div>
-                        <div class="col-lg-2 col-6 footer-links">
-                            
-                        </div>
-                        <div class="col-lg-2 col-6 footer-links">
-                            <h4> {{ $site_name }} </h4>
-                            <ul>
+                            <div class="static-links d-flex mt-4">
                                 @foreach(resolve("StaticPage")->where('in_footer','1') as $page)
-                                <li><a href="{{ $page->url }}"> {{ $page->name }} </a></li>
+                                    <a href="{{ $page->url }}" class="text-white me-3"> {{ $page->name }} </a>
                                 @endforeach
-                            </ul>
-                        </div>
-                        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-                            <h4> @lang('messages.contact_us') </h4>
-                            <p>
-                                <strong class="me-2">@lang('messages.phone'):</strong> {{ global_settings('support_number') }} <br>
-                                <strong class="me-2">@lang('messages.email'):</strong> {{ global_settings('support_email') }} <br>
-                            </p>
-                            <div class="d-flex w-50">
-                                {!! Form::select('language',['en' => 'English','ar' => 'عربي'], session('language'), ['id' => 'user-language','class' => 'form-select','ng-model' => 'userLanguage','ng-change' => "updateUserDefault('language')"]) !!}
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="container mt-4">
-                    <div class="copyright">
-                        &copy; <a href="{{ global_settings('copyright_link') }}" class="text-white"> {{ global_settings('copyright_text') }} </a>
                     </div>
                 </div>
             </footer>
