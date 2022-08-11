@@ -71,7 +71,7 @@ class HomeController extends Controller
                 'first_team_name' => $match->first_team->name,
                 'first_team_formatted_name' => $match->first_team->short_name.' - '.$match->first_team->name,
                 'first_team_image' => $match->first_team->image_src,
-                'second_team_formatted_name' => $match->second_team->short_name.' - '.$match->first_team->name,
+                'second_team_formatted_name' => $match->second_team->short_name.' - '.$match->second_team->name,
                 'second_team_name' => $match->second_team->name,
                 'second_team_image' => $match->second_team->image_src,
                 'round' => $match->round,
