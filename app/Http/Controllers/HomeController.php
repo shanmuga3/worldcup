@@ -44,6 +44,16 @@ class HomeController extends Controller
     public function dashboard(Request $request)
     {
         $data['user'] = Auth::user();
+
+        $url = urlencode("https://www.facebook.com/indomieksa/");
+        $img = urlencode("http://worldcup.indomie.com.sa/images/share.jpg");
+        $title = urlencode("#إندومي_توقع_وربح");
+        $summary="لقد جمعت ".$data['user']->score." نقطة حتى الان مازالت الفرصة متاحة لك ولأصدقائك لربح المزيد من الجوائز";
+
+        $data['share_data'] = [
+            ['key' => 'facebook', 'share_url' => 'https://www.facebook.com/sharer.php?s=100&p[url]='.$url.'&p[images][0]='.$img.'&p[title]='.$title.'&p[summary]='.$summary],
+            ['key' => 'twitter', 'share_url' => 'https://twitter.com/share?text='.$title.'&url='.$url],
+        ];
         
         return view('user.dashboard',$data);
     }

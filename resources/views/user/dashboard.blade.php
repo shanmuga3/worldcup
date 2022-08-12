@@ -32,6 +32,13 @@
 							<h2 class="fw-bold score mb-3">
 								{{ $user->score }}
 							</h2>
+							<div class="share-score d-flex justify-content-center py-2 border-top">
+								@foreach($share_data as $media)
+									<a href="{{ $media['share_url'] }}" class="{{ $media['key'] }} me-2" target="_blank">
+	                                    <img src="{{ asset('images/email/logo_'.$media['key'].'.png') }}" alt="{{ ucfirst($media['key']) }}" height="40" width="40">
+	                                </a>
+								@endforeach
+							</div>
 							<h5 class="">
 								@lang('messages.number_of_guess'): <strong class="text-success"> {{ $user->total_predictions }} </strong>
 							</h5>
