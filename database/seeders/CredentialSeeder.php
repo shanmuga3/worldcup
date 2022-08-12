@@ -20,11 +20,11 @@ class CredentialSeeder extends Seeder
 			['name' => 'driver', 'value' => 'smtp','site' => 'EmailConfig'],
 			['name' => 'host', 'value' => 'smtp.gmail.com','site' => 'EmailConfig'],
 			['name' => 'port', 'value' => '587','site' => 'EmailConfig'],
-			['name' => 'from_address', 'value' => 'worldcupindomieksa@gmail.com','site' => 'EmailConfig'],
+			['name' => 'from_address', 'value' => 'worldcup@indomie.com','site' => 'EmailConfig'],
 			['name' => 'from_name', 'value' => 'Indomie','site' => 'EmailConfig'],
 			['name' => 'encryption', 'value' => 'tls','site' => 'EmailConfig'],
 			['name' => 'username', 'value' => 'worldcupindomieksa@gmail.com','site' => 'EmailConfig'],
-			['name' => 'password', 'value' => 'developers@360','site' => 'EmailConfig'],
+			['name' => 'password', 'value' => 'vthcsstifalcsiip','site' => 'EmailConfig'],
 
             ['name' => 'is_enabled','value' => '0','site' => 'ReCaptcha'],
             ['name' => 'version','value' => '2','site' => 'ReCaptcha'],
