@@ -33,6 +33,17 @@ class UserController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ranking(UsersDataTable $dataTable)
+    {
+        $this->view_data['active_menu'] = 'ranking';
+        return $dataTable->setFilter('ranking')->render('admin.users.view',$this->view_data);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

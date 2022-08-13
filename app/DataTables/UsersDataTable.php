@@ -8,6 +8,13 @@ use Lang;
 
 class UsersDataTable extends DataTable
 {
+    protected $type = 'user';
+    public function setFilter($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
+
     /**
      * Build DataTable class.
      *
@@ -17,15 +24,23 @@ class UsersDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-        ->addColumn('total',function($query) {
+        ->addColumn('guesses',function($query) {
             $guess = \DB::Table('guesses')->where('user_id',$query->id)->count();
+            return $guess;
+        })
+        ->addColumn('correct',function($query) {
+            $guess = \DB::Table('guesses')->where('answer',1)->where('score','>',0)->where('user_id',$query->id)->count();
+            return $guess;
+        })
+        ->addColumn('wrong',function($query) {
+            $guess = \DB::Table('guesses')->where('answer',1)->where('score',0)->where('user_id',$query->id)->count();
             return $guess;
         })
         ->addColumn('action',function($query) {
             $edit = auth()->guard('admin')->user()->can('update-users') ? '<a href="'.route('admin.users.edit',['id' => $query->id]).'" class=""> <i class="fa fa-edit"></i> </a>' : '';
             $delete = auth()->guard('admin')->user()->can('delete-users') ? '<a href="" data-action="'.route('admin.users.delete',['id' => $query->id]).'" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"> <i class="fa fa-times"></i> </a>' : '';
             $login = auth()->guard('admin')->user()->can('update-users') ? '<a href="'.route('admin.users.login',['id' => $query->id]).'" target="_blank" class="'.(env('SHOW_CREDENTIALS') ? "":"d-none").'"> <i class="fa fas fa-sign-in-alt"></i> </a>' : '';
-            return $edit.' &nbsp; '.$delete.' &nbsp; '.$login;
+            return '<div class="d-flex"> '.$edit.' &nbsp; '.$delete.' &nbsp; '.$login.'</div>';
         });
     }
 
@@ -37,6 +52,10 @@ class UsersDataTable extends DataTable
      */
     public function query(User $model)
     {
+        if($this->type == 'ranking') {
+            $query = $model->whereHas('guesses')->get();
+            return $query;
+        }
         return $model->select();
     }
 
@@ -62,15 +81,22 @@ class UsersDataTable extends DataTable
      */
     protected function getColumns()
     {
-        return [
+        $cols = [
             ['data' => 'id', 'name' => 'id', 'title' => Lang::get('admin_messages.fields.id')],
             ['data' => 'first_name', 'name' => 'first_name', 'title' => Lang::get('admin_messages.fields.name')],
             ['data' => 'email', 'name' => 'email', 'title' => Lang::get('admin_messages.fields.email')],
             ['data' => 'phone_number', 'name' => 'phone_number', 'title' => Lang::get('admin_messages.fields.phone_number')],
-            ['data' => 'total', 'name' => 'total', 'title' => Lang::get('messages.total')],
-            ['data' => 'score', 'name' => 'score', 'title' => Lang::get('messages.score')],
-            ['data' => 'status', 'name' => 'status', 'title' => Lang::get('admin_messages.fields.status')],
+            ['data' => 'guesses', 'name' => 'guesses', 'title' => Lang::get('messages.guesses')]
         ];
+
+        if($this->type == 'ranking') {
+            $cols[] = ['data' => 'correct', 'name' => 'correct', 'title' => Lang::get('messages.correct')];
+            $cols[] = ['data' => 'wrong', 'name' => 'wrong', 'title' => Lang::get('messages.wrong')];
+        }
+
+        $cols[] = ['data' => 'score', 'name' => 'score', 'title' => Lang::get('messages.score')];
+        $cols[] = ['data' => 'status', 'name' => 'status', 'title' => Lang::get('admin_messages.fields.status')];
+        return $cols;
     }
 
     /**

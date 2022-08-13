@@ -62,7 +62,7 @@
             <footer id="footer" class="footer">
                 <div class="container">
                     <div class="row justify-content-end">
-                        <div class="col-md-4 footer-links">
+                        <div class="{{ isRtl() ? 'offset-md-4' : '' }} col-md-4 footer-links">
                             <h4> {{ $site_name }} </h4>
                             <div class="d-flex align-items-bottom">
                                 <div class="img">
@@ -77,7 +77,7 @@
                                 {!! Form::select('language',$translatable_languages, session('language'), ['id' => 'user-language','class' => 'form-select','ng-model' => 'userLanguage','ng-change' => "updateUserDefault('language')"]) !!}
                             </div>
                         </div>
-                        <div class="offset-md-4 col-md-4 footer-social-link">
+                        <div class="{{ isRtl() ? '' : 'offset-md-4' }} col-md-4 footer-social-link">
                             <div class="social-links d-flex mt-4">
                                 @foreach(resolve("SocialMediaLink")->where('value','!=','') as $media)
                                 <a href="{{ $media->value }}" class="{{ $media->name }}">

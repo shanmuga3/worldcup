@@ -52,6 +52,14 @@
           </a>
         </li>
         @endcheckPermission
+        @checkPermission('*-users')
+        <li class="nav-item">
+          <a href="{{ route('admin.users.ranking') }}" class="nav-link {{ in_array($active_menu,['ranking']) ? 'active':'' }}">
+            <i class="nav-icon fa-solid fa-list"></i>
+            <p> Ranking </p>
+          </a>
+        </li>
+        @endcheckPermission
         @checkPermission('*-teams')
         <li class="nav-item">
           <a href="{{ route('admin.teams') }}" class="nav-link {{ in_array($active_menu,['teams']) ? 'active':'' }}">

@@ -166,6 +166,15 @@ class User extends Authenticatable
 
     // Relationships
 
+    /**
+     * Join With Guess Table
+     *
+     */
+    public function guesses()
+    {
+        return $this->hasMany(Guess::class);
+    }
+
     // Appends
 
     /**

@@ -70,6 +70,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::get('{id}/edit', [UserController::class,'edit'])->name('users.edit')->middleware('permission:update-users');
         Route::match(['PUT','PATCH'],'{id}', [UserController::class,'update'])->name('users.update')->middleware('permission:update-users');
         Route::delete('{id}', [UserController::class,'destroy'])->name('users.delete')->middleware('permission:delete-users');
+        Route::get('/ranking', [UserController::class,'ranking'])->name('users.ranking')->middleware('permission:view-users');
     });
 
     // Manage Global Settings Routes

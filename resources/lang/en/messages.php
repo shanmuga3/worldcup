@@ -90,4 +90,7 @@ return [
 	"number_of_guess" => "Number of Predictions",
 	"guess" => "Guess",
 	"result" => "Result",
+	"guesses" => "Guesses",
+	"correct" => "Correct",
+	"wrong" => "Wrong",
 ];
