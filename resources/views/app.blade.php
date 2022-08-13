@@ -61,8 +61,8 @@
             @yield('main')
             <footer id="footer" class="footer">
                 <div class="container">
-                    <div class="d-flex justify-content-around gy-4">
-                        <div class="footer-links">
+                    <div class="row justify-content-end">
+                        <div class="col-md-4 footer-links">
                             <h4> {{ $site_name }} </h4>
                             <div class="d-flex align-items-bottom">
                                 <div class="img">
@@ -73,11 +73,11 @@
                                     <h5> {{ global_settings('copyright_text') }} </h5>
                                 </div>
                             </div>
-                            <div class="mt-3">
+                            <div class="mt-3 w-md-50">
                                 {!! Form::select('language',$translatable_languages, session('language'), ['id' => 'user-language','class' => 'form-select','ng-model' => 'userLanguage','ng-change' => "updateUserDefault('language')"]) !!}
                             </div>
                         </div>
-                        <div class="footer-social-link">
+                        <div class="offset-md-4 col-md-4 footer-social-link">
                             <div class="social-links d-flex mt-4">
                                 @foreach(resolve("SocialMediaLink")->where('value','!=','') as $media)
                                 <a href="{{ $media->value }}" class="{{ $media->name }}">

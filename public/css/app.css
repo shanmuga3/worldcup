@@ -13872,6 +13872,9 @@ section {
   .pricing .featured {
     transform: scale(1.15);
   }
+  .w-md-50 {
+    width: 50%;
+  }
 }
 /*--------------------------------------------------------------
 # Frequently Asked Questions Section
