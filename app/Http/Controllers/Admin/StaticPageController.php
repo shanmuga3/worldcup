@@ -69,7 +69,6 @@ class StaticPageController extends Controller
 		$static_page->content = $request->content;
 		$static_page->must_agree = $request->must_agree;
 		$static_page->in_footer = $request->in_footer;
-		$static_page->under_section	= $request->under_section;
 		$static_page->status = $request->status;
 		$static_page->save();
 
@@ -112,7 +111,6 @@ class StaticPageController extends Controller
 		$static_page->content = $request->content;
 		$static_page->must_agree = $request->must_agree;
 		$static_page->in_footer = $request->in_footer;
-		$static_page->under_section	= $request->under_section;
 		$static_page->status = $request->status;
 		$static_page->save();
 
@@ -170,16 +168,12 @@ class StaticPageController extends Controller
 			'in_footer' => 'required',
 			'status'    => 'required',
 		);
-		if($request_data->in_footer == 1) {
-			$rules['under_section'] = 'required';
-		}
 
 		$attributes = array(
 			'name'  		=> Lang::get('admin_messages.fields.name'),
 			'content'  		=> Lang::get('admin_messages.fields.content'),
 			'must_agree'  	=> Lang::get('admin_messages.fields.must_agree'),
 			'in_footer'  	=> Lang::get('admin_messages.fields.footer'),
-			'under_section' => Lang::get('admin_messages.fields.under_section'),
 			'status'    	=> Lang::get('admin_messages.fields.status'),
 		);
 		

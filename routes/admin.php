@@ -73,6 +73,12 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::get('/ranking', [UserController::class,'ranking'])->name('users.ranking')->middleware('permission:view-users');
     });
 
+    // Manage Email Configuration Routes
+    Route::group(['prefix' => 'email-configurations'], function () {
+        Route::get('/', [EmailController::class,'index'])->name('email_configurations')->middleware('permission:view-email_configurations');
+        Route::match(['PUT','PATCH'],'/', [EmailController::class,'update'])->name('email_configurations.update')->middleware('permission:update-email_configurations');
+    });
+
     // Manage Global Settings Routes
     Route::group(['prefix' => 'global-settings'], function () {
         Route::get('/', [GlobalSettingController::class,'index'])->name('global_settings')->middleware('permission:view-global_settings');

@@ -66,6 +66,8 @@
       <script src="{{ asset('admin_assets/plugins/angularjs/angular.min.js') }}"></script>
       <script src="{{ asset('admin_assets/plugins/angularjs/angular-sanitize.min.js') }}"></script>
       <script src="{{ asset('admin_assets/plugins/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+      <!-- SummerNote Editor -->
+      <script src="{{ asset('admin_assets/plugins/summernote/summernote-bs5.min.js') }}"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
       <script src="{{ asset('admin_assets/js/adminlte.js') }}"></script>
       

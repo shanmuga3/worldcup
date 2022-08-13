@@ -313,7 +313,9 @@ return [
         "skype" => "Skype",
         "social_media_links" => "Social Media Links",
         "twitter" => "Twitter",
-        "youtube" => "YouTube"
+        "youtube" => "YouTube",
+        "snapchat" => "Snapchat",
+        "tiktok" => "Tik Tok",
     ],
     "static_pages" => [
         "add_static_page" => "Add Static Page",

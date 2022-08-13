@@ -84,6 +84,30 @@
           </a>
         </li>
         @endcheckPermission
+        @checkPermission('*-static_pages')
+        <li class="nav-item">
+          <a href="{{ route('admin.static_pages') }}" class="nav-link {{ in_array($active_menu,['pages']) ? 'active':'' }}">
+            <i class="nav-icon fa-solid fa-file"></i>
+            <p> Static Pages </p>
+          </a>
+        </li>
+        @endcheckPermission
+        @checkPermission('*-email_configurations')
+        <li class="nav-item">
+          <a href="{{ route('admin.email_configurations') }}" class="nav-link {{ in_array($active_menu,['email_configurations']) ? 'active':'' }}">
+            <i class="nav-icon fa-solid fa-lock"></i>
+            <p> Email Credentials </p>
+          </a>
+        </li>
+        @endcheckPermission
+        @checkPermission('*-social_media_links')
+        <li class="nav-item">
+          <a href="{{ route('admin.social_media_links') }}" class="nav-link {{ in_array($active_menu,['social_media_links']) ? 'active':'' }}">
+            <i class="nav-icon fa-solid fa-square-share-nodes"></i>
+            <p> Social Media </p>
+          </a>
+        </li>
+        @endcheckPermission
         @checkPermission('*-global_settings')
         <li class="nav-item">
           <a href="{{ route('admin.global_settings') }}" class="nav-link {{ in_array($active_menu,['global_settings']) ? 'active':'' }}">

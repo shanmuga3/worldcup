@@ -1,4 +1,4 @@
-@extends('layouts.adminLayout.app')
+@extends('admin.app')
 @section('content')
 <div class="content">
 	<div class="page-inner">
@@ -14,7 +14,7 @@
 					<i class="flaticon-right-arrow"></i>
 				</li>
 				<li class="nav-item">
-					<a href="{{ route('admin.static_pages') }}">@lang("admin_messages.static_pages")</a>
+					<a href="{{ route('admin.static_pages') }}">@lang("admin_messages.navigation.static_pages")</a>
 				</li>
 				<li class="separator">
 					<i class="flaticon-right-arrow"></i>
