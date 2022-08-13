@@ -48,6 +48,10 @@ class ShareServiceProvider extends ServiceProvider
                 $this->shareDateFormat();
             }
 
+            if(Schema::hasTable('languages')) {
+                $this->languages();
+            }
+
             if(Schema::hasTable('static_pages')) {
                 $this->pages();
             }
@@ -154,9 +158,9 @@ class ShareServiceProvider extends ServiceProvider
     protected function languages()
     {
         $languages = resolve('Language');
-        $language_list = $languages->where('status','1')->where('is_translatable',1)->pluck('name','short_name');
+        $language_list = $languages->activeOnly()->pluck('name','short_name');
         View::share('language_list', $language_list);
-        $language_list = $languages->where('status','1')->where('is_translatable','1')->pluck('name','short_name');
+        $language_list = $languages->activeOnly()->where('is_translatable','1')->pluck('name','code');
         View::share('translatable_languages', $language_list);
     }
 

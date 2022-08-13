@@ -42,7 +42,7 @@ class GlobalSettingSeeder extends Seeder
             ['name' => 'backup_period', 'value' => 'never'],
             ['name' => 'user_inactive_days', 'value' => 0],
             ['name' => 'copyright_link', 'value' => '#'],
-            ['name' => 'copyright_text', 'value' => 'All Rights Reserved'],
+            ['name' => 'copyright_text', 'value' => '{"en":"All Rights Reserved","ar":"كل الحقوق محفوظة"}'],
             ['name' => 'font_script_url', 'value' => 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap'],
             ['name' => 'font_family', 'value' => '\'Poppins\', sans-serif'],
         ]);

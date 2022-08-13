@@ -22,8 +22,11 @@ if (!function_exists('global_settings')) {
             if($original) {
                 return $value;
             }
-            if(in_array($key,['site_name','about'])) {
+            if(in_array($key,['site_name','about','copyright_text'])) {
                 $value = json_decode($value,true);
+                if($value == null) {
+                    return $value;
+                }
                 $locale = app()->getLocale();
                 return $value[$locale] ?? '';
             }

@@ -68,10 +68,13 @@
                                 <div class="img">
                                     <img src="http://worldcup.indomie.com.sa/images/sport_ball.jpg" class="img" style="height: 50px;">
                                 </div>
-                                <div class="info ms-3">
+                                <div class="info {{ isRtl() ? 'me-3' : 'ms-3' }}">
                                     <a href="{{ global_settings('copyright_link') }}" class="text-white"> {{ global_settings('copyright_link') }} </a>
                                     <h5> {{ global_settings('copyright_text') }} </h5>
                                 </div>
+                            </div>
+                            <div class="mt-3">
+                                {!! Form::select('language',$translatable_languages, session('language'), ['id' => 'user-language','class' => 'form-select','ng-model' => 'userLanguage','ng-change' => "updateUserDefault('language')"]) !!}
                             </div>
                         </div>
                         <div class="footer-social-link">
