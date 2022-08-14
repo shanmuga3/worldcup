@@ -38,7 +38,10 @@ class UserDefaults
 
         App::setLocale($user_language);
 
-        session(['language' => $user_language]);
+        $language = resolve('Language')->where('code',$user_language)->first();
+
+        session(['language' => $language->code]);
+        session(['language_name' => $language->name]);
 
         \View::share('site_name', global_settings('site_name'));
 

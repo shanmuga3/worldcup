@@ -12711,7 +12711,6 @@ section {
   .navbar .dropdown ul {
     display: block;
     position: absolute;
-    left: 28px;
     top: calc(100% + 30px);
     margin: 0;
     padding: 10px 0;
@@ -12740,6 +12739,9 @@ section {
 .navbar .dropdown ul .active:hover,
 .navbar .dropdown ul li:hover > a {
     color: #c8163d;
+  }
+  .dropdown-menu .dropdown-item.selected {
+    color: #c8163d !important;
   }
   .navbar .dropdown:hover > ul {
     opacity: 1;
@@ -14177,7 +14179,7 @@ section {
 .hero {
   width: 100%;
   position: relative;
-  background: url(../images/banner-1.jpg?a6970d309f8f9d2a1eeb4e2b5684f1f9) bottom center no-repeat;
+  background: url(../images/banner-3.jpg?dced5f03f9658502a17188cd55b6309d) bottom center no-repeat;
   background-size: cover;
   position: relative;
   z-index: 2;

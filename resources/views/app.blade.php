@@ -46,11 +46,22 @@
                             <li><a href="http://www.fifa.com/worldcup/teams" target="_blank"> @lang('messages.teams') </a></li>
                             <li><a href="http://www.fifa.com/worldcup/groups" target="_blank"> @lang('messages.groups') </a></li>
                             @endif
-                            <li><a href="#"> @lang('messages.about') </a></li>
-                            <li><a href="#"> @lang('messages.contact') </a></li>
                             @auth
                             <li><a href="{{ route('logout') }}"> @lang('messages.logout') </a></li>
                             @endauth
+                            <li class="my-account-dropdown d-none d-md-block">
+                               <div class="dropdown">
+                                  <a href="javascript:;" class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-globe {{ isRtl() ? 'ms-2' : 'me-2'}}"></i>
+                                    {{ session('language_name') }}
+                                  </a>
+                                  <ul class="dropdown-menu {{ isRtl() ? 'dropdown-menu-start' : 'dropdown-menu-end' }}" aria-labelledby="dropdownMenuButton1">
+                                    @foreach($translatable_languages as $key => $value)
+                                    <li><a class="dropdown-item {{ session('language') == $key ? 'selected' : '' }}" href="#" ng-click="userLanguage='{{ $key }}';updateUserDefault('language');"> {{ $value }} </a></li>
+                                    @endforeach
+                                  </ul>
+                                </div>
+                            </li>
                         </ul>
                     </nav>
                     <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
@@ -66,14 +77,14 @@
                             <h4> {{ $site_name }} </h4>
                             <div class="d-flex align-items-bottom">
                                 <div class="img">
-                                    <img src="http://worldcup.indomie.com.sa/images/sport_ball.jpg" class="img" style="height: 50px;">
+                                    <img src="{{ asset('images/sport_ball.png') }}" class="img" style="height: 50px;">
                                 </div>
                                 <div class="info {{ isRtl() ? 'me-3' : 'ms-3' }}">
                                     <a href="{{ global_settings('copyright_link') }}" class="text-white"> {{ global_settings('copyright_link') }} </a>
                                     <h5> {{ global_settings('copyright_text') }} </h5>
                                 </div>
                             </div>
-                            <div class="mt-3 w-md-50">
+                            <div class="mt-3 d-md-none">
                                 {!! Form::select('language',$translatable_languages, session('language'), ['id' => 'user-language','class' => 'form-select','ng-model' => 'userLanguage','ng-change' => "updateUserDefault('language')"]) !!}
                             </div>
                         </div>

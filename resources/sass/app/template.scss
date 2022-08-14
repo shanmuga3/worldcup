@@ -912,7 +912,7 @@ section {
   .navbar .dropdown ul {
     display: block;
     position: absolute;
-    left: 28px;
+    // left: 28px;
     top: calc(100% + 30px);
     margin: 0;
     padding: 10px 0;
@@ -945,6 +945,12 @@ section {
   .navbar .dropdown ul .active:hover,
   .navbar .dropdown ul li:hover>a {
     color: $secondary;
+  }
+
+  .dropdown-menu .dropdown-item {
+    &.selected {
+        color: $secondary !important;
+    }
   }
 
   .navbar .dropdown:hover>ul {
@@ -2421,7 +2427,7 @@ section {
 .hero {
     width: 100%;
     position: relative;
-    background: url(../../images/banner-1.jpg) bottom center no-repeat;
+    background: url(../../images/banner-3.jpg) bottom center no-repeat;
     background-size: cover;
     position: relative;
     z-index: 2;
