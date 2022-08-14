@@ -43175,6 +43175,20 @@ app.controller('dashboardController', ['$scope', '$http', function ($scope, $htt
 
     $scope.makePostRequest(url, data_params, callback_function);
   };
+
+  $scope.updateFavTeam = function () {
+    $scope.isLoading = true;
+    var url = routeList.update_favourite_team;
+    var data_params = {
+      team: $scope.fav_team
+    };
+
+    var callback_function = function callback_function(response_data) {
+      window.location.reload();
+    };
+
+    $scope.makePostRequest(url, data_params, callback_function);
+  };
 }]);
 
 /***/ }),

@@ -199,6 +199,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard',[HomeController::class,'dashboard'])->name('dashboard');
     Route::post('predict-match',[HomeController::class,'predictMatch'])->name('predict_match');
     Route::get('previous-guesses',[HomeController::class,'previousGuesses'])->name('previous_guesses');
+    Route::post('update-favourite-team', [HomeController::class,'updatefavTeam'])->name('update_favourite_team');
 
     Route::get('logout', function () {
         session()->forget('url.intended');

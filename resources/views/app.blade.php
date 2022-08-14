@@ -116,6 +116,7 @@
             const routeList = {!!
                 json_encode([
                     'update_user_default' => route('update_user_default'),
+                    'update_favourite_team' => route('update_favourite_team'),
                     'get_matches' => route('get_matches'),
                     'predict_match' => route('predict_match'),
                 ]);

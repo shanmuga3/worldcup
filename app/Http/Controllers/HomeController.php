@@ -36,6 +36,24 @@ class HomeController extends Controller
     }
 
     /**
+     * Update User Default settings
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return json success
+     */
+    public function updatefavTeam(Request $request)
+    {
+        $user = \Auth::user();
+        $user->team_id = $request->team;
+        $user->save();
+
+        return response()->json([
+            'status' => true,
+            'status_message' => Lang::get('messages.common.updated_successfully'),
+        ]);
+    }
+
+    /**
      * Display User Dashboard
      *
      * @param  \Illuminate\Http\Request  $request

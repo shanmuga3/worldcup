@@ -55,12 +55,14 @@
 								  </ul>
 								</div>
 							</div>
-							@if($user->team_logo != '')
 							<div class="favourite-team mt-2 border-top">
 								<h4 class="mb-3"> @lang('messages.favourite_team') </h4>
-								<img class="img" src="{{ $user->team_logo }}" alt="{{ $user->team->short_name }}" title="{{ $user->team->short_name }}">
+								@if($user->team_logo != '')
+									<img class="img" src="{{ $user->team_logo }}" alt="{{ $user->team->short_name }}" title="{{ $user->team->short_name }}">
+								@else
+								{!! Form::select('fav_team',resolve("Team")->pluck('formatted_name','id'), session('language'), ['id' => 'user-language','class' => 'form-select','placeholder' => Lang::get('messages.select'),'ng-model' => 'fav_team','ng-change' => "updateFavTeam()"]) !!}
+								@endif
 							</div>
-							@endif
 						</div>
 					</div>
 				</div>
