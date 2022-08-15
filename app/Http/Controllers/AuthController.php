@@ -51,7 +51,7 @@ class AuthController extends Controller
             'password' => ['required',$password_rule],
             'dob' => ['required'],
             'gender' => ['required'],
-            'phone_number' => ['required','unique:users'],
+            'phone_number' => ['required','unique:users','starts_with:05'],
             'city' => ['required'],
         );
 

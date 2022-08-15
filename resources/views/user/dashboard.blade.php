@@ -114,12 +114,12 @@
 	                        			<div class="col-5">
 	                        				<div class="form-group mb-2">
 	                        					<label class="form-label"> @lang('messages.first_team_score') </label>
-	                        					<input type="text" name="first_team_score" class="form-control" ng-model="prediction_form.first_team_score">
+	                        					<input type="text" name="first_team_score" class="form-control" ng-model="prediction_form.first_team_score" maxlength="1">
 	                        					<span class="text-danger"> @{{ error_messages.first_team_score[0] }} </span>
 	                        				</div>
 	                        				<div class="form-group mb-2" ng-show="active_match.round > 1 && prediction_form.first_team_score != '' && prediction_form.first_team_score == prediction_form.second_team_score">
 	                        					<label class="form-label"> @lang('messages.first_team_penalty') </label>
-	                        					<input type="text" name="first_team_penalty" class="form-control" ng-model="prediction_form.first_team_penalty">
+	                        					<input type="text" name="first_team_penalty" class="form-control" ng-model="prediction_form.first_team_penalty" maxlength="1">
 	                        					<span class="text-danger"> @{{ error_messages.first_team_penalty[0] }} </span>
 	                        				</div>
 	                        			</div>
@@ -129,12 +129,12 @@
 	                        			<div class="col-5">
 	                        				<div class="form-group mb-2">
 	                        					<label class="form-label"> @lang('messages.first_team_score') </label>
-	                        					<input type="text" name="second_team_score" class="form-control" ng-model="prediction_form.second_team_score">
+	                        					<input type="text" name="second_team_score" class="form-control" ng-model="prediction_form.second_team_score" maxlength="1">
 	                        					<span class="text-danger"> @{{ error_messages.second_team_score[0] }} </span>
 	                        				</div>
 	                        				<div class="form-group mb-2" ng-show="active_match.round > 1 && prediction_form.first_team_score != '' && prediction_form.first_team_score == prediction_form.second_team_score">
 	                        					<label class="form-label"> @lang('messages.second_team_penalty') </label>
-	                        					<input type="text" name="second_team_penalty" class="form-control" ng-model="prediction_form.second_team_penalty">
+	                        					<input type="text" name="second_team_penalty" class="form-control" ng-model="prediction_form.second_team_penalty" maxlength="1">
 	                        					<span class="text-danger"> @{{ error_messages.second_team_penalty[0] }} </span>
 	                        				</div>
 	                        			</div>
