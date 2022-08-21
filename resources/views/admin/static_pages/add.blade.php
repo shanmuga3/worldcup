@@ -13,7 +13,7 @@
 						<li class="breadcrumb-item">
 							<a href="{{ route('admin.static_pages') }}">@lang("admin_messages.navigation.static_pages")</a>
 						</li>
-						<li class="breadcrumb-item active">{{ $sub_title }}</li>
+						<li class="breadcrumb-item active"> @lang("admin_messages.common.add") </li>
 					</ol>
 				</div>
 			</div>

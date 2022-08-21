@@ -39,9 +39,7 @@ class StaticPagesDataTable extends DataTable
      */
     public function query(StaticPage $model)
     {
-        $locale = global_settings('default_language');
-        $query = $model->selectRaw('JSON_UNQUOTE(JSON_EXTRACT(static_pages.name, \'$.'.$locale.'\')) as static_page_name, static_pages.id as id, static_pages.in_footer as in_footer, static_pages.slug as slug, static_pages.status as status');
-        return $query;
+        return $model->get();
     }
 
     /**
@@ -67,7 +65,7 @@ class StaticPagesDataTable extends DataTable
     {
         return [
             ['data' => 'id', 'name' => 'id', 'title' => Lang::get('admin_messages.fields.id')],
-            ['data' => 'static_page_name', 'name' => 'static_pages.name', 'title' => Lang::get('admin_messages.fields.name')],
+            ['data' => 'name', 'name' => 'static_pages.name', 'title' => Lang::get('admin_messages.fields.name')],
             ['data' => 'in_footer', 'name' => 'in_footer', 'title' => Lang::get('admin_messages.fields.footer')],
             ['data' => 'status', 'name' => 'status', 'title' => Lang::get('admin_messages.fields.status')],
         ];
