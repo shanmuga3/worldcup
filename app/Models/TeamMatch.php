@@ -47,8 +47,24 @@ class TeamMatch extends Model
 
     public function getDurationAttribute()
     {
+        return $this->formatted_starting_at.' - '.$this->formatted_ending_at;
+    }
+
+    public function getFormattedStartingAtAttribute()
+    {
         $starting_at = getDateObject($this->attributes['starting_at']);
+        return $starting_at->format(DATE_FORMAT.' '.TIME_FORMAT);
+    }
+
+    public function getFormattedEndingAtAttribute()
+    {
         $ending_at = getDateObject($this->attributes['ending_at']);
-        return $starting_at->format(DATE_FORMAT.' '.TIME_FORMAT).' - '.$ending_at->format(DATE_FORMAT.' '.TIME_FORMAT);
+        return $ending_at->format(DATE_FORMAT.' '.TIME_FORMAT);
+    }
+
+    public function getStartingInAttribute()
+    {
+        $starting_at = getDateObject($this->attributes['starting_at']);
+        return $starting_at->format('Y-m-d H:i:s');
     }
 }

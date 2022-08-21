@@ -133,6 +133,29 @@ app.controller('myApp', ['$scope', '$http','$rootScope', function($scope, $http,
 
         $scope.makePostRequest(url,data_params,callback_function);
     };
+
+    $scope.makeTimer = function(id,dateStr) {
+        let now = new Date();
+        now = (Date.parse(now) / 1000);
+
+        let endTime = new Date(dateStr);
+        endTime = (Date.parse(endTime) / 1000);
+
+        let timeLeft = endTime - now;
+
+        let days = Math.floor(timeLeft / 86400); 
+        let hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+        let minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
+        let seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+
+        if (hours < "10") { hours = "0" + hours; }
+        if (minutes < "10") { minutes = "0" + minutes; }
+        if (seconds < "10") { seconds = "0" + seconds; }
+
+        $("#hours_"+id).html(hours + "h: ");
+        $("#minutes_"+id).html(minutes + "m: ");
+        $("#seconds_"+id).html(seconds + "s");
+    };
 }]);
 
 app.controller('authController', ['$scope', '$http', function($scope, $http) {
@@ -180,6 +203,15 @@ app.controller('homeController', ['$scope', '$http', function($scope, $http) {
             else {
                 $scope.active_matches = response_data.matches;
                 $scope.isActiveLoading = false;
+                setTimeout(() =>{
+                    $('.match-timer').each(function(index,element) {
+                        let id = $(this).data('id');
+                        let dateStr = $(this).data('time');
+                        setInterval(() => {
+                            $scope.makeTimer(id,dateStr);
+                        }, 1000);
+                    });
+                },500);
             }
         };
 
@@ -228,6 +260,16 @@ app.controller('dashboardController', ['$scope', '$http', function($scope, $http
             else {
                 $scope.active_matches = response_data.matches;
                 $scope.isActiveLoading = false;
+
+                setTimeout(() =>{
+                    $('.match-timer').each(function(index,element) {
+                        let id = $(this).data('id');
+                        let dateStr = $(this).data('time');
+                        setInterval(() => {
+                            $scope.makeTimer(id,dateStr);
+                        }, 1000);
+                    });
+                },500);
             }
         };
 

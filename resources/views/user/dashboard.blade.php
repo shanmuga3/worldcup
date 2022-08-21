@@ -84,7 +84,7 @@
                         	<div class="text-center" ng-if="active_matches.length == 0">
                         		@lang('messages.no_active_matches')
                         	</div>
-                        	<div class="today-matches" ng-repeat="match in active_matches">
+                        	<div class="today-matches mb-3" ng-repeat="match in active_matches">
 	                        	<div class="part-team">
 		                            <div class="single-team">
 		                                <div class="logo">
@@ -95,7 +95,13 @@
 		                            <div class="match-details">
 		                                <div class="match-time">
 		                                    <span class="date"> @{{ match.duration }} </span>
-		                                    <span class="time"> @{{ match.match_time }} </span>
+		                                    <span class="time match-timer" data-id="@{{ match.id }}" data-time="@{{ match.starting_in }}">
+	                                    	<div class="d-flex justify-content-center" id="timer_@{{ match.id }}">
+												<div id="hours_@{{ match.id }}"></div>
+												<div id="minutes_@{{ match.id }}"></div>
+												<div id="seconds_@{{ match.id }}"></div>
+											</div>
+	                                    </span>
 		                                </div>
 		                                <span class="versus">@lang('messages.vs')</span>
 		                                <div class="buttons">

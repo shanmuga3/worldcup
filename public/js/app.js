@@ -43031,6 +43031,34 @@ app.controller('myApp', ['$scope', '$http', '$rootScope', function ($scope, $htt
 
     $scope.makePostRequest(url, data_params, callback_function);
   };
+
+  $scope.makeTimer = function (id, dateStr) {
+    var now = new Date();
+    now = Date.parse(now) / 1000;
+    var endTime = new Date(dateStr);
+    endTime = Date.parse(endTime) / 1000;
+    var timeLeft = endTime - now;
+    var days = Math.floor(timeLeft / 86400);
+    var hours = Math.floor((timeLeft - days * 86400) / 3600);
+    var minutes = Math.floor((timeLeft - days * 86400 - hours * 3600) / 60);
+    var seconds = Math.floor(timeLeft - days * 86400 - hours * 3600 - minutes * 60);
+
+    if (hours < "10") {
+      hours = "0" + hours;
+    }
+
+    if (minutes < "10") {
+      minutes = "0" + minutes;
+    }
+
+    if (seconds < "10") {
+      seconds = "0" + seconds;
+    }
+
+    $("#hours_" + id).html(hours + "h: ");
+    $("#minutes_" + id).html(minutes + "m: ");
+    $("#seconds_" + id).html(seconds + "s");
+  };
 }]);
 app.controller('authController', ['$scope', '$http', function ($scope, $http) {
   $(document).ready(function () {
@@ -43073,6 +43101,15 @@ app.controller('homeController', ['$scope', '$http', function ($scope, $http) {
       } else {
         $scope.active_matches = response_data.matches;
         $scope.isActiveLoading = false;
+        setTimeout(function () {
+          $('.match-timer').each(function (index, element) {
+            var id = $(this).data('id');
+            var dateStr = $(this).data('time');
+            setInterval(function () {
+              $scope.makeTimer(id, dateStr);
+            }, 1000);
+          });
+        }, 500);
       }
     };
 
@@ -43117,6 +43154,15 @@ app.controller('dashboardController', ['$scope', '$http', function ($scope, $htt
       } else {
         $scope.active_matches = response_data.matches;
         $scope.isActiveLoading = false;
+        setTimeout(function () {
+          $('.match-timer').each(function (index, element) {
+            var id = $(this).data('id');
+            var dateStr = $(this).data('time');
+            setInterval(function () {
+              $scope.makeTimer(id, dateStr);
+            }, 1000);
+          });
+        }, 500);
       }
     };
 
