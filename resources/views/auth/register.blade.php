@@ -52,7 +52,7 @@
                                     <span class="text-danger"> {{ $errors->first('dob') }} </span>
                                     <div class="form-group mt-2">
                                         <label class="form-label"> @lang('messages.phone_number') <em class="text-danger"> * </em> </label>
-                                        {!! Form::text('phone_number',null,['placeholder' => '05xxxxxxxxxx','class' =>'form-control','maxlength' => 10])!!}
+                                        {!! Form::text('phone_number',null,['placeholder' => '05xxxxxxxxxx','class' =>'form-control phone_number','maxlength' => 10])!!}
                                         <span class="text-danger"> {{ $errors->first('phone_number') }} </span>
                                     </div>
                                     <div class="mb-3">

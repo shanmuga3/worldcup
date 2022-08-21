@@ -58,6 +58,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     },2000);
 
+    $(document).on('keydown keyup change','.phone_number',function(event) {
+        let value = $(this).val();
+        if(value.length > 10) {
+            $(this).val(value.substring(0, 10));
+        }
+    });
+
     const preloader = document.querySelector('#preloader');
     if (preloader) {
         window.addEventListener('load', () => {
