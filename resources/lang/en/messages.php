@@ -28,7 +28,7 @@ return [
 	"already_have_account" => "Already have an account",
 	"create_new_account" => "Create New account",
 	"name" => "Name",
-	"first_name" => "Last Name",
+	"first_name" => "First Name",
 	"last_name" => "Last Name",
 	"phone_number" => "Phone Number",
 	"city" => "City",
