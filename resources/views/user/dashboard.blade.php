@@ -93,9 +93,9 @@
 		                                <span class="team-name"> @{{ match.first_team_formatted_name }} </span>
 		                            </div>
 		                            <div class="match-details">
-		                                <div class="match-time">
+		                                <div class="match-time" dir="ltr">
 		                                    <span class="date"> @{{ match.duration }} </span>
-		                                    <span class="time match-timer" data-id="@{{ match.id }}" data-time="@{{ match.starting_in }}">
+		                                    <span class="time match-timer" data-id="@{{ match.id }}" data-time="@{{ match.ending_at }}">
 	                                    	<div class="d-flex justify-content-center" id="timer_@{{ match.id }}">
 												<div id="hours_@{{ match.id }}"></div>
 												<div id="minutes_@{{ match.id }}"></div>
