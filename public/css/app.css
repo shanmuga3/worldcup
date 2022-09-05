@@ -4331,7 +4331,8 @@ textarea.form-control-lg {
 
 .btn-primary {
   color: #fff;
-  background-color: #008276;
+  background: linear-gradient(0deg,#c8163d,rgb(84 4 28 / 85%));
+  /*background-color: #008276;*/
   border-color: #008276;
 }
 .btn-primary:hover {
@@ -12605,7 +12606,9 @@ section {
   transition: all 0.5s;
   z-index: 997;
   height: 90px;
-  background-color: #008276;
+   background:linear-gradient(0deg,#c8163d,rgb(84 4 28 / 85%));
+ /* background: linear-gradient(0deg,rgb(209 5 66 / 85%),rgb(84 4 28 / 85%));
+  background-color: #008276;*/
 }
 
 .header.sticked {
@@ -12691,7 +12694,7 @@ section {
     height: 2px;
     bottom: -6px;
     left: 0;
-    background-color: #c8163d;
+    background-color: #fff;
     visibility: hidden;
     width: 0px;
     transition: all 0.3s ease-in-out 0s;
@@ -13669,7 +13672,7 @@ section {
 }
 
 .team .member img {
-  border-radius: 10px;
+  border-radius: 0px;
   overflow: hidden;
 }
 
@@ -14880,8 +14883,9 @@ section {
 --------------------------------------------------------------*/
 .footer {
   font-size: 14px;
-  background-color: #008276;
-  padding: 50px 0px;
+  background: linear-gradient(0deg,#c8163d,rgb(84 4 28 / 85%));
+  /*background-color: #008276;*/
+  padding: 25px 0px;
   color: white;
 }
 
@@ -15134,8 +15138,8 @@ section {
   display: flex;
 }
 .upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team .part-logo img {
-  width: 55px;
-  height: 60px;
+  width: 80px;
+  height: 39.45px;
 }
 .upcoming-match-wrapper .upcoming-matches-list .upcoming-match .single-team .part-text span.team-name {
   font-weight: 500;

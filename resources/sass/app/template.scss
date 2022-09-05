@@ -309,6 +309,10 @@ select::-webkit-scrollbar {
     text-align: center;
 }
 
+.btn-primary {
+    background: linear-gradient(0deg,#c8163d,rgb(84 4 28 / 85%));
+}
+
 .btn-primary,.btn {
     &:disabled{
         opacity: 0.35 !important;
@@ -797,7 +801,7 @@ section {
   transition: all 0.5s;
   z-index: 997;
   height: 90px;
-  background-color: $primary;
+  background:linear-gradient(0deg,#c8163d,rgb(84 4 28 / 85%));
 }
 
 .header.sticked {
@@ -889,7 +893,7 @@ section {
     height: 2px;
     bottom: -6px;
     left: 0;
-    background-color: $secondary;
+    background-color: $white;
     visibility: hidden;
     width: 0px;
     transition: all 0.3s ease-in-out 0s;
@@ -1912,7 +1916,7 @@ section {
 }
 
 .team .member img {
-  border-radius: 10px;
+  border-radius: 0px;
   overflow: hidden;
 }
 
@@ -3132,8 +3136,8 @@ section {
 --------------------------------------------------------------*/
 .footer {
   font-size: 14px;
-  background-color: $primary;
-  padding: 50px 0px;
+  background: linear-gradient(0deg,#c8163d,rgb(84 4 28 / 85%));
+  padding: 25px 0px;
   color: white;
 }
 
@@ -3393,8 +3397,8 @@ section {
                 .part-logo {
                     display: flex;
                     img {
-                        width: 55px;
-                        height: 60px;
+                        width: 80px;
+                        height: 39.45px;
                     }
                 }
                 .part-text {
