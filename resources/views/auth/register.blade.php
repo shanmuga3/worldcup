@@ -56,11 +56,11 @@
                                         <span class="text-danger"> {{ $errors->first('phone_number') }} </span>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="profile_picture" class="form-label"> @lang('messages.profile_picture') </label>
+                                        <label for="profile_picture" class="form-label"> @lang('messages.profile_picture') <em class="text-danger"> * </em> </label>
                                         <input type="file" name="profile_picture" class="form-control" id="profile_picture">
                                     </div>
                                     <div class="form-group mt-2">
-                                        <label class="form-label"> @lang('messages.address') </label>
+                                        <label class="form-label"> @lang('messages.address') <em class="text-danger"> * </em> </label>
                                         {!! Form::text('address',null,['placeholder' => trans('messages.address'),'class' =>'form-control'])!!}
                                         <span class="text-danger"> {{ $errors->first('address') }} </span>
                                     </div>

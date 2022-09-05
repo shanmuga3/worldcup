@@ -168,13 +168,13 @@
                                     <div class="part-logo me-4">
                                          <img ng-src="@{{ match.first_team_image }}" alt="@{{ match.first_team_name }}">
                                     </div>
-                                    <div class="part-text">
+                                    <div class="part-text d-none d-md-block">
                                         <span class="team-name"> @{{ match.first_team_formatted_name }} </span>
                                     </div>
                                 </div>
                                 <span class="versus">@lang('messages.vs')</span>
                                 <div class="single-team">
-                                    <div class="part-text">
+                                    <div class="part-text d-none d-md-block">
                                         <span class="team-name"> @{{ match.second_team_formatted_name }} </span>
                                     </div>
                                     <div class="part-logo">

@@ -16,7 +16,7 @@
                                     <div class="part-logo me-4">
                                          <img src="{{ $guess->match->first_team->image_src }}" alt="{{ $guess->match->first_team->name }}">
                                     </div>
-                                    <div class="part-text">
+                                    <div class="part-text d-none d-md-block">
                                         <p class="team-name fw-bold"> {{ $guess->match->first_team->formatted_name }} </p>
                                         <p class="user-guess">
                                             <span class="fw-bold mx-2"> @lang('messages.guess'):</span>
@@ -38,7 +38,7 @@
                                 </div>
                                 <span class="versus">@lang('messages.vs')</span>
                                 <div class="single-team">
-                                    <div class="part-text">
+                                    <div class="part-text d-none d-md-block">
                                         <p class="team-name fw-bold"> {{ $guess->match->second_team->formatted_name }} </p>
                                         <p class="user-guess">
                                             <span class="fw-bold mx-2"> @lang('messages.guess'):</span>
