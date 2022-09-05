@@ -52,6 +52,8 @@ class AuthController extends Controller
             'dob' => ['required'],
             'gender' => ['required'],
             'phone_number' => ['required','unique:users','starts_with:05'],
+            'profile_picture' => ['required'],
+            'address' => ['required'],
             'city' => ['required'],
         );
 
