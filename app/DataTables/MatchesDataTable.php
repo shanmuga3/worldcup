@@ -72,7 +72,7 @@ class MatchesDataTable extends DataTable
             ['data' => 'first_team', 'name' => 'first_team', 'title' => Lang::get('admin_messages.matches.first_team')],
             ['data' => 'second_team', 'name' => 'second_team', 'title' => Lang::get('admin_messages.matches.second_team')],
             ['data' => 'round', 'name' => 'round', 'title' => Lang::get('admin_messages.matches.round')],
-            ['data' => 'match_time', 'name' => 'match_time', 'title' => Lang::get('admin_messages.matches.match_time')],
+            // ['data' => 'match_time', 'name' => 'match_time', 'title' => Lang::get('admin_messages.matches.match_time')],
             ['data' => 'starting_at', 'name' => 'starting_at', 'title' => Lang::get('admin_messages.matches.starting_at')],
             ['data' => 'ending_at', 'name' => 'ending_at', 'title' => Lang::get('admin_messages.matches.ending_at')],
             ['data' => 'answer', 'name' => 'answer', 'title' => Lang::get('admin_messages.matches.answer')],

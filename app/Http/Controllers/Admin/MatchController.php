@@ -146,8 +146,10 @@ class MatchController extends Controller
 				}
 				if($points > 0) {
 					$user = $guess->user;
-					$user->score += $points;
-					$user->save();
+					if($user != '') {
+						$user->score += $points;
+						$user->save();
+					}
 				}
 				$guess->score = $points;
 				$guess->answer = 1;
