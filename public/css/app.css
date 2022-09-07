@@ -4331,8 +4331,7 @@ textarea.form-control-lg {
 
 .btn-primary {
   color: #fff;
-  background: linear-gradient(0deg,#c8163d,rgb(84 4 28 / 85%));
-  /*background-color: #008276;*/
+  background-color: #008276;
   border-color: #008276;
 }
 .btn-primary:hover {
@@ -12103,6 +12102,10 @@ footer,
   text-align: center;
 }
 
+.btn-primary {
+  background: linear-gradient(0deg, #c8163d, rgba(84, 4, 28, 0.85));
+}
+
 .btn-primary:disabled, .btn:disabled {
   opacity: 0.35 !important;
 }
@@ -12606,9 +12609,7 @@ section {
   transition: all 0.5s;
   z-index: 997;
   height: 90px;
-   background:linear-gradient(0deg,#c8163d,rgb(84 4 28 / 85%));
- /* background: linear-gradient(0deg,rgb(209 5 66 / 85%),rgb(84 4 28 / 85%));
-  background-color: #008276;*/
+  background: linear-gradient(0deg, #c8163d, rgba(84, 4, 28, 0.85));
 }
 
 .header.sticked {
@@ -14182,7 +14183,7 @@ section {
 .hero {
   width: 100%;
   position: relative;
-  background: url(../images/banner-3.jpg?dced5f03f9658502a17188cd55b6309d) bottom center no-repeat;
+  background: url(../images/banner_desktop.png?348da1f9ee8764824a990b47d6218d14) bottom center no-repeat;
   background-size: cover;
   position: relative;
   z-index: 2;
@@ -14193,7 +14194,7 @@ section {
   width: 100%;
   min-height: 100vh;
   position: relative;
-  background: url(../images/banner-2.jpg?a9d42bf37ea497330a99b7331dfc6c5b) bottom center no-repeat;
+  background: url(../images/banner_desktop.png?348da1f9ee8764824a990b47d6218d14) bottom center no-repeat;
   background-size: cover;
   position: relative;
   z-index: 2;
@@ -14883,8 +14884,7 @@ section {
 --------------------------------------------------------------*/
 .footer {
   font-size: 14px;
-  background: linear-gradient(0deg,#c8163d,rgb(84 4 28 / 85%));
-  /*background-color: #008276;*/
+  background: linear-gradient(0deg, #c8163d, rgba(84, 4, 28, 0.85));
   padding: 25px 0px;
   color: white;
 }
