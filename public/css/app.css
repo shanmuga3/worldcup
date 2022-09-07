@@ -14183,30 +14183,33 @@ section {
 .hero {
   width: 100%;
   position: relative;
-  background: url(../images/banner_desktop.png?348da1f9ee8764824a990b47d6218d14) bottom center no-repeat;
+  background: url(../images/banner_desktop.png?d966ba8afe9bd068460151b66d9ea21f) bottom center no-repeat;
   background-size: cover;
-  position: relative;
   z-index: 2;
   padding: 60px 0 0 0;
+  height: 45vh;
 }
 
 .hero-dashboard {
   width: 100%;
   min-height: 100vh;
   position: relative;
-  background: url(../images/banner_desktop.png?348da1f9ee8764824a990b47d6218d14) bottom center no-repeat;
+  background: url(../images/banner_desktop.png?d966ba8afe9bd068460151b66d9ea21f) bottom center no-repeat;
   background-size: cover;
-  position: relative;
   z-index: 2;
   padding: 60px 0 0 0;
 }
 
 @media (min-width: 1365px) {
-  .hero {
-    background-attachment: fixed;
-  }
   .hero-dashboard {
     background-attachment: fixed;
+  }
+}
+@media (max-width: 991px) {
+  .hero {
+    height: 35vh;
+    background: url(../images/banner_mobile.png?00458ea9a077f227251c41f2d825a460) bottom center no-repeat;
+    background-size: cover;
   }
 }
 .hero h2, .hero .h2 {

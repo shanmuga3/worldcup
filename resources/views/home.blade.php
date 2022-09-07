@@ -2,6 +2,7 @@
 @section('main')
 <main class="main-container" ng-controller="homeController">
 	<section id="hero" class="hero hero-home">
+		{{--
 		<div class="container position-relative">
 			<div class="row gy-5 " data-aos="fade-in">
 				<div class="col-lg-6 order-2 invisible order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
@@ -16,6 +17,7 @@
 				</div>
 			</div>
 		</div>
+		--}}
 		{{--
 		<div class="icon-boxes position-relative">
 			<div class="container position-relative">

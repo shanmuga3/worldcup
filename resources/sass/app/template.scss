@@ -2433,9 +2433,9 @@ section {
     position: relative;
     background: url(../../images/banner_desktop.png) bottom center no-repeat;
     background-size: cover;
-    position: relative;
     z-index: 2;
     padding: 60px 0 0 0;
+    height: 45vh;
 }
 
 .hero-dashboard {
@@ -2444,17 +2444,22 @@ section {
     position: relative;
     background: url(../../images/banner_desktop.png) bottom center no-repeat;
     background-size: cover;
-    position: relative;
     z-index: 2;
     padding: 60px 0 0 0;
 }
 
 @media (min-width: 1365px) {
-  .hero {
-    background-attachment: fixed;
-  }
+
   .hero-dashboard {
     background-attachment: fixed;
+  }
+}
+
+@media (max-width: 991px) {
+  .hero {
+    height: 35vh;
+    background: url(../../images/banner_mobile.png) bottom center no-repeat;
+    background-size: cover;
   }
 }
 
