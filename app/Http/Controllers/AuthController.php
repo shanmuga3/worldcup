@@ -39,7 +39,7 @@ class AuthController extends Controller
 
     public function createUser(Request $request)
     {
-        $password_rule = Password::min(8)->mixedCase()->numbers()->uncompromised();
+        $password_rule = Password::min(8);
         if(env('SHOW_CREDENTIALS') == true) {
             $password_rule = Password::min(8);
         }
@@ -51,7 +51,7 @@ class AuthController extends Controller
             'password' => ['required',$password_rule],
             'dob' => ['required'],
             'gender' => ['required'],
-            'phone_number' => ['required','unique:users','starts_with:05'],
+            'phone_number' => ['required','unique:users','starts_with:05','digits:10'],
             'profile_picture' => ['required'],
             'address' => ['required'],
             'city' => ['required'],

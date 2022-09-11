@@ -58,6 +58,7 @@
                                     <div class="mb-3">
                                         <label for="profile_picture" class="form-label"> @lang('messages.profile_picture') <em class="text-danger"> * </em> </label>
                                         <input type="file" name="profile_picture" class="form-control" id="profile_picture">
+                                        <span class="text-danger"> {{ $errors->first('profile_picture') }} </span>
                                     </div>
                                     <div class="form-group mt-2">
                                         <label class="form-label"> @lang('messages.address') <em class="text-danger"> * </em> </label>

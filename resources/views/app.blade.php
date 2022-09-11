@@ -49,6 +49,16 @@
                             @auth
                             <li><a href="{{ route('logout') }}"> @lang('messages.logout') </a></li>
                             @endauth
+                            <li class="ms-2 d-block d-md-none">
+                                <div class="mobile-language d-flex align-items-center text-white" type="button">
+                                    <i class="bi bi-globe {{ isRtl() ? 'ms-2' : 'me-2'}}"></i>
+                                    @foreach($translatable_languages as $key => $value)
+                                    @if(session('language') != $key)
+                                    <a class=" {{ session('language') == $key ? 'selected' : '' }}" href="#" ng-click="userLanguage='{{ $key }}';updateUserDefault('language');"> {{ $value }} </a>
+                                    @endif
+                                    @endforeach
+                                </div>
+                            </li>
                             <li class="my-account-dropdown d-none d-md-block">
                                <div class="dropdown">
                                   <a href="javascript:;" class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
