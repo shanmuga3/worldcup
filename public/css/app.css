@@ -15192,6 +15192,10 @@ section {
   opacity: 0.1;
 }
 
+#follow-button {
+  border-radius: 5px !important;
+}
+
 .main-container {
   min-height: 80vh;
 }

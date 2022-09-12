@@ -216,7 +216,8 @@ app.controller('homeController', ['$scope', '$http', function($scope, $http) {
                         setInterval(() => {
                             let result = $scope.makeTimer(id,dateStr);
                             if(result == 'reload') {
-                                $scope.getMatches();
+                                window.location.reload();
+                                // $scope.getMatches();
                             }
                         }, 1000);
                     });
@@ -277,7 +278,8 @@ app.controller('dashboardController', ['$scope', '$http', function($scope, $http
                         setInterval(() => {
                             let result = $scope.makeTimer(id,dateStr);
                             if(result == 'reload') {
-                                $scope.getMatches();
+                                window.location.reload();
+                                // $scope.getMatches();
                             }
                         }, 1000);
                     });

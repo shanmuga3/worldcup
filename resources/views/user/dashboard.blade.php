@@ -33,11 +33,8 @@
 								{{ $user->score }}
 							</h2>
 							<div class="share-score d-flex justify-content-center py-2 border-top">
-								@foreach($share_data as $media)
-									<a href="{{ $media['share_url'] }}" class="{{ $media['key'] }} me-2" target="_blank">
-	                                    <img src="{{ asset('images/email/logo_'.$media['key'].'.png') }}" alt="{{ ucfirst($media['key']) }}" height="40" width="40">
-	                                </a>
-								@endforeach
+								<iframe class="me-3" src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Findomieksa&width=60&layout=button&action=like&size=large&share=false&height=60&appId=632632744403634" width="60" height="65" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+								<a href="https://twitter.com/indomieksa?ref_src=twsrc%5Etfw" class="ms-3 twitter-follow-button" data-size="large" data-show-screen-name="false" data-show-count="false">Follow</a>
 							</div>
 							<h5 class="">
 								@lang('messages.number_of_guess'): <strong class="text-success"> {{ $user->total_predictions }} </strong>
@@ -190,3 +187,6 @@
 	</section>
 </main>
 @endsection
+@push('scripts')
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+@endpush

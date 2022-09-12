@@ -69,7 +69,6 @@ class HomeController extends Controller
         $summary="لقد جمعت ".$data['user']->score." نقطة حتى الان مازالت الفرصة متاحة لك ولأصدقائك لربح المزيد من الجوائز";
 
         $data['share_data'] = [
-            ['key' => 'facebook', 'share_url' => 'https://www.facebook.com/sharer.php?s=100&p[url]='.$url.'&p[images][0]='.$img.'&p[title]='.$title.'&p[summary]='.$summary],
             ['key' => 'twitter', 'share_url' => 'https://twitter.com/share?text='.$title.'&url='.$url],
         ];
         
