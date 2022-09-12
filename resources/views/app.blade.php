@@ -84,7 +84,6 @@
                 <div class="container">
                     <div class="row justify-content-end">
                         <div class="{{ isRtl() ? 'offset-md-4' : '' }} col-md-4 footer-links">
-                            <h4> {{ $site_name }} </h4>
                             <div class="d-flex align-items-bottom">
                                 <div class="img">
                                     <img src="{{ asset('images/sport_ball.png') }}" class="img" style="height: 50px;">
@@ -102,7 +101,7 @@
                             <div class="social-links d-flex mt-4">
                                 @foreach(resolve("SocialMediaLink")->where('value','!=','') as $media)
                                 <a href="{{ $media->value }}" class="{{ $media->name }}">
-                                    <img src="{{ asset('images/email/logo_'.$media->name.'.png') }}" alt="{{ ucfirst($media->name) }}" height="40" width="40">
+                                    <img src="{{ asset('images/email/logo_'.$media->name.'.png') }}" alt="{{ ucfirst($media->name) }}" height="30" width="30">
                                 </a>
                                 @endforeach
                             </div>
@@ -136,6 +135,8 @@
         <!-- Include JS files -->
         {!! Html::script('js/app.js?v='.$version) !!}
         {!! Html::script('js/common.js?v='.$version) !!}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.37/moment-timezone-with-data.js"></script>
         
         @if(Session::has('message'))
         <script type="text/javascript">

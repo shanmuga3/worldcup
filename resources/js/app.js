@@ -135,6 +135,12 @@ app.controller('myApp', ['$scope', '$http','$rootScope', function($scope, $http,
     };
 
     $scope.makeTimer = function(id,dateStr) {
+        let startTime = moment().tz('Asia/Qatar');
+        let endTime1 = moment(dateStr,"YYYY-MM-DD HH:mm:ss").tz('Asia/Qatar');
+        if(endTime1.diff(startTime) <= 0) {
+            return 'reload';
+        }
+
         let now = new Date();
         now = (Date.parse(now) / 1000);
 
@@ -208,7 +214,10 @@ app.controller('homeController', ['$scope', '$http', function($scope, $http) {
                         let id = $(this).data('id');
                         let dateStr = $(this).data('time');
                         setInterval(() => {
-                            $scope.makeTimer(id,dateStr);
+                            let result = $scope.makeTimer(id,dateStr);
+                            if(result == 'reload') {
+                                $scope.getMatches();
+                            }
                         }, 1000);
                     });
                 },500);
@@ -261,12 +270,15 @@ app.controller('dashboardController', ['$scope', '$http', function($scope, $http
                 $scope.active_matches = response_data.matches;
                 $scope.isActiveLoading = false;
 
-                setTimeout(() =>{
+                setTimeout(() => {
                     $('.match-timer').each(function(index,element) {
                         let id = $(this).data('id');
                         let dateStr = $(this).data('time');
                         setInterval(() => {
-                            $scope.makeTimer(id,dateStr);
+                            let result = $scope.makeTimer(id,dateStr);
+                            if(result == 'reload') {
+                                $scope.getMatches();
+                            }
                         }, 1000);
                     });
                 },500);

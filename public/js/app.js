@@ -43033,6 +43033,13 @@ app.controller('myApp', ['$scope', '$http', '$rootScope', function ($scope, $htt
   };
 
   $scope.makeTimer = function (id, dateStr) {
+    var startTime = moment().tz('Asia/Qatar');
+    var endTime1 = moment(dateStr, "YYYY-MM-DD HH:mm:ss").tz('Asia/Qatar');
+
+    if (endTime1.diff(startTime) <= 0) {
+      return 'reload';
+    }
+
     var now = new Date();
     now = Date.parse(now) / 1000;
     var endTime = new Date(dateStr);
@@ -43106,7 +43113,11 @@ app.controller('homeController', ['$scope', '$http', function ($scope, $http) {
             var id = $(this).data('id');
             var dateStr = $(this).data('time');
             setInterval(function () {
-              $scope.makeTimer(id, dateStr);
+              var result = $scope.makeTimer(id, dateStr);
+
+              if (result == 'reload') {
+                $scope.getMatches();
+              }
             }, 1000);
           });
         }, 500);
@@ -43159,7 +43170,11 @@ app.controller('dashboardController', ['$scope', '$http', function ($scope, $htt
             var id = $(this).data('id');
             var dateStr = $(this).data('time');
             setInterval(function () {
-              $scope.makeTimer(id, dateStr);
+              var result = $scope.makeTimer(id, dateStr);
+
+              if (result == 'reload') {
+                $scope.getMatches();
+              }
             }, 1000);
           });
         }, 500);

@@ -60,7 +60,7 @@ class MatchController extends Controller
 		$match->first_team_id = $request->first_team;
 		$match->second_team_id = $request->second_team;
 		$match->round = $request->round;
-		$match->match_time = $request->match_time;
+		// $match->match_time = $request->match_time;
 		$match->first_team_score = $request->first_team_score;
 		$match->second_team_score = $request->second_team_score;
 		$match->first_team_penalty = $request->first_team_penalty;
@@ -108,7 +108,7 @@ class MatchController extends Controller
 		$match->first_team_id = $request->first_team;
 		$match->second_team_id = $request->second_team;
 		$match->round = $request->round;
-		$match->match_time = $request->match_time;
+		// $match->match_time = $request->match_time;
 		$match->first_team_score = $request->first_team_score;
 		$match->second_team_score = $request->second_team_score;
 		$match->first_team_penalty = $request->first_team_penalty;
@@ -204,7 +204,7 @@ class MatchController extends Controller
 			'first_team' => 'required',
 			'second_team' => 'required',
 			'round' => 'required|min:1',
-			'match_time' => 'required',
+			// 'match_time' => 'required',
 			'starting_at' => 'required',
 			'ending_at' => 'required',
 			'answer' => 'required|in:0,1',

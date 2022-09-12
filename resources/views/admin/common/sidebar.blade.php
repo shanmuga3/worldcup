@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-bg-dark sidebar-color-primary shadow">
   <div class="brand-container">
-    <a href="route('admin.dashboard')" class="brand-link">
+    <a href="{{ route('home') }}" class="brand-link" target="_blank">
       <img src="{{ $site_logo }}" alt="{{ $site_name }}" class="brand-image opacity-80 shadow">
       <span class="brand-text fw-light"> {{ $site_name }} </span>
     </a>

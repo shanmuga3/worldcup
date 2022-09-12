@@ -18,11 +18,13 @@
 			{!! Form::select('round', ['1' => '1','2' => '2','3' => '3','4' => '4','5' => '5'], $result->round, ['class' => 'form-select', 'id' => 'round', 'placeholder' => Lang::get("admin_messages.common.select")]) !!}
 			<span class="text-danger">{{ $errors->first('round') }}</span>
 		</div>
+		{{--
 		<div class="form-group mb-2">
 			<label for="match_time"> @lang('admin_messages.matches.match_time') <em class="text-danger">*</em> </label>
 			{!! Form::text('match_time', $result->match_time, ['class' => 'form-control', 'id' => 'match_time', 'placeholder' => Lang::get("admin_messages.matches.match_time")]) !!}
 			<span class="text-danger">{{ $errors->first('match_time') }}</span>
 		</div>
+		--}}
 		<div class="form-group mb-2">
 			<label for="first_team_score"> @lang('admin_messages.matches.first_team_score') <em class="text-danger">*</em> </label>
 			{!! Form::text('first_team_score', $result->first_team_score, ['class' => 'form-control', 'id' => 'first_team_score', 'placeholder' => Lang::get("admin_messages.matches.first_team_score")]) !!}
