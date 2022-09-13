@@ -18,12 +18,13 @@ class MetaSeeder extends Seeder
 
 		$currentDateTime = date('Y-m-d H:i:s');
 		
-		$id = 1;
 		DB::table('metas')->insert([
-			['id' => $id++, 'route_name' => 'home','display_name' => '/', 'title' => '{SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
-			['id' => $id++, 'route_name' => 'login','display_name' => 'login', 'title' => 'Login - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
-			['id' => $id++, 'route_name' => 'register','display_name' => 'register', 'title' => 'Register - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
-			['id' => $id++, 'route_name' => 'dashboard','display_name' => 'dashboard', 'title' => 'Dashboard - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
+			['route_name' => 'home','display_name' => '/', 'title' => '{SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
+			['route_name' => 'login','display_name' => 'login', 'title' => 'Login - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
+			['route_name' => 'register','display_name' => 'register', 'title' => 'Register - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
+			['route_name' => 'reset_password','display_name' => 'reset_password', 'title' => 'Reset Password - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
+			['route_name' => 'dashboard','display_name' => 'dashboard', 'title' => 'Dashboard - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
+			['route_name' => 'previous_guesses','display_name' => 'previous_guesses', 'title' => 'Previous Guesses - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
 		]);
     }
 }

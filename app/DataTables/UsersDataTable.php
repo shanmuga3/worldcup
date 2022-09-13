@@ -99,6 +99,7 @@ class UsersDataTable extends DataTable
         if($this->type != 'ranking') {
             $cols[] = ['data' => 'city', 'name' => 'city', 'title' => Lang::get('messages.city')];
             $cols[] = ['data' => 'address', 'name' => 'address', 'title' => Lang::get('messages.address')];
+            $cols[] = ['data' => 'gender', 'name' => 'gender', 'title' => Lang::get('messages.gender')];
             $cols[] = ['data' => 'dob', 'name' => 'dob', 'title' => Lang::get('messages.dob')];
         }
 
