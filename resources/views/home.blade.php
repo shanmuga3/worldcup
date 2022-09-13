@@ -1,7 +1,8 @@
 @extends('app')
 @section('main')
 <main class="main-container" ng-controller="homeController">
-	<section id="hero" class="hero hero-home">
+	<section id="hero" class="hero hero-home pt-0">
+		<img src="{{ asset('images/banner_mobile.png') }}" class="d-none d-md-block w-100 img img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100">
 		{{--
 		<div class="container position-relative">
 			<div class="row gy-5 " data-aos="fade-in">

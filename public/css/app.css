@@ -14181,20 +14181,14 @@ section {
 # Hero Section
 --------------------------------------------------------------*/
 .hero {
-  width: 100%;
   position: relative;
-  background: url(../images/banner_desktop.png?d966ba8afe9bd068460151b66d9ea21f) bottom center no-repeat;
-  background-size: cover;
-  z-index: 2;
-  padding: 60px 0 0 0;
-  height: 45vh;
 }
 
 .hero-dashboard {
   width: 100%;
   min-height: 100vh;
   position: relative;
-  background: url(../images/banner_desktop.png?d966ba8afe9bd068460151b66d9ea21f) bottom center no-repeat;
+  background: url(../images/banner-2.jpg?a9d42bf37ea497330a99b7331dfc6c5b) bottom center no-repeat;
   background-size: cover;
   z-index: 2;
   padding: 60px 0 0 0;
@@ -14207,6 +14201,10 @@ section {
 }
 @media (max-width: 991px) {
   .hero {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    padding: 60px 0 0 0;
     height: 35vh;
     background: url(../images/banner_mobile.png?00458ea9a077f227251c41f2d825a460) bottom center no-repeat;
     background-size: cover;

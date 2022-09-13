@@ -13,6 +13,7 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
+
 body {
     background: $body-bg;
     font-family: $font-family;
@@ -2429,20 +2430,14 @@ section {
 # Hero Section
 --------------------------------------------------------------*/
 .hero {
-    width: 100%;
     position: relative;
-    background: url(../../images/banner_desktop.png) bottom center no-repeat;
-    background-size: cover;
-    z-index: 2;
-    padding: 60px 0 0 0;
-    height: 45vh;
 }
 
 .hero-dashboard {
     width: 100%;
     min-height: 100vh;
     position: relative;
-    background: url(../../images/banner_desktop.png) bottom center no-repeat;
+    background: url(../../images/banner-2.jpg) bottom center no-repeat;
     background-size: cover;
     z-index: 2;
     padding: 60px 0 0 0;
@@ -2457,6 +2452,10 @@ section {
 
 @media (max-width: 991px) {
   .hero {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    padding: 60px 0 0 0;
     height: 35vh;
     background: url(../../images/banner_mobile.png) bottom center no-repeat;
     background-size: cover;

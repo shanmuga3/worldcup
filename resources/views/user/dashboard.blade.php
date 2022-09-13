@@ -49,6 +49,8 @@
 									<li> <p class="mb-2"> @lang('messages.point_desc_2') </p> </li>
 									<li> <p class="mb-2"> @lang('messages.point_desc_3') </p> </li>
 									<li> <p class="mb-2"> @lang('messages.point_desc_4') </p> </li>
+									<li> <p class="mb-2"> @lang('messages.point_desc_5') </p> </li>
+									<li> <p class="mb-2"> @lang('messages.point_desc_6') </p> </li>
 								  </ul>
 								</div>
 							</div>

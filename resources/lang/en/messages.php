@@ -51,6 +51,8 @@ return [
 	"point_desc_2" => "10 points when registering a mobile number",
 	"point_desc_3" => "10 points when registering the date of birth",
 	"point_desc_4" => "10 points when registering the city",
+	"point_desc_5" => "10 points when follow us on Facebook",
+	"point_desc_6" => "10 points when follow us on Twitter",
 	"featured_matches" => "Featured Matches",
 	"upcoming_matches" => "Upcoming Matches",
 	"today_matches" => "Today Matches",
