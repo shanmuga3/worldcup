@@ -197,6 +197,8 @@ Route::post('get-matches',[HomeController::class,'getMatches'])->name('get_match
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard',[HomeController::class,'dashboard'])->name('dashboard');
+    Route::get('edit_profile',[HomeController::class,'editProfile'])->name('edit_profile');
+    Route::post('update_profile',[HomeController::class,'updateProfile'])->name('update_profile');
     Route::post('predict-match',[HomeController::class,'predictMatch'])->name('predict_match');
     Route::get('previous-guesses',[HomeController::class,'previousGuesses'])->name('previous_guesses');
     Route::post('update-favourite-team', [HomeController::class,'updatefavTeam'])->name('update_favourite_team');

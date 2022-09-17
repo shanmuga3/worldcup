@@ -39,7 +39,7 @@ class AuthController extends Controller
 
     public function createUser(Request $request)
     {
-        $password_rule = Password::min(8);
+        $password_rule = Password::min(8)->mixedCase()->numbers()->uncompromised();
         if(env('SHOW_CREDENTIALS') == true) {
             $password_rule = Password::min(8);
         }
@@ -48,11 +48,10 @@ class AuthController extends Controller
             'first_name' => ['required','max:30'],
             'last_name' => ['required','max:30'],
             'email' => ['required','max:50','email','unique:users'],
-            'password' => ['required',$password_rule],
+            'password' => ['required','confirmed',$password_rule],
             'dob' => ['required'],
             'gender' => ['required'],
             'phone_number' => ['required','unique:users','starts_with:05','digits:10'],
-            'profile_picture' => ['required'],
             'address' => ['required'],
             'city' => ['required'],
         );
@@ -81,7 +80,7 @@ class AuthController extends Controller
         $user->dob = $request->dob;
         $user->gender = $request->gender;
         $user->phone_code = '05';
-        $user->phone_number = ltrim($request->phone_number,'05');
+        $user->phone_number = substr($request->phone_number,2);
         $user->address = $request->address ?? '';
         $user->city = $request->city;
         $user->status = 'active';

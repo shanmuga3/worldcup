@@ -42891,6 +42891,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+document.addEventListener('DOMContentLoaded', function () {
+  // Init ToolTips
+  setTimeout(function () {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+  }, 1000);
+});
 var app = angular.module('App', ['ngSanitize']);
 app.controller('myApp', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
   $scope.isLoading = false;

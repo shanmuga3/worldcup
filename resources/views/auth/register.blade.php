@@ -29,12 +29,26 @@
                                         <span class="text-danger"> {{ $errors->first('email') }} </span>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label"> @lang('messages.password') <em class="text-danger"> * </em> </label>
+                                        <label class="form-label">
+                                            @lang('messages.password')
+                                            <span class="cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="@lang('messages.password_rule')">
+                                                <i class="fa-solid fa-circle-info"></i>
+                                            </span>
+                                            <em class="text-danger"> * </em>
+                                        </label>
                                         <div class="input-group mt-2 password-with-toggler">
                                             <input type="password" name="password" class="password form-control" placeholder="@lang('messages.password')">
                                             <span class="input-group-text"><i class="bi bi-eye-slash cursor-pointer toggle-password active" area-hidden="true"></i></span>
                                         </div>
                                         <span class="text-danger"> {{ $errors->first('password') }} </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label"> @lang('messages.password_confirmation') <em class="text-danger"> * </em> </label>
+                                        <div class="input-group mt-2 password-with-toggler">
+                                            <input type="password" name="password_confirmation" class="password form-control" placeholder="@lang('messages.password')">
+                                            <span class="input-group-text"><i class="bi bi-eye-slash cursor-pointer toggle-password active" area-hidden="true"></i></span>
+                                        </div>
+                                        <span class="text-danger"> {{ $errors->first('password_confirmation') }} </span>
                                     </div>
                                     <div class="form-group mt-2">
                                         <label class="form-label"> @lang('messages.gender') <em class="text-danger"> * </em> </label>
@@ -56,7 +70,7 @@
                                         <span class="text-danger"> {{ $errors->first('phone_number') }} </span>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="profile_picture" class="form-label"> @lang('messages.profile_picture') <em class="text-danger"> * </em> </label>
+                                        <label for="profile_picture" class="form-label"> @lang('messages.profile_picture') </label>
                                         <input type="file" name="profile_picture" class="form-control" id="profile_picture">
                                         <span class="text-danger"> {{ $errors->first('profile_picture') }} </span>
                                     </div>

@@ -69,7 +69,7 @@
                                 	<p class="h5 text-danger fw-bold"> 0 @lang('messages.points') </p>
                                 	@endif
                                 	@else
-                                	<p class="h5"> @lang('messages.pending') </p>
+                                	<p class="h5"> @lang('messages.score_pending') </p>
                                 	@endif
                                 </div>
                             </div>

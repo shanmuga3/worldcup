@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TeamMatch;
 use App\Models\Guess;
+use Illuminate\Validation\Rules\Password;
 use Validator;
 use Lang;
 use Auth;
@@ -62,17 +63,107 @@ class HomeController extends Controller
     public function dashboard(Request $request)
     {
         $data['user'] = Auth::user();
-
-        $url = urlencode("https://www.facebook.com/indomieksa/");
-        $img = urlencode("http://worldcup.indomie.com.sa/images/share.jpg");
-        $title = urlencode("#إندومي_توقع_وربح");
-        $summary="لقد جمعت ".$data['user']->score." نقطة حتى الان مازالت الفرصة متاحة لك ولأصدقائك لربح المزيد من الجوائز";
-
-        $data['share_data'] = [
-            ['key' => 'twitter', 'share_url' => 'https://twitter.com/share?text='.$title.'&url='.$url],
-        ];
         
         return view('user.dashboard',$data);
+    }
+
+    /**
+     * Display User Dashboard
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function editProfile(Request $request)
+    {
+        $data['user'] = Auth::user();
+        
+        return view('user.profile',$data);
+    }
+
+    /**
+     * Display User Dashboard
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateProfile(Request $request)
+    {
+        $password_rule = Password::min(8)->mixedCase()->numbers()->uncompromised();
+        if(env('SHOW_CREDENTIALS') == true) {
+            $password_rule = Password::min(8);
+        }
+
+        $rules = array(
+            'first_name' => ['required','max:30'],
+            'last_name' => ['required','max:30'],
+            'email' => ['required','max:50','email','unique:users,email,'.Auth::id()],
+            'password' => ['nullable',$password_rule],
+            'dob' => ['required'],
+            'gender' => ['required'],
+            'phone_number' => ['required','unique:users','starts_with:05','digits:10'],
+            'address' => ['required'],
+            'city' => ['required'],
+        );
+
+        $attributes = array(
+            'first_name' => Lang::get('messages.first_name'),
+            'last_name' => Lang::get('messages.last_name'),
+            'email' => Lang::get('messages.email'),
+            'password' => Lang::get('messages.password'),
+            'dob' => Lang::get('messages.dob'),
+            'phone_number' => Lang::get('messages.phone_number'),
+            'address' => Lang::get('messages.address'),
+            'city' => Lang::get('messages.city'),
+        );
+        $validator = Validator::make($request->all(), $rules, [], $attributes);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $user = Auth::user();
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        if($request->password != '') {
+            $user->password = $request->password;
+        }
+
+        $user->dob = $request->dob;
+        $user->gender = $request->gender;
+        $user->phone_code = '05';
+        $user->phone_number = substr($request->phone_number,2);
+        $user->address = $request->address ?? '';
+        $user->city = $request->city;
+        $user->status = 'active';
+
+        try {
+            $user->save();
+        }
+        catch(\Exception $e) {
+            flashMessage('danger', Lang::get('messages.failed'), Lang::get('messages.failed_to_update_profile'));
+            return back()->withInput();
+        }
+
+        if($request->file('profile_picture')) {
+            $image_handler = resolve('App\Services\ImageHandlers\LocalImageHandler');
+            $image_data['name_prefix'] = 'user_'.$user->id;
+            $image_data['add_time'] = false;
+            $image_data['target_dir'] = $user->getUploadPath();
+            $image_data['image_size'] = $user->getImageSize();
+
+            $upload_result = $image_handler->upload($request->file('profile_picture'),$image_data);
+            
+            if($upload_result['status']) {
+                $user->src = $upload_result['file_name'];
+                $user->photo_source = 'site';
+                $user->upload_driver = $upload_result['upload_driver'];
+                $user->save();
+            }
+        }
+        
+        flashMessage('success', Lang::get('messages.success'), Lang::get('messages.updated_successfully'));
+        return back()->withInput();
     }
 
     /**

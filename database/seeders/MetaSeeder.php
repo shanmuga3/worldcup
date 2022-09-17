@@ -24,6 +24,7 @@ class MetaSeeder extends Seeder
 			['route_name' => 'register','display_name' => 'register', 'title' => 'Register - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
 			['route_name' => 'reset_password','display_name' => 'reset_password', 'title' => 'Reset Password - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
 			['route_name' => 'dashboard','display_name' => 'dashboard', 'title' => 'Dashboard - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
+			['route_name' => 'edit_profile','display_name' => 'edit_profile', 'title' => 'Edit Profile - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
 			['route_name' => 'previous_guesses','display_name' => 'previous_guesses', 'title' => 'Previous Guesses - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
 		]);
     }

@@ -2,6 +2,16 @@
 
 require('./bootstrap');
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Init ToolTips
+    setTimeout( () => {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    },1000);
+});
+
 const app = angular.module('App', ['ngSanitize']);
 
 app.controller('myApp', ['$scope', '$http','$rootScope', function($scope, $http,$rootScope) {
