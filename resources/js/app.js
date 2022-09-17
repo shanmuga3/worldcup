@@ -145,11 +145,11 @@ app.controller('myApp', ['$scope', '$http','$rootScope', function($scope, $http,
     };
 
     $scope.makeTimer = function(id,dateStr) {
-        let startTime = moment().tz('Asia/Qatar');
+        /*let startTime = moment().tz('Asia/Qatar');
         let endTime1 = moment(dateStr,"YYYY-MM-DD HH:mm:ss").tz('Asia/Qatar');
         if(endTime1.diff(startTime) <= 0) {
             return 'reload';
-        }
+        }*/
 
         let now = new Date();
         now = (Date.parse(now) / 1000);

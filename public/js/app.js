@@ -43042,13 +43042,11 @@ app.controller('myApp', ['$scope', '$http', '$rootScope', function ($scope, $htt
   };
 
   $scope.makeTimer = function (id, dateStr) {
-    var startTime = moment().tz('Asia/Qatar');
-    var endTime1 = moment(dateStr, "YYYY-MM-DD HH:mm:ss").tz('Asia/Qatar');
-
-    if (endTime1.diff(startTime) <= 0) {
-      return 'reload';
-    }
-
+    /*let startTime = moment().tz('Asia/Qatar');
+    let endTime1 = moment(dateStr,"YYYY-MM-DD HH:mm:ss").tz('Asia/Qatar');
+    if(endTime1.diff(startTime) <= 0) {
+        return 'reload';
+    }*/
     var now = new Date();
     now = Date.parse(now) / 1000;
     var endTime = new Date(dateStr);
