@@ -57,6 +57,7 @@ return [
 	"upcoming_matches" => "Upcoming Matches",
 	"today_matches" => "Today Matches",
 	"predict_now" => "Predict Now",
+	"update_prediction" => "Update Your Prediction",
 	"success" => "Success",
 	"failed" => "Failed",
 	"no_upcoming_matches" => "No Upcoming Matches",
@@ -101,4 +102,7 @@ return [
 	"edit_profile" => "Edit Profile",
 	"updated_successfully" => "Profile has been updated Successfully",
 	"password_rule" => "The Password must contain at least one uppercase, one lowercase letter and one special character",
+	"edit" => "Edit",
+	"close" => "Close",
+	"save_changes" => "Save changes",
 ];

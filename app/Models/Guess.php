@@ -25,4 +25,9 @@ class Guess extends Model
     {
         return $this->belongsTo(TeamMatch::class);
     }
+
+    public function canEditScore()
+    {
+        return $this->match->ending_at > date('Y-m-d H:i:s');
+    }
 }

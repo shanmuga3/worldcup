@@ -249,10 +249,39 @@ class HomeController extends Controller
         $user_id = Auth::id();
         $prev_count = Guess::where('user_id',$user_id)->where('match_id',$request->match_id)->count();
         if($prev_count > 0) {
+            if($request->type != 'update') {
+                return response()->json([
+                    'status' => false,
+                    'status_title' => Lang::get('messages.failed'),
+                    'status_message' => Lang::get('messages.your_prediction_already_submitted'),
+                ]);
+            }
+
+            $user_guess = Guess::where('user_id',$user_id)->find($request->guess_id);
+            if($user_guess == '' || @!$user_guess->canEditScore()) {
+                return response()->json([
+                    'status' => false,
+                    'status_title' => Lang::get('messages.failed'),
+                    'status_message' => Lang::get('messages.your_prediction_already_submitted'),
+                ]);
+            }
+
+            $user_guess->user_id = $user_id;
+            $user_guess->match_id = $match->id;
+            $user_guess->first_team_score = $request->first_team_score;
+            $user_guess->second_team_score = $request->second_team_score;
+            $user_guess->first_team_penalty = $user_guess->second_team_penalty = NULL;
+            if($request->first_team_score != '' && $request->first_team_score == $request->second_team_score) {
+                $user_guess->first_team_penalty = $request->first_team_penalty;
+                $user_guess->second_team_penalty = $request->second_team_penalty;
+            }
+            $user_guess->round = $match->round;
+            $user_guess->save();
+
             return response()->json([
-                'status' => false,
-                'status_title' => Lang::get('messages.failed'),
-                'status_message' => Lang::get('messages.your_prediction_already_submitted'),
+                'status' => true,
+                'status_title' => Lang::get('messages.success'),
+                'status_message' => Lang::get('messages.prediction_has_been_submitted'),
             ]);
         }
 

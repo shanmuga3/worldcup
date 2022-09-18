@@ -43273,6 +43273,73 @@ app.controller('dashboardController', ['$scope', '$http', function ($scope, $htt
     $scope.makePostRequest(url, data_params, callback_function);
   };
 }]);
+app.controller('previousGuessController', ['$scope', '$http', function ($scope, $http) {
+  $scope.isLoading = false;
+  $scope.active_match = {};
+  $scope.prediction_form = {
+    first_team_score: '',
+    second_team_score: '',
+    first_team_penalty: '',
+    second_team_penalty: ''
+  };
+
+  $scope.openUpdateForm = function (active_match) {
+    $scope.active_match = active_match;
+    $scope.prediction_form = {
+      first_team_score: $scope.active_match.first_team_score,
+      second_team_score: $scope.active_match.second_team_score,
+      first_team_penalty: $scope.active_match.first_team_penalty,
+      second_team_penalty: $scope.active_match.second_team_penalty
+    };
+    openModal('updatePredictionModal');
+  };
+
+  $scope.savePrediction = function () {
+    $scope.active_match = active_match;
+    openModal('updatePredictionModal');
+  };
+
+  $scope.updatePrediction = function () {
+    var url = routeList.predict_match;
+    var data_params = $scope.prediction_form;
+    data_params['match_id'] = $scope.active_match.match_id;
+    data_params['guess_id'] = $scope.active_match.id;
+    data_params['type'] = 'update';
+    $scope.isLoading = true;
+
+    var callback_function = function callback_function(response_data) {
+      $scope.isLoading = false;
+
+      if (response_data.error) {
+        $scope.error_messages = response_data.error_messages;
+        return false;
+      }
+
+      $scope.error_messages = {};
+      closeModal('updatePredictionModal');
+
+      if (!response_data.status) {
+        var _content2 = {
+          title: response_data.status_title,
+          message: response_data.status_message
+        };
+        flashMessage(_content2, "danger");
+        return false;
+      }
+
+      var content = {
+        title: response_data.status_title,
+        message: response_data.status_message
+      };
+      flashMessage(content, "success");
+      setTimeout(function () {
+        window.location.reload();
+      }, 500);
+    };
+
+    $scope.makePostRequest(url, data_params, callback_function);
+  };
+}]);
 
 /***/ }),
 

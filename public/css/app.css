@@ -15202,6 +15202,9 @@ section {
   .part-logo {
     display: block !important;
   }
+  .btn-edit-score {
+    float: right;
+  }
 }
 #follow-button {
   border-radius: 5px !important;
