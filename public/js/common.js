@@ -58,6 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     },2000);
 
+    $(document).on('mouseover','.social-icon', function() {
+        let icon = $(this).data('icon');
+        $( this ).attr("src",APP_URL+"/images/social_media_icons/icon_"+icon+"_dark.png");
+    });
+
+    $(document).on('mouseout','.social-icon', function() {
+        let icon = $(this).data('icon');
+        $( this ).attr("src",APP_URL+"/images/social_media_icons/icon_"+icon+".png");
+    });
+
     $(document).on('keydown keyup change','.phone_number',function(event) {
         let value = $(this).val();
         if(value.length > 10) {

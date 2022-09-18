@@ -83,14 +83,14 @@
             @yield('main')
             <footer id="footer" class="footer">
                 <div class="container">
-                    <div class="row justify-content-end">
+                    <div class="row justify-content-end align-items-center">
                         <div class="{{ isRtl() ? 'offset-md-4' : '' }} col-md-4 footer-links">
                             <div class="d-flex align-items-bottom">
                                 <div class="img">
                                     <img src="{{ asset('images/sport_ball.png') }}" class="img" style="height: 50px;">
                                 </div>
                                 <div class="info {{ isRtl() ? 'me-3' : 'ms-3' }}">
-                                    <a href="{{ global_settings('copyright_link') }}" class="text-white"> {{ global_settings('copyright_link') }} </a>
+                                    <a href="{{ global_settings('copyright_link') }}" class=""> {{ global_settings('copyright_link') }} </a>
                                     <h5> {{ global_settings('copyright_text') }} </h5>
                                 </div>
                             </div>
@@ -102,13 +102,13 @@
                             <div class="social-links d-flex mt-4">
                                 @foreach(resolve("SocialMediaLink")->where('value','!=','') as $media)
                                 <a href="{{ $media->value }}" class="{{ $media->name }}">
-                                    <img src="{{ asset('images/email/logo_'.$media->name.'.png') }}" alt="{{ ucfirst($media->name) }}" height="30" width="30">
+                                    <img src="{{ asset('images/social_media_icons/icon_'.$media->name.'.png') }}" class="img social-icon" data-icon="{{ $media->name }}" alt="{{ ucfirst($media->name) }}" height="30" width="30">
                                 </a>
                                 @endforeach
                             </div>
-                            <div class="static-links d-flex mt-4">
+                            <div class="static-links d-flex mb-2 mt-2">
                                 @foreach(resolve("StaticPage")->where('in_footer','1') as $page)
-                                    <a href="{{ $page->url }}" class="text-white me-3"> {{ $page->name }} </a>
+                                    <a href="{{ $page->url }}" class="me-3"> {{ $page->name }} </a>
                                 @endforeach
                             </div>
                         </div>

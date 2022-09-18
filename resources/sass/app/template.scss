@@ -2443,6 +2443,14 @@ section {
     padding: 60px 0 0 0;
 }
 
+.bg-image-red {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: url(../../images/register-bg.png) bottom center no-repeat;
+    background-size: cover;
+}
+
 @media (min-width: 1365px) {
 
   .hero-dashboard {
@@ -2457,7 +2465,7 @@ section {
     z-index: 2;
     padding: 60px 0 0 0;
     height: 35vh;
-    background: url(../../images/banner_mobile.png) bottom center no-repeat;
+    background: url(../../images/banner_desktop.png) bottom center no-repeat;
     background-size: cover;
   }
 }
@@ -3140,9 +3148,9 @@ section {
 --------------------------------------------------------------*/
 .footer {
   font-size: 14px;
-  background: linear-gradient(0deg,#c8163d,rgb(84 4 28 / 85%));
-  padding: 25px 0px;
-  color: white;
+  // background: linear-gradient(0deg,#c8163d,rgb(84 4 28 / 85%));
+  // padding: 25px 0px;
+  // color: white;
 }
 
 .footer .footer-info .logo {
@@ -3189,7 +3197,7 @@ section {
 }
 
 .footer .footer-links {
-  margin-bottom: 30px;
+  // margin-bottom: 30px;
 }
 
 .footer .footer-links ul {

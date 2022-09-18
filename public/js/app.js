@@ -43096,6 +43096,10 @@ app.controller('homeController', ['$scope', '$http', function ($scope, $http) {
   $(document).ready(function () {
     $scope.getMatches('upcoming');
     $scope.getMatches('active');
+
+    if ($(window).width() <= 991) {
+      $('.hero-banner').attr('src', $('.hero-banner').data('mobile-src'));
+    }
   });
 
   $scope.getMatches = function (type) {

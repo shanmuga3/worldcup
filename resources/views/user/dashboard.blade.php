@@ -40,6 +40,10 @@
 								@lang('messages.number_of_guess'): <strong class="text-success"> {{ $user->total_predictions }} </strong>
 							</h5>
 							<div class="help border-top">
+								<a href="javascript:;" role="button" data-bs-toggle="modal" data-bs-target="#earnPointsModal">
+								  <h4 class="dropdown-toggle"> @lang('messages.how_earn_points') </h4>
+								<a>
+								{{--
 								<div class="dropdown">
 								  <a class="" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
 									<h4 class="dropdown-toggle"> @lang('messages.how_earn_points') </h4>
@@ -53,6 +57,7 @@
 									<li> <p class="mb-2"> @lang('messages.point_desc_6') </p> </li>
 								  </ul>
 								</div>
+								--}}
 							</div>
 							<div class="favourite-team mt-2 border-top">
 								<h4 class="mb-3"> @lang('messages.favourite_team') </h4>
@@ -193,6 +198,30 @@
 			</div>
 		</div>
 	</section>
+	<div class="modal fade" id="earnPointsModal" tabindex="-1" aria-labelledby="earnPointsLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="earnPointsLabel">@lang('messages.how_earn_points')</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <ul class="list-group px-3">
+				<li class="list-group-item"> <p class="mb-2"> @lang('messages.point_desc_1') </p> </li>
+				<li class="list-group-item"> <p class="mb-2"> @lang('messages.point_desc_2') </p> </li>
+				<li class="list-group-item"> <p class="mb-2"> @lang('messages.point_desc_3') </p> </li>
+				<li class="list-group-item"> <p class="mb-2"> @lang('messages.point_desc_4') </p> </li>
+				<li class="list-group-item"> <p class="mb-2"> @lang('messages.point_desc_5') </p> </li>
+				<li class="list-group-item"> <p class="mb-2"> @lang('messages.point_desc_6') </p> </li>
+			  </ul>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> @lang('messages.close') </button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
 </main>
 @endsection
 @push('scripts')

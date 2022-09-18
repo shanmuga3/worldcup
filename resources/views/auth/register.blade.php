@@ -1,7 +1,7 @@
 @extends('app')
 @section('main')
 <main class="main-container" ng-controller="authController">
-    <section class="pt-5 pb-5">
+    <section class="pt-5 pb-5 bg-image-red">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 m-auto">
