@@ -15,17 +15,17 @@
 								<div class="form__content">
 									<div class="form-group mt-2">
 										<label class="form-label"> @lang('messages.first_name') <em class="text-danger"> * </em> </label>
-										{!! Form::text('first_name',$user->first_name,['placeholder' => trans('messages.first_name'),'class' =>'form-control'])!!}
+										{!! Form::text('first_name',$user->first_name,['placeholder' => trans('messages.first_name'),'class' =>'form-control','readonly' => true])!!}
 										<span class="text-danger"> {{ $errors->first('first_name') }} </span>
 									</div>
 									<div class="form-group mt-2">
 										<label class="form-label"> @lang('messages.last_name') <em class="text-danger"> * </em> </label>
-										{!! Form::text('last_name',$user->last_name,['placeholder' => trans('messages.last_name'),'class' =>'form-control'])!!}
+										{!! Form::text('last_name',$user->last_name,['placeholder' => trans('messages.last_name'),'class' =>'form-control','readonly' => true])!!}
 										<span class="text-danger"> {{ $errors->first('last_name') }} </span>
 									</div>
 									<div class="form-group mt-2">
 										<label class="form-label"> @lang('messages.email') <em class="text-danger"> * </em> </label>
-										{!! Form::text('email',$user->email,['placeholder' => trans('messages.email'),'class' =>'form-control'])!!}
+										{!! Form::text('email',$user->email,['placeholder' => trans('messages.email'),'class' =>'form-control','readonly' => true])!!}
 										<span class="text-danger"> {{ $errors->first('email') }} </span>
 									</div>
 									<div class="form-group">
@@ -58,7 +58,7 @@
 									<span class="text-danger"> {{ $errors->first('dob') }} </span>
 									<div class="form-group mt-2">
 										<label class="form-label"> @lang('messages.phone_number') <em class="text-danger"> * </em> </label>
-										{!! Form::text('phone_number',$user->phone_code.$user->phone_number,['placeholder' => '05xxxxxxxxxx','class' =>'form-control phone_number','maxlength' => 10])!!}
+										{!! Form::text('phone_number',$user->phone_code.$user->phone_number,['placeholder' => '05xxxxxxxxxx','class' =>'form-control phone_number','maxlength' => 10,'readonly' => true])!!}
 										<span class="text-danger"> {{ $errors->first('phone_number') }} </span>
 									</div>
 									<div class="mb-3">
@@ -106,3 +106,16 @@
 	</section>
 </main>
 @endsection
+@push('scripts')
+<script type="text/javascript">
+	$(document).ready(function() {
+        flatpickr('#dob', {
+            maxDate: 'today',
+            altInput: true,
+            disableMobile: true,
+            altFormat: flatpickrFormat,
+            dateFormat: "Y-m-d",
+        });
+    });
+</script>
+@endpush
