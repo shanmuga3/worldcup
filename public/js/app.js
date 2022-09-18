@@ -43042,20 +43042,23 @@ app.controller('myApp', ['$scope', '$http', '$rootScope', function ($scope, $htt
   };
 
   $scope.makeTimer = function (id, dateStr) {
-    /*let startTime = moment().tz('Asia/Qatar');
-    let endTime1 = moment(dateStr,"YYYY-MM-DD HH:mm:ss").tz('Asia/Qatar');
-    if(endTime1.diff(startTime) <= 0) {
-        return 'reload';
-    }*/
+    var startTime = moment().tz('Asia/Qatar');
+    var endTime = moment(dateStr, "YYYY-MM-DD HH:mm:ss").tz('Asia/Qatar');
+
+    if (endTime.diff(startTime) <= 0) {
+      return 'reload';
+    }
+
+    endTime = Date.parse(endTime) / 1000;
     var now = new Date();
     now = Date.parse(now) / 1000;
-    var endTime = new Date(dateStr);
-    endTime = Date.parse(endTime) / 1000;
-    var timeLeft = endTime - now;
-    var days = Math.floor(timeLeft / 86400);
-    var hours = Math.floor((timeLeft - days * 86400) / 3600);
-    var minutes = Math.floor((timeLeft - days * 86400 - hours * 3600) / 60);
-    var seconds = Math.floor(timeLeft - days * 86400 - hours * 3600 - minutes * 60);
+    var diffTime = endTime - now;
+    var duration = moment.duration(diffTime * 1000, 'milliseconds');
+    duration = moment.duration(duration - 1000, 'milliseconds');
+    var days = duration.days();
+    var hours = duration.hours();
+    var minutes = duration.minutes();
+    var seconds = duration.seconds();
 
     if (hours < "10") {
       hours = "0" + hours;

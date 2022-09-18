@@ -19,30 +19,30 @@ app.controller('myApp', ['$scope', '$http','$rootScope', function($scope, $http,
     $scope.userLanguage = 'en';
 
     $(document).ready(function() {
-    	setTimeout( () => {
-    		$scope.initRichTextEditor('.rich-text-editor');
-    	},500);
+        setTimeout( () => {
+            $scope.initRichTextEditor('.rich-text-editor');
+        },500);
 
         $scope.initDefaultValues();
 
-    	let deleteModalEl = document.getElementById('confirmDeleteModal');
-	    if(deleteModalEl !== null) {
-			let deleteModel = bootstrap.Modal.getOrCreateInstance(deleteModalEl);
-	    	$(document).on('click', '.confirm-delete', function() {
-				let url = $(this).attr('data-href');
-				$('.confirm-delete-action').attr('href',url);
-				deleteModel.show();
-			});
+        let deleteModalEl = document.getElementById('confirmDeleteModal');
+        if(deleteModalEl !== null) {
+            let deleteModel = bootstrap.Modal.getOrCreateInstance(deleteModalEl);
+            $(document).on('click', '.confirm-delete', function() {
+                let url = $(this).attr('data-href');
+                $('.confirm-delete-action').attr('href',url);
+                deleteModel.show();
+            });
 
-	        deleteModalEl.addEventListener('hidden.bs.modal', function(event) {
-	            $('.confirm-delete-action').attr('href','#');
-	        });
-	    }
+            deleteModalEl.addEventListener('hidden.bs.modal', function(event) {
+                $('.confirm-delete-action').attr('href','#');
+            });
+        }
 
-	    $(document).on('change','.select-with-dropdown .dropdown-field',function() {
-			let value = $(this).find('option:selected').data('display_value');
-			$(this).parent('.select-with-dropdown').find('.select-value').text(value);
-		});
+        $(document).on('change','.select-with-dropdown .dropdown-field',function() {
+            let value = $(this).find('option:selected').data('display_value');
+            $(this).parent('.select-with-dropdown').find('.select-value').text(value);
+        });
     });
 
     $scope.initDefaultValues = function() {
@@ -145,25 +145,25 @@ app.controller('myApp', ['$scope', '$http','$rootScope', function($scope, $http,
     };
 
     $scope.makeTimer = function(id,dateStr) {
-        /*let startTime = moment().tz('Asia/Qatar');
-        let endTime1 = moment(dateStr,"YYYY-MM-DD HH:mm:ss").tz('Asia/Qatar');
-        if(endTime1.diff(startTime) <= 0) {
+        let startTime = moment().tz('Asia/Qatar');
+        let endTime = moment(dateStr,"YYYY-MM-DD HH:mm:ss").tz('Asia/Qatar');
+        if(endTime.diff(startTime) <= 0) {
             return 'reload';
-        }*/
+        }
 
+        endTime = (Date.parse(endTime) / 1000);
         let now = new Date();
         now = (Date.parse(now) / 1000);
-
-        let endTime = new Date(dateStr);
-        endTime = (Date.parse(endTime) / 1000);
-
-        let timeLeft = endTime - now;
-
-        let days = Math.floor(timeLeft / 86400); 
-        let hours = Math.floor((timeLeft - (days * 86400)) / 3600);
-        let minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
-        let seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
-
+        var diffTime = endTime - now;
+        
+        var duration = moment.duration(diffTime*1000, 'milliseconds');
+        duration = moment.duration(duration - 1000, 'milliseconds');
+        
+        let days = duration.days();
+        let hours = duration.hours();
+        let minutes = duration.minutes();
+        let seconds = duration.seconds();
+        
         if (hours < "10") { hours = "0" + hours; }
         if (minutes < "10") { minutes = "0" + minutes; }
         if (seconds < "10") { seconds = "0" + seconds; }
