@@ -15097,6 +15097,9 @@ section {
   padding: 0;
 }
 
+.upcoming-match-wrapper .upcoming-matches-list .match-item {
+  box-shadow: 0 0 8px 6px rgba(0, 0, 0, 0.04);
+}
 .upcoming-match-wrapper .upcoming-matches-list .upcoming-match {
   display: flex;
   flex-direction: row;
@@ -15105,7 +15108,6 @@ section {
   text-align: center;
   overflow: hidden;
   margin-bottom: 24px;
-  box-shadow: 0 0 8px 6px rgba(0, 0, 0, 0.04);
 }
 .upcoming-match-wrapper .upcoming-matches-list .upcoming-match:nth-child(2n+0) span.versus {
   background: #383838;
@@ -15190,6 +15192,17 @@ section {
   opacity: 0.1;
 }
 
+@media screen and (max-width: 768px) {
+  .versus:after {
+    display: none;
+  }
+  .versus:before {
+    display: none;
+  }
+  .part-logo {
+    display: block !important;
+  }
+}
 #follow-button {
   border-radius: 5px !important;
 }
