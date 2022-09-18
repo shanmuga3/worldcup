@@ -256,6 +256,25 @@ app.controller('dashboardController', ['$scope', '$http', function($scope, $http
     $(document).ready(function() {
         $scope.getMatches('upcoming');
         $scope.getMatches('active');
+
+        $("#favourite-team").select2({
+          width: '100%',
+          templateResult: (state) => {
+              if(!state.id) {
+                return state.text;
+              }
+
+              var $state = $(
+                '<span class="d-flex"><img src="' + state.element.dataset.imgSrc + '" class="mx-3 img img-icon" /> ' + state.text + '</span>'
+              );
+              return $state;
+            },
+        });
+
+        $('#favourite-team').on('select2:select', function (e) {
+          let fav_team = $('#favourite-team').val();
+          $scope.updateFavTeam(fav_team);
+        });
     });
     
     $scope.getMatches = function(type) {
@@ -352,10 +371,10 @@ app.controller('dashboardController', ['$scope', '$http', function($scope, $http
         $scope.makePostRequest(url,data_params,callback_function);
     };
 
-    $scope.updateFavTeam = function() {
+    $scope.updateFavTeam = function(team_id) {
         $scope.isLoading = true;
         var url = routeList.update_favourite_team;
-        var data_params = {team: $scope.fav_team};
+        var data_params = {team: team_id};
 
         var callback_function = (response_data) => {
             window.location.reload();

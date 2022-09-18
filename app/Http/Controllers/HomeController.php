@@ -135,6 +135,7 @@ class HomeController extends Controller
         $user->phone_number = substr($request->phone_number,2);
         $user->address = $request->address ?? '';
         $user->city = $request->city;
+        $user->team_id = $request->fav_team;
         $user->status = 'active';
 
         try {
