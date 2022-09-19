@@ -42,7 +42,7 @@
 							<div class="help border-top">
 								<a href="javascript:;" role="button" data-bs-toggle="modal" data-bs-target="#earnPointsModal">
 								  <h4 class="dropdown-toggle"> @lang('messages.how_earn_points') </h4>
-								<a>
+								</a>
 								{{--
 								<div class="dropdown">
 								  <a class="" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
