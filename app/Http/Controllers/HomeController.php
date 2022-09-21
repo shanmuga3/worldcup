@@ -175,6 +175,7 @@ class HomeController extends Controller
      */
     public function getMatches(Request $request)
     {
+        date_default_timezone_set($request->timezone);
         if($request->type == 'upcoming') {
             $matches = TeamMatch::with('first_team','second_team')->upcomingMatches()->limit(4)->get();
         }

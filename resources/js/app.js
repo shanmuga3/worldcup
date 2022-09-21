@@ -204,9 +204,11 @@ app.controller('homeController', ['$scope', '$http', function($scope, $http) {
     $scope.getMatches = function(type) {
         $scope.isLoading = true;
         let url = routeList.get_matches;
+        let tz = moment.tz.guess();
         let data_params = {
             'type' : type,
-        }
+            'timezone' : tz,
+        };
 
         if(type == 'upcoming') {
             $scope.isUpcomingLoading = true;
@@ -284,9 +286,11 @@ app.controller('dashboardController', ['$scope', '$http', function($scope, $http
     $scope.getMatches = function(type) {
         $scope.isLoading = true;
         let url = routeList.get_matches;
+        let tz = moment.tz.guess();
         let data_params = {
             'type' : type,
-        }
+            'timezone' : tz,
+        };
 
         if(type == 'upcoming') {
             $scope.isUpcomingLoading = true;
