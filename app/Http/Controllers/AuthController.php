@@ -54,6 +54,7 @@ class AuthController extends Controller
             'phone_number' => ['required','unique:users','starts_with:05','digits:10'],
             'address' => ['required'],
             'city' => ['required'],
+            'profile_picture' => ['nullable','file','max:1024'],
         );
 
         $attributes = array(
@@ -84,7 +85,7 @@ class AuthController extends Controller
         $user->address = $request->address ?? '';
         $user->city = $request->city;
         $user->status = 'active';
-        $user->score = 30;
+        // $user->score = 30;
         try {
             $user->save();
         }

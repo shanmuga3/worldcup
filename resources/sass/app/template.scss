@@ -802,7 +802,7 @@ section {
   transition: all 0.5s;
   z-index: 997;
   height: 90px;
-  background:linear-gradient(0deg,#c8163d,rgb(84 4 28 / 85%));
+  background: linear-gradient(0deg, #fefaf6, rgb(250 246 242));
 }
 
 .header.sticked {
@@ -874,7 +874,7 @@ section {
     font-family: var(--font-secondary);
     font-size: 16px;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgb(168 3 37);
     white-space: nowrap;
     transition: 0.3s;
     position: relative;
@@ -894,7 +894,7 @@ section {
     height: 2px;
     bottom: -6px;
     left: 0;
-    background-color: $white;
+    background-color: #8414;
     visibility: hidden;
     width: 0px;
     transition: all 0.3s ease-in-out 0s;
@@ -911,7 +911,7 @@ section {
   .navbar .active,
   .navbar .active:focus,
   .navbar li:hover>a {
-    color: $white;
+    color:#7c1329;
   }
 
   .navbar .dropdown ul {
@@ -1079,6 +1079,12 @@ section {
   .navbar .dropdown>.dropdown-active,
   .navbar .dropdown .dropdown>.dropdown-active {
     display: block;
+  }
+
+  .mobile-nav-btn {
+    color: $black;
+    background: $primary;
+    transform: rotate(50deg);
   }
 
   .mobile-nav-show {
@@ -2437,7 +2443,7 @@ section {
     width: 100%;
     min-height: 100vh;
     position: relative;
-    background: url(../../images/banner-2.jpg) bottom center no-repeat;
+    background: url(../../images/banner-2.png) bottom center no-repeat;
     background-size: cover;
     z-index: 2;
     padding: 60px 0 0 0;
@@ -3148,9 +3154,7 @@ section {
 --------------------------------------------------------------*/
 .footer {
   font-size: 14px;
-  // background: linear-gradient(0deg,#c8163d,rgb(84 4 28 / 85%));
-  // padding: 25px 0px;
-  // color: white;
+  border-top: 2px solid #82253e;
 }
 
 .footer .footer-info .logo {

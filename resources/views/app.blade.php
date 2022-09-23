@@ -75,8 +75,12 @@
                             </li>
                         </ul>
                     </nav>
-                    <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-                    <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+                    <span class="mobile-nav-toggle mobile-nav-show mobile-nav-btn p-2">
+                        <i class="bi bi-list"></i>
+                    </span>
+                    <span class="mobile-nav-toggle mobile-nav-hide d-none">
+                        <i class="bi bi-x"></i>
+                    </span>
                 </div>
             </header>
             

@@ -97,12 +97,13 @@ class HomeController extends Controller
             'first_name' => ['required','max:30'],
             'last_name' => ['required','max:30'],
             'email' => ['required','max:50','email','unique:users,email,'.Auth::id()],
-            'password' => ['nullable',$password_rule],
+            'password' => ['nullable','confirmed',$password_rule],
             'dob' => ['required'],
             'gender' => ['required'],
             'phone_number' => ['required','unique:users','starts_with:05','digits:10'],
             'address' => ['required'],
             'city' => ['required'],
+            'profile_picture' => ['nullable','file','max:1024'],
         );
 
         $attributes = array(

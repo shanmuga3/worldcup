@@ -37,11 +37,19 @@
 											<em class="text-danger"> * </em>
 										</label>
 										<div class="input-group mt-2 password-with-toggler">
-											<input type="password" name="password" class="password form-control" placeholder="@lang('messages.password')">
+											<input type="password" name="password" class="password form-control" placeholder="@lang('messages.password')" value="" autocomplete="off">
 											<span class="input-group-text"><i class="bi bi-eye-slash cursor-pointer toggle-password active" area-hidden="true"></i></span>
 										</div>
 										<span class="text-danger"> {{ $errors->first('password') }} </span>
 									</div>
+									<div class="form-group">
+                                        <label class="form-label"> @lang('messages.password_confirmation') <em class="text-danger"> * </em> </label>
+                                        <div class="input-group mt-2 password-with-toggler">
+                                            <input type="password" name="password_confirmation" class="password form-control" placeholder="@lang('messages.password')">
+                                            <span class="input-group-text"><i class="bi bi-eye-slash cursor-pointer toggle-password active" area-hidden="true"></i></span>
+                                        </div>
+                                        <span class="text-danger"> {{ $errors->first('password_confirmation') }} </span>
+                                    </div>
 									<div class="form-group mt-2">
 										<label class="form-label"> @lang('messages.gender') <em class="text-danger"> * </em> </label>
 										<select name="gender" class="form-select">
