@@ -82,6 +82,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    var updateMarginTop = function() {
+        let window_height = window.innerHeight;
+        let footer_height = $(".page-footer").outerHeight();
+        let inbox_body = (window_height - $('.navbar').outerHeight() - footer_height - 24);
+        $('.main-container').css({
+            "margin-top": $('.navbar').outerHeight()+"px",
+            "min-height": inbox_body + "px",
+        });
+    };
+
+    updateMarginTop();
+    $(window).on('scroll', updateMarginTop);
+    $(window).on('resize', updateMarginTop);
+
     const selectHeader = document.querySelector('#header');
   if (selectHeader) {
     let headerOffset = selectHeader.offsetTop;

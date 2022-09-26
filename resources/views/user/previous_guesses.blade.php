@@ -1,7 +1,7 @@
 @extends('app')
 @section('main')
 <main class="main-container" ng-controller="previousGuessController">
-	<section id="recent-posts" class="recent-posts sections-bg">
+	<section id="recent-posts" class="recent-posts sections-bg bg-image-red">
 		<div class="container" data-aos="fade-up">
 			<div class="section-header">
 				<h2> @lang('messages.your_previous_guesses') </h2>

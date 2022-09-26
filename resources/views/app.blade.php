@@ -28,60 +28,140 @@
     </head>
     <body>
         <div id="app" ng-app="App" ng-controller="myApp" ng-cloak>
-            <header id="header" class="header d-flex align-items-center bg-primary">
-                <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-                    <a href="{{ route('home') }}" class="logo d-flex align-items-center">
-                        <img src="{{ $site_logo }}" alt="{{ $site_name }}">
-                        <h1 class="d-none">{{ $site_name }}</h1>
-                    </a>
-                    <nav id="navbar" class="navbar">
-                        <ul>
-                            @guest
-                            <li><a href="{{ route('home') }}"> @lang('messages.home') </a></li>
-                            <li><a href="{{ route('login') }}"> @lang('messages.sign_in') </a></li>
-                            <li><a href="{{ route('register') }}"> @lang('messages.register') </a></li>
-                            @else
-                            <li><a href="{{ route('dashboard') }}"> @lang('messages.dashboard') </a></li>
-                            <li><a href="{{ route('previous_guesses') }}"> @lang('messages.previous_guess') </a></li>
-                            <li><a href="{{ route('edit_profile') }}"> @lang('messages.edit_profile') </a></li>
-                            <li><a href="http://www.fifa.com/worldcup/teams" target="_blank"> @lang('messages.teams') </a></li>
-                            <li><a href="http://www.fifa.com/worldcup/groups" target="_blank"> @lang('messages.groups') </a></li>
-                            @endif
-                            @auth
-                            <li><a href="{{ route('logout') }}"> @lang('messages.logout') </a></li>
-                            @endauth
-                            <li class="ms-2 d-block d-md-none">
-                                <div class="mobile-language d-flex align-items-center text-white" type="button">
-                                    <i class="bi bi-globe {{ isRtl() ? 'ms-2' : 'me-2'}}"></i>
+            <header class="black-bg {{ Route::currentRouteName() == 'home' ? 'header-container' : 'normal-menu'}}">
+                <nav class="px-5 container-fluid navbar navbar-expand-lg navbar-sm justify-content-between">
+                    <div class="hstack gap-2">
+                        <a class="navbar-brand logo" href="{{ url('/') }}">
+                            <img class="header-logo" src="{{ $site_logo }}" alt="{{ $site_name }}">
+                        </a>
+                    </div>
+                    <div class="main-menu collapse navbar-collapse flex-grow-0" id="navbarNav">
+                        <ul class="nav navbar-nav align-items-center ms-auto main-menu">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle d-flex align-items-center language" href="javascript:;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="globe-icon">
+                                        <i class="bi bi-globe me-2"></i>
+                                        {{ session('language_name') }}
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu overflow-auto" aria-labelledby="navbarDropdown">
                                     @foreach($translatable_languages as $key => $value)
                                     @if(session('language') != $key)
-                                    <a class=" {{ session('language') == $key ? 'selected' : '' }}" href="#" ng-click="userLanguage='{{ $key }}';updateUserDefault('language');"> {{ $value }} </a>
+                                    <li class="dropdown-item">
+                                        <a class="{{ session('language') == $key ? 'selected' : '' }}" href="#" class="dropdown-link" ng-click="userLanguage='{{ $key }}';updateUserDefault('language');"> {{ $value }} </a>
+                                    </li>
                                     @endif
                                     @endforeach
-                                </div>
+                                </ul>
                             </li>
-                            <li class="my-account-dropdown d-none d-md-block">
-                               <div class="dropdown">
-                                  <a href="javascript:;" class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="bi bi-globe {{ isRtl() ? 'ms-2' : 'me-2'}}"></i>
-                                    {{ session('language_name') }}
-                                  </a>
-                                  <ul class="dropdown-menu {{ isRtl() ? 'dropdown-menu-start' : 'dropdown-menu-end' }}" aria-labelledby="dropdownMenuButton1">
-                                    @foreach($translatable_languages as $key => $value)
-                                    <li><a class="dropdown-item {{ session('language') == $key ? 'selected' : '' }}" href="#" ng-click="userLanguage='{{ $key }}';updateUserDefault('language');"> {{ $value }} </a></li>
-                                    @endforeach
-                                  </ul>
-                                </div>
+                            @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home') }}"> @lang('messages.home') </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}"> @lang('messages.sign_in') </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-diamond" href="{{ route('register') }}"> @lang('messages.register') </a>
+                            </li>
+                            @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('dashboard') }}"> @lang('messages.dashboard') </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('previous_guesses') }}"> @lang('messages.previous_guess') </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('edit_profile') }}"> @lang('messages.edit_profile') </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://www.fifa.com/worldcup/teams" target="_blank"> @lang('messages.teams') </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://www.fifa.com/worldcup/groups" target="_blank"> @lang('messages.groups') </a>
+                            </li>
+                            @endif
+                            @auth
+                            <li class="nav-item">
+                                <a href="{{ route('logout') }}"> @lang('messages.logout') </a>
+                            </li>
+                            @endauth
                         </ul>
+                    </div>
+                    <nav class="navbar bg-light fixed-top px-2 d-block d-lg-none">
+                        <div class="container-fluid">
+                            <a class="navbar-brand logo" href="{{ url('/') }}">
+                                <img src="{{ $site_logo }}" alt="{{ $site_name }}">
+                            </a>
+                            <div class="nav-item dropdown ms-auto">
+                                <a class="nav-link d-flex align-items-center language me-2" href="javascript:;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="globe-icon">
+                                        <i class="bi bi-globe me-2"></i>
+                                        {{ session('language_name') }}
+                                    </div>
+                                </a>
+                                 <ul class="dropdown-menu dropdown-menu-end overflow-auto" aria-labelledby="navbarDropdown">
+                                    @foreach($translatable_languages as $key => $value)
+                                    @if(session('language') != $key)
+                                    <li class="dropdown-item">
+                                        <a class="{{ session('language') == $key ? 'selected' : '' }}" href="#" class="dropdown-link" ng-click="userLanguage='{{ $key }}';updateUserDefault('language');"> {{ $value }} </a>
+                                    </li>
+                                    @endif
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <button class="border-0 square p-0 rounded-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                                <div class="burgerwrap">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </button>
+                            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                                <div class="offcanvas-header">
+                                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel"></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                </div>
+                                <div class="offcanvas-body">
+                                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 {{ Auth::check() ? 'flex-column' : '' }}">
+                                        @guest
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('home') }}"> @lang('messages.home') </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('login') }}"> @lang('messages.sign_in') </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('register') }}"> @lang('messages.register') </a>
+                                        </li>
+                                        @else
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('dashboard') }}"> @lang('messages.dashboard') </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('previous_guesses') }}"> @lang('messages.previous_guess') </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('edit_profile') }}"> @lang('messages.edit_profile') </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="http://www.fifa.com/worldcup/teams" target="_blank"> @lang('messages.teams') </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="http://www.fifa.com/worldcup/groups" target="_blank"> @lang('messages.groups') </a>
+                                        </li>
+                                        @endif
+                                        @auth
+                                        <li class="nav-item">
+                                            <a href="{{ route('logout') }}"> @lang('messages.logout') </a>
+                                        </li>
+                                        @endauth
+                                    </ul>                        
+                                </div>
+                            </div>
+                        </div>
                     </nav>
-                    <span class="mobile-nav-toggle mobile-nav-show mobile-nav-btn p-2">
-                        <i class="bi bi-list"></i>
-                    </span>
-                    <span class="mobile-nav-toggle mobile-nav-hide d-none">
-                        <i class="bi bi-x"></i>
-                    </span>
-                </div>
+                </nav>
             </header>
             
             @yield('main')
@@ -97,9 +177,6 @@
                                     <a href="{{ global_settings('copyright_link') }}" class=""> {{ global_settings('copyright_link') }} </a>
                                     <h5> {{ global_settings('copyright_text') }} </h5>
                                 </div>
-                            </div>
-                            <div class="mt-3 d-md-none">
-                                {!! Form::select('language',$translatable_languages, session('language'), ['id' => 'user-language','class' => 'form-select','ng-model' => 'userLanguage','ng-change' => "updateUserDefault('language')"]) !!}
                             </div>
                         </div>
                         <div class="{{ isRtl() ? '' : 'offset-md-4' }} col-md-4 footer-social-link">
