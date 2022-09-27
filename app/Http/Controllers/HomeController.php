@@ -183,7 +183,12 @@ class HomeController extends Controller
         else {
             $limit = Auth::check() ? 100 : 1;
             $already_predicted = Guess::where('user_id',Auth::id())->get()->pluck('match_id');
-            $matches = TeamMatch::with('first_team','second_team')->whereNotIn('id',$already_predicted)->whereRaw('? between starting_at and ending_at', [date('Y-m-d H:i:s')])->limit($limit)->get();
+            $matches = TeamMatch::with('first_team','second_team')
+                ->whereNotIn('id',$already_predicted)
+                ->whereRaw('"'.date('Y-m-d H:i:s',strtotime('-1 day')).'"  >= starting_at')
+                ->where('ending_at', '>',date('Y-m-d H:i:s'))
+                ->limit($limit)
+                ->get();
         }
 
         $matches = $matches->map(function($match) {
