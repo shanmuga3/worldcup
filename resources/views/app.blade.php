@@ -183,7 +183,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 footer-social-link">
+                        <div class="offset-md-4 col-md-4 footer-social-link">
                             <div class="social-links d-flex mt-4">
                                 @foreach(resolve("SocialMediaLink")->where('value','!=','') as $media)
                                 <a href="{{ $media->value }}" class="{{ $media->name }}">

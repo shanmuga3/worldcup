@@ -4,7 +4,7 @@
 	<section id="hero" class="hero-dashboard">
 		<div class="container team position-relative">
 			<div class="row gy-4 py-5">
-				<div class="col-xl-3 col-md-6 d-flex {{ isRtl() ? 'offset-xl-6' : '' }}" data-aos="fade-up" data-aos-delay="100">
+				<div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
 					<div class="member">
 						<img src="{{ $user->profile_picture_src }}" class="img-fluid" alt="">
 						<h4> {{ $user->full_name }} </h4>
@@ -23,7 +23,7 @@
 						@endif
 					</div>
 				</div>
-				<div class="col-xl-3 col-md-6 d-flex {{ isRtl() ? '' : 'offset-xl-6' }}" data-aos="fade-up" data-aos-delay="200">
+				<div class="offset-xl-6 col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
 					<div class="member">
 						<div class="card-header">
 							<h3 class="text-center"> @lang('messages.score') </h3>
