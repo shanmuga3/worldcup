@@ -23,7 +23,11 @@
         }
         </style>
         <!-- Include App Style Sheet -->
-        {!! Html::style('css/app.css?v='.$version) !!}
+        @if(app()->getLocale() == 'ar')
+            {!! Html::style('css/app.rtl.css?v='.$version) !!}
+        @else
+            {!! Html::style('css/app.css?v='.$version) !!}
+        @endif
         {!! global_settings('head_code') !!}
     </head>
     <body>
@@ -168,18 +172,18 @@
             <footer id="footer" class="footer">
                 <div class="container">
                     <div class="row justify-content-end align-items-center">
-                        <div class="{{ isRtl() ? 'offset-md-4' : '' }} col-md-4 footer-links">
+                        <div class="col-md-4 footer-links">
                             <div class="d-flex align-items-bottom">
                                 <div class="img">
                                     <img src="{{ asset('images/sport_ball.png') }}" class="img" style="height: 50px;">
                                 </div>
-                                <div class="info {{ isRtl() ? 'me-3' : 'ms-3' }}">
+                                <div class="info ms-3">
                                     <a href="{{ global_settings('copyright_link') }}" class=""> {{ global_settings('copyright_link') }} </a>
                                     <h5> {{ global_settings('copyright_text') }} </h5>
                                 </div>
                             </div>
                         </div>
-                        <div class="{{ isRtl() ? '' : 'offset-md-4' }} col-md-4 footer-social-link">
+                        <div class="col-md-4 footer-social-link">
                             <div class="social-links d-flex mt-4">
                                 @foreach(resolve("SocialMediaLink")->where('value','!=','') as $media)
                                 <a href="{{ $media->value }}" class="{{ $media->name }}">

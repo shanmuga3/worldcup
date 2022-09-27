@@ -1,13 +1,14 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npm run development",
+        "dev": "npm run development && npm run rtl",
         "development": "mix",
         "watch": "mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
+        "prod": "npm run production && npm run rtl",
+        "production": "mix --production",
+        "rtl": "rtlcss public/css/app.css public/css/app.rtl.css"
     },
     "devDependencies": {
         "@popperjs/core": "^2.10.2",
@@ -16,6 +17,7 @@
         "laravel-mix": "^6.0.41",
         "lodash": "^4.17.21",
         "resolve-url-loader": "^5.0.0",
+        "rtlcss": "^4.0.0",
         "sass": "^1.49.0",
         "sass-loader": "^12.4.0",
         "vue-loader": "^16.8.3"

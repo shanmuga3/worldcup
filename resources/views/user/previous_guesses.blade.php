@@ -98,7 +98,7 @@
                                             </p>
                                             @endif
                                         </div>
-                                        <div class="part-logo {{ isRtl() ? 'me-4' : 'ms-4' }}">
+                                        <div class="part-logo ms-4">
                                              <img src="{{ $guess->match->second_team->image_src }}" alt="{{ $guess->match->second_team->name }}">
                                              <div class="d-block d-md-none mobile-result">
                                                  <p class="user-guess">
