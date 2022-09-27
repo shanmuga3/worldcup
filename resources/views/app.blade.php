@@ -66,7 +66,7 @@
                                 <a class="nav-link" href="{{ route('login') }}"> @lang('messages.sign_in') </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn btn-diamond" href="{{ route('register') }}"> @lang('messages.register') </a>
+                                <a class="btn btn-primary text-white px-3 py-2" href="{{ route('register') }}"> @lang('messages.register') </a>
                             </li>
                             @else
                             <li class="nav-item">
