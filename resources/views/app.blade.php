@@ -66,7 +66,7 @@
                                 <a class="nav-link" href="{{ route('login') }}"> @lang('messages.sign_in') </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn btn-diamond" href="{{ route('register') }}"> @lang('messages.register') </a>
+                                <a class="btn btn-primary text-white px-3 py-2" href="{{ route('register') }}"> @lang('messages.register') </a>
                             </li>
                             @else
                             <li class="nav-item">
@@ -183,7 +183,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 footer-social-link">
+                        <div class="offset-md-4 col-md-4 footer-social-link">
                             <div class="social-links d-flex mt-4">
                                 @foreach(resolve("SocialMediaLink")->where('value','!=','') as $media)
                                 <a href="{{ $media->value }}" class="{{ $media->name }}">
