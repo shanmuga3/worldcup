@@ -402,6 +402,7 @@ app.controller('previousGuessController', ['$scope', '$http', function($scope, $
         first_team_penalty: '',
         second_team_penalty: '',
     };
+    $scope.user_guesses = [];
 
     $scope.openUpdateForm = function(active_match) {
         $scope.active_match = active_match;
@@ -438,6 +439,10 @@ app.controller('previousGuessController', ['$scope', '$http', function($scope, $
 
             closeModal('updatePredictionModal');
 
+            if(response_data.status_action == 'reload') {
+                window.location.reload();
+                return false;
+            }
             if(!response_data.status) {
                 let content = {
                     title: response_data.status_title,
@@ -461,4 +466,37 @@ app.controller('previousGuessController', ['$scope', '$http', function($scope, $
 
         $scope.makePostRequest(url,data_params,callback_function);
     };
+
+    $scope.getUserGuesses = function() {
+        $scope.isLoading = true;
+        let url = routeList.get_previous_guesses;
+        let tz = moment.tz.guess();
+        let data_params = {
+            'timezone' : tz,
+        };
+
+        let callback_function = (response_data) => {
+            $scope.user_guesses = response_data.user_guesses;
+            $scope.isLoading = false;
+            setTimeout(() =>{
+                $scope.user_guesses.forEach(function(guess) {
+                    if(guess.can_edit_score) {
+                        setInterval(() => {
+                            let startTime = moment().tz('Asia/Qatar');
+                            let endTime = moment(guess.ending_at,"YYYY-MM-DD HH:mm:ss").tz('Asia/Qatar');
+                            if(endTime.diff(startTime) <= 0) {
+                                window.location.reload();
+                            }
+                        }, 1000);                        
+                    }
+                });
+            },500);
+        };
+
+        $scope.makePostRequest(url,data_params,callback_function);
+    };
+
+    $(document).ready(function() {
+        $scope.getUserGuesses();
+    });
 }]);

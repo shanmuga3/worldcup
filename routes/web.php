@@ -201,6 +201,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('update_profile',[HomeController::class,'updateProfile'])->name('update_profile');
     Route::post('predict-match',[HomeController::class,'predictMatch'])->name('predict_match');
     Route::get('previous-guesses',[HomeController::class,'previousGuesses'])->name('previous_guesses');
+    Route::post('get-previous-guesses',[HomeController::class,'getPreviousGuesses'])->name('get_previous_guesses');
     Route::post('update-favourite-team', [HomeController::class,'updatefavTeam'])->name('update_favourite_team');
 
     Route::get('logout', function () {

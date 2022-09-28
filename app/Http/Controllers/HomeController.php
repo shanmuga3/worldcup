@@ -263,6 +263,7 @@ class HomeController extends Controller
             if($user_guess == '' || @!$user_guess->canEditScore()) {
                 return response()->json([
                     'status' => false,
+                    'status_action' => 'reload',
                     'status_title' => Lang::get('messages.failed'),
                     'status_message' => Lang::get('messages.your_prediction_already_submitted'),
                 ]);
@@ -316,6 +317,47 @@ class HomeController extends Controller
     {
         $data['user_guesses'] = Guess::with('match.first_team','match.second_team')->where('user_id',Auth::id())->get();
         return view('user.previous_guesses',$data);
+    }
+
+    public function getPreviousGuesses(Request $request)
+    {
+        date_default_timezone_set($request->timezone);
+        $user_guesses = Guess::with('match.first_team','match.second_team')->where('user_id',Auth::id())->get();
+        
+        $guesses = $user_guesses->map(function($guess) {
+            return [
+                'id' => $guess->id,
+                'match_id' => $guess->match_id,
+                'first_team_name' => $guess->match->first_team->name,
+                'first_team_formatted_name' => $guess->match->first_team->short_name.' - '.$guess->match->first_team->name,
+                'first_team_image' => $guess->match->first_team->image_src,
+                'second_team_formatted_name' => $guess->match->second_team->short_name.' - '.$guess->match->second_team->name,
+                'second_team_name' => $guess->match->second_team->name,
+                'second_team_image' => $guess->match->second_team->image_src,
+                'first_team_score' => $guess->first_team_score,
+                'second_team_score' => $guess->second_team_score,
+                'first_team_penalty' => $guess->first_team_penalty,
+                'second_team_penalty' => $guess->second_team_penalty,
+                'round' => $guess->round,
+                'score' => $guess->score,
+                'answer' => $guess->answer,
+                'can_edit_score' => $guess->canEditScore(),
+                'starting_at' => $guess->match->starting_at,
+                'starting_at_formatted' => getDateObject($guess->match->starting_at)->format('d/m/Y'),
+                'ending_at' => $guess->match->ending_at,
+                'ending_at_formatted' => getDateObject($guess->match->ending_at)->format('d/m/Y'),
+                'result_published' => $guess->match->answer,
+                'first_team_result' => $guess->match->first_team_score,
+                'second_team_result' => $guess->match->second_team_score,
+                'first_team_penalty_result' => $guess->match->first_team_penalty,
+                'second_team_penalty_result' => $guess->match->second_team_penalty,
+            ];
+        });
+        
+        return response()->json([
+            'status' => true,
+            'user_guesses' => $guesses,
+        ]);
     }
 
     /**

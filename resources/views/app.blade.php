@@ -214,6 +214,7 @@
                     'update_favourite_team' => route('update_favourite_team'),
                     'get_matches' => route('get_matches'),
                     'predict_match' => route('predict_match'),
+                    'get_previous_guesses' => route('get_previous_guesses'),
                 ]);
             !!}
         </script>
