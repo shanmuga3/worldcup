@@ -94,8 +94,8 @@ class HomeController extends Controller
         }
 
         $rules = array(
-            'first_name' => ['required','max:30'],
-            'last_name' => ['required','max:30'],
+            'full_name' => ['required','max:30'],
+            // 'last_name' => ['required','max:30'],
             'email' => ['required','max:50','email','unique:users,email,'.Auth::id()],
             'password' => ['nullable','confirmed',$password_rule],
             'dob' => ['required'],
@@ -107,7 +107,7 @@ class HomeController extends Controller
         );
 
         $attributes = array(
-            'first_name' => Lang::get('messages.first_name'),
+            'full_name' => Lang::get('messages.full_name'),
             'last_name' => Lang::get('messages.last_name'),
             'email' => Lang::get('messages.email'),
             'password' => Lang::get('messages.password'),
@@ -123,8 +123,8 @@ class HomeController extends Controller
         }
 
         $user = Auth::user();
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
+        $user->first_name = $request->full_name;
+        $user->last_name = $request->last_name ?? '';
         $user->email = $request->email;
         if($request->password != '') {
             $user->password = $request->password;
@@ -185,7 +185,7 @@ class HomeController extends Controller
             $already_predicted = Guess::where('user_id',Auth::id())->get()->pluck('match_id');
             $matches = TeamMatch::with('first_team','second_team')
                 ->whereNotIn('id',$already_predicted)
-                ->whereRaw('"'.date('Y-m-d H:i:s',strtotime('-1 day')).'"  >= starting_at')
+                ->whereRaw('"'.date('Y-m-d H:i:s').'"  >= starting_at')
                 ->where('ending_at', '>',date('Y-m-d H:i:s'))
                 ->limit($limit)
                 ->get();

@@ -29,6 +29,7 @@ return [
 	"create_new_account" => "Create New account",
 	"name" => "Name",
 	"first_name" => "First Name",
+	"full_name" => "Full Name",
 	"last_name" => "Last Name",
 	"phone_number" => "Phone Number",
 	"city" => "City",

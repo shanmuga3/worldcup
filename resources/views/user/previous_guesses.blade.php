@@ -20,7 +20,7 @@
                                                 <p class="h5 text-danger fw-bold" ng-show="guess.score <= 0"> 0 @lang('messages.points') </p>
                                             </div>
                                             <div ng-if="!guess.answer">
-                                                <p class="h5"> @lang('messages.score_pending') </p>
+                                                <p class="h5"> </p>
                                             </div>
                                             <div ng-if="guess.can_edit_score">
                                                 <button type="button" class="btn btn-primary btn-edit-score ms-3 d-flex align-items-center" ng-click="openUpdateForm(guess)">
@@ -127,7 +127,7 @@
                 </div>
                 <div class="col-5">
                     <div class="form-group mb-2">
-                        <label class="form-label"> @lang('messages.first_team_score') </label>
+                        <label class="form-label"> @lang('messages.second_team_score') </label>
                         <input type="text" name="second_team_score" class="form-control" ng-model="prediction_form.second_team_score" maxlength="2">
                         <span class="text-danger"> @{{ error_messages.second_team_score[0] }} </span>
                     </div>

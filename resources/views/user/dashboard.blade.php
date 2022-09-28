@@ -144,7 +144,7 @@
 	                        			</div>
 	                        			<div class="col-5">
 	                        				<div class="form-group mb-2">
-	                        					<label class="form-label"> @lang('messages.first_team_score') </label>
+	                        					<label class="form-label"> @lang('messages.second_team_score') </label>
 	                        					<input type="text" name="second_team_score" class="form-control" ng-model="prediction_form.second_team_score" maxlength="2">
 	                        					<span class="text-danger"> @{{ error_messages.second_team_score[0] }} </span>
 	                        				</div>

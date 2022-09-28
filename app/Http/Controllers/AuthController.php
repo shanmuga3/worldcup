@@ -45,8 +45,8 @@ class AuthController extends Controller
         }
 
         $rules = array(
-            'first_name' => ['required','max:30'],
-            'last_name' => ['required','max:30'],
+            'full_name' => ['required','alpha','min:8','max:30'],
+            // 'last_name' => ['required','max:30'],
             'email' => ['required','max:50','email','unique:users'],
             'password' => ['required','confirmed',$password_rule],
             'dob' => ['required'],
@@ -74,8 +74,8 @@ class AuthController extends Controller
         }
 
         $user = new User;
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
+        $user->first_name = $request->full_name;
+        $user->last_name = $request->last_name ?? '';
         $user->email = $request->email;
         $user->password = $request->password;
         $user->dob = $request->dob;

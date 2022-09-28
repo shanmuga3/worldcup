@@ -14,15 +14,17 @@
                                 {!! Form::open(['url' => route('create_user'), 'class' => 'form--auth form--register','files' => true]) !!}
                                 <div class="form__content">
                                     <div class="form-group mt-2">
-                                        <label class="form-label"> @lang('messages.first_name') <em class="text-danger"> * </em> </label>
-                                        {!! Form::text('first_name',null,['placeholder' => trans('messages.first_name'),'class' =>'form-control'])!!}
-                                        <span class="text-danger"> {{ $errors->first('first_name') }} </span>
+                                        <label class="form-label"> @lang('messages.full_name') <em class="text-danger"> * </em> </label>
+                                        {!! Form::text('full_name',null,['placeholder' => trans('messages.full_name'),'class' =>'form-control'])!!}
+                                        <span class="text-danger"> {{ $errors->first('full_name') }} </span>
                                     </div>
+                                    {{--
                                     <div class="form-group mt-2">
                                         <label class="form-label"> @lang('messages.last_name') <em class="text-danger"> * </em> </label>
                                         {!! Form::text('last_name',null,['placeholder' => trans('messages.last_name'),'class' =>'form-control'])!!}
                                         <span class="text-danger"> {{ $errors->first('last_name') }} </span>
                                     </div>
+                                    --}}
                                     <div class="form-group mt-2">
                                         <label class="form-label"> @lang('messages.email') <em class="text-danger"> * </em> </label>
                                         {!! Form::text('email',null,['placeholder' => trans('messages.email'),'class' =>'form-control'])!!}
