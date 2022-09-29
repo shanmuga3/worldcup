@@ -29,6 +29,7 @@ return [
 	"create_new_account" => "انشاء حساب جديد",
 	"name" => "اسم",
 	"first_name" => "الاسم الاول",
+	"full_name" => "الاسم الكامل",
 	"last_name" => "الكنية",
 	"phone_number" => "رقم الهاتف",
 	"city" => "مدينة",

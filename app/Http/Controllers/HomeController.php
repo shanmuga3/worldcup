@@ -341,8 +341,8 @@ class HomeController extends Controller
                 'second_team_image' => $guess->match->second_team->image_src,
                 'first_team_score' => $guess->first_team_score,
                 'second_team_score' => $guess->second_team_score,
-                'first_team_penalty' => $guess->first_team_penalty,
-                'second_team_penalty' => $guess->second_team_penalty,
+                'first_team_penalty' => $guess->first_team_penalty ?? '',
+                'second_team_penalty' => $guess->second_team_penalty ?? '',
                 'round' => $guess->round,
                 'score' => $guess->score,
                 'answer' => $guess->answer,
@@ -354,8 +354,8 @@ class HomeController extends Controller
                 'result_published' => $guess->match->answer,
                 'first_team_result' => $guess->match->first_team_score,
                 'second_team_result' => $guess->match->second_team_score,
-                'first_team_penalty_result' => $guess->match->first_team_penalty,
-                'second_team_penalty_result' => $guess->match->second_team_penalty,
+                'first_team_penalty_result' => $guess->match->first_team_penalty ?? '',
+                'second_team_penalty_result' => $guess->match->second_team_penalty ?? '',
             ];
         });
         

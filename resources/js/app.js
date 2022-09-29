@@ -168,6 +168,11 @@ app.controller('myApp', ['$scope', '$http','$rootScope', function($scope, $http,
         if (minutes < "10") { minutes = "0" + minutes; }
         if (seconds < "10") { seconds = "0" + seconds; }
 
+        $("#days_"+id).html(days + "d: ");
+        $("#days_"+id).addClass('d-none');
+        if(days > 0) {
+            $("#days_"+id).removeClass('d-none');
+        }
         $("#hours_"+id).html(hours + "h: ");
         $("#minutes_"+id).html(minutes + "m: ");
         $("#seconds_"+id).html(seconds + "s");
