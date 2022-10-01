@@ -43,7 +43,7 @@
                         <ul class="nav navbar-nav align-items-center ms-auto main-menu">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle d-flex align-items-center language" href="javascript:;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <div class="globe-icon">
+                                    <div class="globe-icon d-flex align-items-center">
                                         <i class="bi bi-globe me-2"></i>
                                         {{ session('language_name') }}
                                     </div>
