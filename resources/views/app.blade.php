@@ -60,29 +60,29 @@
                             </li>
                             @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('home') }}"> @lang('messages.home') </a>
+                                <a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active fw-bold' : '' }}" href="{{ route('home') }}"> @lang('messages.home') </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}"> @lang('messages.sign_in') </a>
+                                <a class="nav-link {{ Route::currentRouteName() == 'login' ? 'active fw-bold' : '' }}" href="{{ route('login') }}"> @lang('messages.sign_in') </a>
                             </li>
                             <li class="nav-item">
                                 <a class="btn btn-primary text-white px-3 py-2" href="{{ route('register') }}"> @lang('messages.register') </a>
                             </li>
                             @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('dashboard') }}"> @lang('messages.dashboard') </a>
+                                <a class="nav-link {{ Route::currentRouteName() == 'dashboard' ? 'active fw-bold' : '' }}" href="{{ route('dashboard') }}"> @lang('messages.dashboard') </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('previous_guesses') }}"> @lang('messages.previous_guess') </a>
+                                <a class="nav-link {{ Route::currentRouteName() == 'previous_guesses' ? 'active fw-bold' : '' }}" href="{{ route('previous_guesses') }}"> @lang('messages.previous_guess') </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('edit_profile') }}"> @lang('messages.edit_profile') </a>
+                                <a class="nav-link {{ Route::currentRouteName() == 'edit_profile' ? 'active fw-bold' : '' }}" href="{{ route('edit_profile') }}"> @lang('messages.edit_profile') </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="http://www.fifa.com/worldcup/teams" target="_blank"> @lang('messages.teams') </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="http://www.fifa.com/worldcup/groups" target="_blank"> @lang('messages.groups') </a>
+                            <li class="nav-item {{ Route::currentRouteName() == 'groups' ? 'active' : '' }}">
+                                <a class="nav-link {{ Route::currentRouteName() == 'groups' ? 'active fw-bold' : '' }}" href="{{ route('groups') }}"> @lang('messages.groups') </a>
                             </li>
                             @endif
                             @auth

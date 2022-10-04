@@ -193,6 +193,7 @@ Route::group(['middleware' => ['guest']], function () {
     Route::post('set-password', [AuthController::class,'setNewPassword'])->name('set_password');
 });
 
+Route::view('groups','groups')->name('groups');
 Route::post('get-matches',[HomeController::class,'getMatches'])->name('get_matches');
 
 Route::group(['middleware' => ['auth']], function () {
