@@ -45,7 +45,7 @@ class AuthController extends Controller
         }
 
         $rules = array(
-            'full_name' => ['required','alpha','min:8','max:30'],
+            'full_name' => ['required','regex:/^[\pL\s\-]+$/u','min:8','max:30'],
             // 'last_name' => ['required','max:30'],
             'email' => ['required','max:50','email','unique:users'],
             'password' => ['required','confirmed',$password_rule],
@@ -58,6 +58,7 @@ class AuthController extends Controller
         );
 
         $attributes = array(
+            'full_name' => Lang::get('messages.full_name'),
             'first_name' => Lang::get('messages.first_name'),
             'last_name' => Lang::get('messages.last_name'),
             'email' => Lang::get('messages.email'),
@@ -67,7 +68,12 @@ class AuthController extends Controller
             'address' => Lang::get('messages.address'),
             'city' => Lang::get('messages.city'),
         );
-        $validator = Validator::make($request->all(), $rules, [], $attributes);
+
+        $messages = array(
+            'full_name.regex' => Lang::get('validation.alpha',['attribute' => Lang::get('messages.full_name')]),
+        );
+
+        $validator = Validator::make($request->all(), $rules, $messages, $attributes);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
