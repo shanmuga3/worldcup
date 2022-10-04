@@ -26,7 +26,7 @@ class MetaSeeder extends Seeder
 			['route_name' => 'dashboard','display_name' => 'dashboard', 'title' => 'Dashboard - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
 			['route_name' => 'edit_profile','display_name' => 'edit_profile', 'title' => 'Edit Profile - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
 			['route_name' => 'previous_guesses','display_name' => 'previous_guesses', 'title' => 'Previous Guesses - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
-			['route_name' => 'teams','display_name' => 'teams', 'title' => 'Teams - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
+			['route_name' => 'match_schedule','display_name' => 'match_schedule', 'title' => 'Match Schedule - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
 			['route_name' => 'groups','display_name' => 'groups', 'title' => 'Groups - {SITE_NAME}', 'description' => NULL, 'created_at' => $currentDateTime, 'updated_at' => $currentDateTime],
 		]);
     }

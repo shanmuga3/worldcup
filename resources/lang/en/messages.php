@@ -47,6 +47,7 @@ return [
 	"phone" => "Phone",
 	"useful_links" => "Useful Links",
 	"groups" => "Groups",
+	"match_schedule" => "Match Schedule",
 	"score" => "Score",
 	"how_earn_points" => "How to Earn Points",
 	"point_desc_1" => "10 points for every correct prediction",

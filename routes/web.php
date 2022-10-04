@@ -194,6 +194,7 @@ Route::group(['middleware' => ['guest']], function () {
 });
 
 Route::view('groups','groups')->name('groups');
+Route::view('match_schedule','match_schedule')->name('match_schedule');
 Route::post('get-matches',[HomeController::class,'getMatches'])->name('get_matches');
 
 Route::group(['middleware' => ['auth']], function () {

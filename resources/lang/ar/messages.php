@@ -47,6 +47,7 @@ return [
 	"phone" => "هاتف",
 	"useful_links" => "روابط مفيدة",
 	"groups" => "مجموعات",
+	"match_schedule" => "جدول المباراة",
 	"score" => "نتيجة",
 	"how_earn_points" => "كيف تكسب النقاط",
 	"point_desc_1" => "10 نقاط على كل توقع صحيح ",

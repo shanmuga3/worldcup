@@ -78,8 +78,8 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ Route::currentRouteName() == 'edit_profile' ? 'active fw-bold' : '' }}" href="{{ route('edit_profile') }}"> @lang('messages.edit_profile') </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="http://www.fifa.com/worldcup/teams" target="_blank"> @lang('messages.teams') </a>
+                            <li class="nav-item {{ Route::currentRouteName() == 'match_schedule' ? 'active' : '' }}">
+                                <a class="nav-link {{ Route::currentRouteName() == 'match_schedule' ? 'active fw-bold' : '' }}" href="{{ route('match_schedule') }}"> @lang('messages.match_schedule') </a>
                             </li>
                             <li class="nav-item {{ Route::currentRouteName() == 'groups' ? 'active' : '' }}">
                                 <a class="nav-link {{ Route::currentRouteName() == 'groups' ? 'active fw-bold' : '' }}" href="{{ route('groups') }}"> @lang('messages.groups') </a>
