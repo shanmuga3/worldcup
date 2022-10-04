@@ -91,9 +91,9 @@ class UsersDataTable extends DataTable
     {
         $cols = [
             ['data' => 'id', 'name' => 'id', 'title' => Lang::get('admin_messages.fields.id')],
-            ['data' => 'first_name', 'name' => 'first_name', 'title' => Lang::get('admin_messages.fields.name')],
-            ['data' => 'email', 'name' => 'email', 'title' => Lang::get('admin_messages.fields.email')],
-            ['data' => 'phone_number', 'name' => 'phone_number', 'title' => Lang::get('admin_messages.fields.phone_number')],
+            ['data' => 'first_name', 'name' => 'first_name', 'title' => Lang::get('messages.name')],
+            ['data' => 'email', 'name' => 'email', 'title' => Lang::get('messages.email')],
+            ['data' => 'phone_number', 'name' => 'phone_number', 'title' => Lang::get('messages.phone_number')],
         ];
 
         if($this->type != 'ranking') {

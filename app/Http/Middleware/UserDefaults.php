@@ -49,6 +49,14 @@ class UserDefaults
 
         \View::share('site_logo', $site_logo);
 
+        $cities = resolve("City")->map(function($city) use($user_language) {
+            $key = $user_language == 'ar' ? 'name_ar' : 'name_en';
+            $city['name'] = $city[$key];
+            return $city;
+        });
+
+        \View::share('cities', $cities->pluck('name','id'));
+
         $response = $next($request);
         $response->headers->set('Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate');
         $response->headers->set('Pragma', 'no-cache');

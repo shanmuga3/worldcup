@@ -206,7 +206,8 @@ class User extends Authenticatable
     public function getCityNameAttribute()
     {
         $city = resolve("City")->where('id',$this->city)->first();
-        return $city['name'] ?? '';
+        $locale = session('language') ?? 'en';
+        return $city['name_'.$locale] ?? '';
     }
 
     /**

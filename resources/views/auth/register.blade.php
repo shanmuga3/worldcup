@@ -83,7 +83,7 @@
                                     </div>
                                     <div class="form-group mt-2">
                                         <label class="form-label"> @lang('messages.city') <em class="text-danger"> * </em> </label>
-                                        {!! Form::select('city',resolve("City")->pluck('name','id'),null,['placeholder' => trans('messages.select'),'class' =>'form-select'])!!}
+                                        {!! Form::select('city',$cities,null,['placeholder' => trans('messages.select'),'class' =>'form-select'])!!}
                                         <span class="text-danger"> {{ $errors->first('city') }} </span>
                                     </div>
                                     
