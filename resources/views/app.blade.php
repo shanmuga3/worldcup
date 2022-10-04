@@ -183,17 +183,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="offset-md-4 col-md-4 footer-social-link">
+                        <div class="col-md-4 footer-social-link">
+                            <div class="static-links d-flex mb-2 mt-2">
+                                @foreach(resolve("StaticPage")->where('in_footer','1') as $page)
+                                    <a href="{{ $page->url }}" class="me-3"> {{ $page->name }} </a>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="col-md-4 footer-social-link">
                             <div class="social-links d-flex mt-4">
                                 @foreach(resolve("SocialMediaLink")->where('value','!=','') as $media)
                                 <a href="{{ $media->value }}" class="{{ $media->name }}">
                                     <img src="{{ asset('images/social_media_icons/icon_'.$media->name.'.png') }}" class="img social-icon" data-icon="{{ $media->name }}" alt="{{ ucfirst($media->name) }}" height="30" width="30">
                                 </a>
-                                @endforeach
-                            </div>
-                            <div class="static-links d-flex mb-2 mt-2">
-                                @foreach(resolve("StaticPage")->where('in_footer','1') as $page)
-                                    <a href="{{ $page->url }}" class="me-3"> {{ $page->name }} </a>
                                 @endforeach
                             </div>
                         </div>
