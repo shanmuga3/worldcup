@@ -67,7 +67,7 @@
 								@else
 								<select name="fav_team" id="favourite-team" class="form-select" placeholder="@lang('messages.select')">
 									<option value=""> @lang('messages.select') </option>
-									@foreach(resolve("Team") as $team)
+									@foreach(resolve("Team")->sortBy('name')->values() as $team)
 									<option data-img-src="{{ $team->image_src }}" value="{{ $team->id }}"> {{ $team->name }} </option>
 									@endforeach
 								</select>

@@ -93,7 +93,7 @@
 										<label class="form-label"> @lang('messages.favourite_team') </label>
 										<select name="fav_team" id="favourite-team" class="form-select" placeholder="@lang('messages.select')">
 											<option value=""> @lang('messages.select') </option>
-											@foreach(resolve("Team") as $team)
+											@foreach(resolve("Team")->sortBy('name') as $team)
 											<option data-img-src="{{ $team->image_src }}" value="{{ $team->id }}" ng-selected="{{ $team->id == $user->team_id ? 'true' : 'false'}}"> {{ $team->name }} </option>
 											@endforeach
 										</select>

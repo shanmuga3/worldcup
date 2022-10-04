@@ -34,7 +34,7 @@
         </div>
         <div class="form-group mb-2">
             <label for="team"> @lang('admin_messages.fields.team') </label>
-            {!! Form::select('team', resolve("Team")->pluck('short_name','id') ,$result->team_id, ['class' => 'form-select', 'id' => 'team','placeholder' => Lang::get('admin_messages.common.select')]) !!}
+            {!! Form::select('team', resolve("Team")->sortBy('name')->pluck('short_name','id') ,$result->team_id, ['class' => 'form-select', 'id' => 'team','placeholder' => Lang::get('admin_messages.common.select')]) !!}
         </div>
         <div class="form-group mb-2">
             <label for="phone_number"> @lang('admin_messages.fields.phone_number') </label>
