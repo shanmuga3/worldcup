@@ -52,7 +52,7 @@ class AuthController extends Controller
             'dob' => ['required'],
             'gender' => ['required'],
             'phone_number' => ['required','unique:users','starts_with:05','digits:10'],
-            'address' => ['required'],
+            'address' => ['required','min:8'],
             'city' => ['required'],
             'profile_picture' => ['nullable','file','max:1024'],
         );

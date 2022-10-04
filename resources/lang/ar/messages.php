@@ -40,6 +40,7 @@ return [
 	"female" => "أنثى",
 	"other" => "آخر",
 	"address" => "تبوك",
+	"address_street" => "المدينة ، الحي ، الشارع",
 	"dob" => "تاريخ الولادة",
 	"get_started" => "البدء",
 	"contact_us" => "اتصل بنا",

@@ -55,7 +55,6 @@
                                     <div class="form-group mt-2">
                                         <label class="form-label"> @lang('messages.gender') <em class="text-danger"> * </em> </label>
                                         <select name="gender" class="form-select">
-                                            <option value=""> @lang('messages.select') </option>
                                             <option value="male" ng-selected="{{ old('gender') == 'male' ? true : false }}"> @lang('messages.male') </option>
                                             <option value="female" ng-selected="{{ old('gender') == 'female' ? true : false }}"> @lang('messages.female') </option>
                                         </select>
@@ -78,7 +77,7 @@
                                     </div>
                                     <div class="form-group mt-2">
                                         <label class="form-label"> @lang('messages.address') <em class="text-danger"> * </em> </label>
-                                        {!! Form::text('address',null,['placeholder' => trans('messages.address'),'class' =>'form-control'])!!}
+                                        {!! Form::text('address',null,['placeholder' => trans('messages.address_street'),'class' =>'form-control'])!!}
                                         <span class="text-danger"> {{ $errors->first('address') }} </span>
                                     </div>
                                     <div class="form-group mt-2">

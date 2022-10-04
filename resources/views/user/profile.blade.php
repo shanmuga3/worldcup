@@ -55,7 +55,6 @@
 									<div class="form-group mt-2">
 										<label class="form-label"> @lang('messages.gender') <em class="text-danger"> * </em> </label>
 										<select name="gender" class="form-select">
-											<option value=""> @lang('messages.select') </option>
 											<option value="male" ng-selected="{{ old('gender',$user->gender) == 'male' ? true : false }}"> @lang('messages.male') </option>
 											<option value="female" ng-selected="{{ old('gender',$user->gender) == 'female' ? true : false }}"> @lang('messages.female') </option>
 										</select>

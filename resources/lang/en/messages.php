@@ -40,6 +40,7 @@ return [
 	"female" => "Female",
 	"other" => "Other",
 	"address" => "Address",
+	"address_street" => "City, District, Street",
 	"dob" => "Date of Birth",
 	"get_started" => "Get Started",
 	"contact_us" => "Contact Us",
