@@ -14032,9 +14032,9 @@ section {
     position: relative;
     z-index: 2;
     padding: 60px 0 0 0;
-    height: 35vh;
-    background: url(../images/banner_desktop.png?458f63943a4c2ae90f1f091692e131cc) bottom center no-repeat;
-    background-size: cover;
+    /* height: 35vh;
+    background: url(../../images/banner_desktop.png) bottom center no-repeat;
+    background-size: cover; */
   }
 }
 .hero h2, .hero .h2 {
@@ -15667,12 +15667,12 @@ header .search-settings.shown {
 }
 @-webkit-keyframes fa-flip {
   50% {
-    transform: rotate3d(var«-1698:1», var«1698:-2», var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));
+    transform: rotate3d(var«-1696:1», var«1696:-2», var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));
   }
 }
 @keyframes fa-flip {
   50% {
-    transform: rotate3d(var«-1699:1», var«1699:-2», var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));
+    transform: rotate3d(var«-1697:1», var«1697:-2», var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));
   }
 }
 @-webkit-keyframes fa-shake {

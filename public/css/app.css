@@ -14055,9 +14055,9 @@ section {
     position: relative;
     z-index: 2;
     padding: 60px 0 0 0;
-    height: 35vh;
-    background: url(../images/banner_desktop.png?458f63943a4c2ae90f1f091692e131cc) bottom center no-repeat;
-    background-size: cover;
+    /* height: 35vh;
+    background: url(../../images/banner_desktop.png) bottom center no-repeat;
+    background-size: cover; */
   }
 }
 .hero h2, .hero .h2 {
