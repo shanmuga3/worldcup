@@ -84,11 +84,10 @@
 										<span class="text-danger"> {{ $errors->first('address') }} </span>
 									</div>
 									<div class="form-group mt-2">
-										<label class="form-label"> @lang('messages.city') <em class="text-danger"> * </em> </label>
-										{!! Form::select('city',resolve("City")->pluck('name','id'),$user->city,['placeholder' => trans('messages.select'),'class' =>'form-select'])!!}
-										<span class="text-danger"> {{ $errors->first('city') }} </span>
-									</div>
-
+                                        <label class="form-label"> @lang('messages.city') <em class="text-danger"> * </em> </label>
+                                        {!! Form::select('city',$cities,$user->city,['placeholder' => trans('messages.select'),'class' =>'form-select'])!!}
+                                        <span class="text-danger"> {{ $errors->first('city') }} </span>
+                                    </div>
 									<div class="form-group mt-2">
 										<label class="form-label"> @lang('messages.favourite_team') </label>
 										<select name="fav_team" id="favourite-team" class="form-select" placeholder="@lang('messages.select')">
