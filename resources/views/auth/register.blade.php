@@ -85,6 +85,12 @@
                                         {!! Form::select('city',$cities,null,['placeholder' => trans('messages.select'),'class' =>'form-select'])!!}
                                         <span class="text-danger"> {{ $errors->first('city') }} </span>
                                     </div>
+                                    <div class="recaptcha-container mt-2">
+                                        <div class="g-recaptcha" data-sitekey="{{ credentials('site_key','ReCaptcha') }}"></div>
+                                    </div>
+                                    @if($errors->has('g-recaptcha-response'))
+                                        <span class="text-danger"> {{ $errors->first('g-recaptcha-response') }} </span>
+                                    @endif
                                     
                                     <div class="form-group mt-4">
                                         <button type="submit" class="btn btn-rounded btn-primary w-100 py-2 d-flex align-items-center justify-content-center">

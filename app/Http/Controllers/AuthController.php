@@ -16,15 +16,27 @@ class AuthController extends Controller
         $rules = array(
             'email'     => 'required|email',
             'password'  => 'required',
+            'g-recaptcha-response'  => 'required',
         );
         $attributes = array(
             'email'     => Lang::get('messages.email'),
             'password'  => Lang::get('messages.password'),
         );
-        $validator = Validator::make($request->all(), $rules, [], $attributes);
+        $messages = [
+            'g-recaptcha-response.required' => Lang::get('messages.please_complete_captcha_to_continue'),
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages, $attributes);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
+        }
+
+        $captchaValidate = validateReCaptcha($request['g-recaptcha-response']);
+        if(!$captchaValidate['status']) {
+            $recaptcha_error = [
+                'g-recaptcha-response' => Lang::get('messages.please_complete_captcha_to_continue')
+            ];
+            return back()->withErrors($recaptcha_error)->withInput();
         }
 
         $credentials = $request->only(['email','password']);
@@ -49,6 +61,7 @@ class AuthController extends Controller
             // 'last_name' => ['required','max:30'],
             'email' => ['required','max:50','email','unique:users'],
             'password' => ['required','confirmed',$password_rule],
+            'g-recaptcha-response'  => ['required'],
             'dob' => ['required'],
             'gender' => ['required'],
             'phone_number' => ['required','unique:users','starts_with:05','digits:10'],
@@ -71,12 +84,21 @@ class AuthController extends Controller
 
         $messages = array(
             'full_name.regex' => Lang::get('validation.alpha',['attribute' => Lang::get('messages.full_name')]),
+            'g-recaptcha-response.required' => Lang::get('messages.please_complete_captcha_to_continue'),
         );
 
         $validator = Validator::make($request->all(), $rules, $messages, $attributes);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
+        }
+
+        $captchaValidate = validateReCaptcha($request['g-recaptcha-response']);
+        if(!$captchaValidate['status']) {
+            $recaptcha_error = [
+                'g-recaptcha-response' => Lang::get('messages.please_complete_captcha_to_continue')
+            ];
+            return back()->withErrors($recaptcha_error)->withInput();
         }
 
         $user = new User;

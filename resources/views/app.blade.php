@@ -226,6 +226,7 @@
         {!! Html::script('js/common.js?v='.$version) !!}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.37/moment-timezone-with-data.js"></script>
+        <script src="//google.com/recaptcha/api.js" async defer></script>
         
         @if(Session::has('message'))
         <script type="text/javascript">

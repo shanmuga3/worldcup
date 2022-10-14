@@ -108,4 +108,5 @@ return [
 	"edit" => "يحرر",
 	"close" => "قريب",
 	"save_changes" => "احفظ التغييرات",
+	"please_complete_captcha_to_continue" => "يرجى إكمال Captcha للمتابعة",
 ];

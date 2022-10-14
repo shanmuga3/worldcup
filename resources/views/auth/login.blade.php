@@ -26,6 +26,12 @@
                                         <span class="input-group-text"><i class="bi bi-eye-slash cursor-pointer toggle-password active" area-hidden="true"></i></span>
                                     </div>
                                     <span class="text-danger"> {{ $errors->first('password') }} </span>
+                                    <div class="form-group recaptcha-container mt-2 mb-2">
+                                        <div class="g-recaptcha" data-sitekey="{{ credentials('site_key','ReCaptcha') }}"></div>
+                                    </div>
+                                    @if($errors->has('g-recaptcha-response'))
+                                        <span class="text-danger"> {{ $errors->first('g-recaptcha-response') }} </span>
+                                    @endif
                                     <div class="form-check">
                                         <a href="#" class="float-end" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">
                                             @lang('messages.forgot_password')?

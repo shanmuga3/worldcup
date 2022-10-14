@@ -338,3 +338,31 @@ if (!function_exists('resolveAndSendNotification')) {
         return $return_data;
     }
 }
+
+/**
+ * validateReCaptcha
+ *
+ * @return Array
+ */
+if (!function_exists('validateReCaptcha')) {
+    function validateReCaptcha($captcha)
+    {
+        $response = Http::asForm()->post("https://www.google.com/recaptcha/api/siteverify", [
+            'secret' => credentials('secret_key','ReCaptcha'),
+            'response' => $captcha,
+            'remoteip' => $_SERVER['REMOTE_ADDR'],
+        ]);
+
+        if($response->successful()) {
+            $response_data = $response->json();
+            return [
+                'status' => $response_data['success'] ?? false,
+                'status_message' => Lang::get('messages.success'),
+            ];
+        }
+        return [
+            'status' => false,
+            'status_message' => Lang::get('messages.please_complete_captcha_to_continue'),
+        ];
+    }
+}

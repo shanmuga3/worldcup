@@ -108,4 +108,5 @@ return [
 	"edit" => "Edit",
 	"close" => "Close",
 	"save_changes" => "Save changes",
+	"please_complete_captcha_to_continue" => "Please Complete Captcha to Continue",
 ];
