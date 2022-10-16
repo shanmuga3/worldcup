@@ -28,8 +28,8 @@ class CredentialSeeder extends Seeder
 
             ['name' => 'is_enabled','value' => '0','site' => 'ReCaptcha'],
             ['name' => 'version','value' => '2','site' => 'ReCaptcha'],
-			['name' => 'site_key','value' => '6LcF1bUaAAAAAIFgygQFz4fDYIrB0LVK8FvfL6AG','site' => 'ReCaptcha'],
-			['name' => 'secret_key','value' => '6LcF1bUaAAAAAG4NukEA1De87YO5ziWDzv8q9Wo3','site' => 'ReCaptcha'],
+			['name' => 'site_key','value' => '6LfBxX8iAAAAAI_4RipQw7J-oyjEzlUtVEtxOMTh','site' => 'ReCaptcha'],
+			['name' => 'secret_key','value' => '6LfBxX8iAAAAAC4_5Unodyv2T1RtFn10GnVEntNh','site' => 'ReCaptcha'],
 		]);
     }
 }
