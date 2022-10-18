@@ -24,8 +24,8 @@ return [
 	"register" => "Register",
 	"email" => "Email",
 	"password" => "Password",
-	"dont_have_account" => "Don't have an account",
-	"already_have_account" => "Already have an account",
+	"dont_have_account" => "Don't have an account?",
+	"already_have_account" => "Already have an account?",
 	"create_new_account" => "Create New account",
 	"name" => "Name",
 	"first_name" => "First Name",
@@ -109,4 +109,5 @@ return [
 	"close" => "Close",
 	"save_changes" => "Save changes",
 	"please_complete_captcha_to_continue" => "Please Complete Captcha to Continue",
+	"terms_and_conditions" => "Terms And Conditions",
 ];

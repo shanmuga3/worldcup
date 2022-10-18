@@ -99,7 +99,7 @@
                                     </div>
                                     {!! Form::close() !!}
                                 </div>
-                                <p class="mt-3"> @lang('messages.already_have_account')? <a href="{{ route('login') }}" class="d-inline-block"> @lang('messages.sign_in') </a></p>
+                                <p class="mt-3"> @lang('messages.already_have_account') <a href="{{ route('login') }}" class="d-inline-block"> @lang('messages.sign_in') </a></p>
                             </div>
                         </div>
                     </div>

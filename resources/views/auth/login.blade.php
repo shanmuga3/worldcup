@@ -34,7 +34,7 @@
                                     @endif
                                     <div class="form-check">
                                         <a href="#" class="float-end" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">
-                                            @lang('messages.forgot_password')?
+                                            @lang('messages.forgot_password')
                                         </a>
                                     </div>
                                     <div class="mb-2 form-floating mt-4">

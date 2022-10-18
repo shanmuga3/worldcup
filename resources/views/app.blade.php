@@ -3,10 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="apple-touch-icon" sizes="180x180" href="resources/favicon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="resources/favicon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="resources/favicon/favicon-16x16.png">
-        <link rel="mask-icon" href="resources/favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ $favicon }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ $favicon }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ $favicon }}">
+        <link rel="mask-icon" href="{{ $favicon }}" color="#5bbad5">
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">
         <title> {{ $title ?? getMetaData('title') }} </title>
@@ -185,9 +185,7 @@
                         </div>
                         <div class="col-md-4 footer-social-link">
                             <div class="static-links d-flex mb-2 mt-2">
-                                @foreach(resolve("StaticPage")->where('in_footer','1') as $page)
-                                    <a href="{{ $page->url }}" class="me-3"> {{ $page->name }} </a>
-                                @endforeach
+                                    <a href="http://contest.indomie.com.sa" target="_blank" class="me-3"> @lang('messages.terms_and_conditions') </a>
                             </div>
                         </div>
                         <div class="col-md-4 footer-social-link">
