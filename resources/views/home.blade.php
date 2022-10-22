@@ -1,7 +1,7 @@
 @extends('app')
 @section('main')
 <main class="main-container" ng-controller="homeController">
-	<section id="hero" class="hero hero-home pt-0">
+	<section id="hero" class="hero hero-home pt-0 pb-0">
 		<img src="{{ asset('images/banner_2.png') }}" class="d-none d-md-block w-100 img img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100">
 		<img src="{{ asset('images/banner_1.png') }}" class="d-md-none w-100 img img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100">
 		{{--
