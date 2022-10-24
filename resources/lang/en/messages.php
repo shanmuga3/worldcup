@@ -110,4 +110,5 @@ return [
 	"save_changes" => "Save changes",
 	"please_complete_captcha_to_continue" => "Please Complete Captcha to Continue",
 	"terms_and_conditions" => "Terms And Conditions",
+	"all_rights_reserved" => "All Rights Reserved",
 ];

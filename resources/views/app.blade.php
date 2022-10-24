@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="info ms-3">
                                     <a href="{{ global_settings('copyright_link') }}" class=""> {{ global_settings('copyright_link') }} </a>
-                                    <h5> {{ global_settings('copyright_text') }} </h5>
+                                    <h5> @lang('messages.all_rights_reserved') </h5>
                                 </div>
                             </div>
                         </div>

@@ -110,4 +110,5 @@ return [
 	"save_changes" => "احفظ التغييرات",
 	"please_complete_captcha_to_continue" => "يرجى إكمال Captcha للمتابعة",
 	"terms_and_conditions" => "شروط المسابقه",
+	"all_rights_reserved" => "كل الحقوق محفوظة",
 ];
